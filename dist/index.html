@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+</head>
+
+<body>
+    <nav>
+        <img class="icon whiteIcon openMenuButton pointer"  src="../src/assets/menu.png" alt="Open Menu">
+        <img class="icon whiteIcon openNewItemMenu pointer" src="../src/assets/more.png" alt="Create new to-do item">
+    </nav>
+    <div class="newItemMenu hidden">
+        <p id="openNewTaskMenu" class="pointer">New Task</p>
+        <p>New Project</p>
+    </div>
+    <main>
+        <div class="sideMenu">
+            <div class="dueDateSorterContainer">
+                <div class="sideMenuOption sideMenuTitle">
+                    <h2>Due</h2>
+                    <img class="icon" src="../src/assets/more.png" alt="Add new due date tracker">
+                </div>
+                <div class="dueDateSorter sideMenuOption">
+                    <p>Today</p>
+                    <img class="icon" src="../src/assets/more.png" alt="Add new task for today">
+                </div>
+                <div class="dueDateSorter sideMenuOption">
+                    <p>Tomorrow</p>
+                    <img class="icon" src="../src/assets/more.png" alt="Add new task for tomorrow">
+                </div>
+                <div class="dueDateSorter sideMenuOption">
+                    <p>This Week</p>
+                    <img class="icon" src="../src/assets/more.png" alt="Add new task for this week">
+                </div>
+            </div>
+            <div class="projectSorterContainer">
+                <div class="sideMenuOption sideMenuTitle">
+                    <h2>Projects</h2>
+                    <img class="icon" src="../src/assets/more.png" alt="Add new project">
+                </div>
+                <div class="sideMenuOption">
+                    <p>Sample Project</p>
+                    <img class="icon" src="../src/assets/more.png" alt="Add new task to this project">
+                </div>
+            </div>
+        </div>
+        <div class="newTask hidden">
+            <div class="menuHeader">
+            <h2 class="menuHeaderText">Create New Task</h2>
+            <img class="smallIcon whiteIcon end pointer" id="closeNewTaskMenu" src="../src/assets/close.png" alt="Close new task menu">
+            </div>
+            <form id="createTask">
+                <label for="title">New Task Name:</label>
+                <input type="text" name="title" id="title">
+                <label for="date">Due Date:</label>
+                <input type="text" name="date" id="date">
+                <label for="description">Task Description:</label>
+                <input type="text" name="descriptoin" id="description">
+                <label for="Priority">Important:</label>
+                <input type="checkbox" name="priority" id="priority">
+                <label for="checklist">Checklist:</label>
+                <input type="text" name="checklist" id="checklist">
+                <label for="repeat">Repeat?</label>
+                <input type="checkbox" name="repeat" id="repeat">
+                <label for="notes">Notes:</label>
+                <input type="text" name="notes" id="notes">
+                <input type="submit" value="Create">
+            </form>
+        </div>
+        <div class="taskContainer">
+            <div class="taskCard opened">
+                <h3 class="title">Sample Task</h3>
+                <h3 class="taskDueDate">1/29/23</h3>
+                <div class="completedCheck">
+                    <label for="completed">Complete?</label>
+                    <input type="checkbox" name="Completed" id="completed">
+                </div>
+                <div class="notes">
+                    <p><label for="notes">Notes:</label></p>
+                    <textarea name="notes" id="notes" cols="200" rows="4">Sample notes</textarea>
+                </div>
+                <div class="checklist">
+                    <h3>Checklist:</h3>
+                    <div class="checklistItem">
+                        <input type="checkbox" name="checklist1" id="checklist1" class="checklistItem">
+                        <label for="checklist1">subtask 1</label>
+                    </div>
+                    <div class="checklistItem">
+                        <input type="checkbox" name="checklist12" id="checklist2" class="checklistItem">
+                        <label for="checklist1">subtask 2</label>
+                    </div>
+                </div>
+                <p class="edit">edit</p>
+                <p class="delete">delete</p>
+                <img class="smallIcon minimizeCard pointer" src="../src/assets/contract.png" alt="Minimize task">
+            </div>
+        </div>
+    </main>
+</body>
+
+<script src="./main.js"></script>
+
+</html>
