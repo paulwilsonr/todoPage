@@ -1,12 +1,11 @@
 import './style.css';
+import { cardCreator } from './taskCreator';
 
 const openMenuButton = document.querySelector(".openMenuButton");
 const sideMenu = document.querySelector(".sideMenu");
 const taskContainer = document.querySelector(".taskContainer");
 const openNewItemMenu = document.querySelector(".openNewItemMenu");
 const newItemMenu = document.querySelector(".newItemMenu");
-const minimizeCard = document.querySelector(".minimizeCard");
-const taskCard = document.querySelector(".taskCard");
 const createTask = document.querySelector('#createTask');
 const taskMenu = document.querySelector('.newTask');
 const openNewTaskMenu = document.querySelector('#openNewTaskMenu');
@@ -16,7 +15,7 @@ openMenuButton.addEventListener("click", toggleSideMenu);
 openNewItemMenu.addEventListener("click", function () {
     toggleHidden(newItemMenu);
 });
-minimizeCard.addEventListener("click", toggleCard);
+
 createTask.addEventListener("submit", createNewTask);
 openNewTaskMenu.addEventListener("click", function() {
     toggleHidden(newItemMenu);
@@ -47,23 +46,60 @@ function toggleHidden(hiddenElement) {
     }
 }
 
-function toggleCard() {
+function toggleCard(button) {
+    const taskCard = button.parentElement;
+
     if (taskCard.classList.contains('closed')) {
-        minimizeCard.src = "../src/assets/contract.png";
+        taskCard.querySelector('.minimizeCard').src = "../src/assets/contract.png";
         taskCard.classList.remove('closed');
         taskCard.classList.add('opened');
     } else {
-        minimizeCard.src = "../src/assets/expand.png";
+        taskCard.querySelector('.minimizeCard').src = "../src/assets/expand.png";
         taskCard.classList.remove('opened');
         taskCard.classList.add('closed');
+    } 
+
+}
+
+class taskInfoHolder {
+    constructor(obj) {
+        this.title = obj.title;
+        this.date = obj.date;
+        this.description = obj.description;
+        this.priority = obj.priority;
+        this.checklist = obj.checklist;
+        this.repeat = obj.repeat;
     }
 }
     
 function createNewTask() {
    let newTask = Array.from(document.querySelectorAll('#createTask input')
    ).reduce((acc, input) => ({ ...acc, [input.id]: input.value}), {});
-   console.log(newTask);
+   console.log(newTask); 
+};
+
+
+
+let testClassObj = {
+    title: 'Sample Task',
+    date: '1/29/23',
+    description: 'Sample Descriptoin',
+    priority: '1',
+    checklist: ['subtask 1', 'subtask 2'],
+    repeat: 'n',
 }
 
-
 toggleSideMenu();
+
+const testTask = new taskInfoHolder(testClassObj);
+
+cardCreator(testTask);
+cardCreator(testTask);
+cardCreator(testTask);
+cardCreator(testTask);
+
+document.querySelectorAll('.minimizeCard').forEach(item => {
+    item.addEventListener('click', event =>{
+        toggleCard(item);
+    })
+});
