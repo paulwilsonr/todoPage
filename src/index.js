@@ -1,5 +1,7 @@
 import './style.css';
-import { cardCreator } from './taskCreator';
+import { cardControler } from './taskDisplayControler';
+import { taskControler } from './taskControler';
+import { taskInfoHolder } from './taskInfoHolder';
 
 const openMenuButton = document.querySelector(".openMenuButton");
 const sideMenu = document.querySelector(".sideMenu");
@@ -11,18 +13,24 @@ const taskMenu = document.querySelector('.newTask');
 const openNewTaskMenu = document.querySelector('#openNewTaskMenu');
 const closeNewTaskMenu = document.querySelector('#closeNewTaskMenu');
 
+
+
 openMenuButton.addEventListener("click", toggleSideMenu);
 openNewItemMenu.addEventListener("click", function () {
     toggleHidden(newItemMenu);
 });
 
-createTask.addEventListener("submit", createNewTask);
-openNewTaskMenu.addEventListener("click", function() {
+createTask.addEventListener("submit", function() {
+    taskControler.newTask();
+    toggleHidden(newItemMenu);
+});
+
+openNewTaskMenu.addEventListener("click", function () {
     toggleHidden(newItemMenu);
     toggleHidden(taskMenu);
-    
+
 })
-closeNewTaskMenu.addEventListener("click", function() {
+closeNewTaskMenu.addEventListener("click", function () {
     toggleHidden(taskMenu);
 })
 
@@ -38,7 +46,7 @@ function toggleSideMenu() {
 
 //switches between hidden and not hidden for elements
 
-function toggleHidden(hiddenElement) { 
+function toggleHidden(hiddenElement) {
     if (hiddenElement.classList.contains('hidden')) {
         hiddenElement.classList.remove('hidden');
     } else {
@@ -46,60 +54,10 @@ function toggleHidden(hiddenElement) {
     }
 }
 
-function toggleCard(button) {
-    const taskCard = button.parentElement;
 
-    if (taskCard.classList.contains('closed')) {
-        taskCard.querySelector('.minimizeCard').src = "../src/assets/contract.png";
-        taskCard.classList.remove('closed');
-        taskCard.classList.add('opened');
-    } else {
-        taskCard.querySelector('.minimizeCard').src = "../src/assets/expand.png";
-        taskCard.classList.remove('opened');
-        taskCard.classList.add('closed');
-    } 
-
-}
-
-class taskInfoHolder {
-    constructor(obj) {
-        this.title = obj.title;
-        this.date = obj.date;
-        this.description = obj.description;
-        this.priority = obj.priority;
-        this.checklist = obj.checklist;
-        this.repeat = obj.repeat;
-    }
-}
-    
-function createNewTask() {
-   let newTask = Array.from(document.querySelectorAll('#createTask input')
-   ).reduce((acc, input) => ({ ...acc, [input.id]: input.value}), {});
-   console.log(newTask); 
-};
-
-
-
-let testClassObj = {
-    title: 'Sample Task',
-    date: '1/29/23',
-    description: 'Sample Descriptoin',
-    priority: '1',
-    checklist: ['subtask 1', 'subtask 2'],
-    repeat: 'n',
-}
 
 toggleSideMenu();
 
-const testTask = new taskInfoHolder(testClassObj);
+cardControler.displayAllTasks();
 
-cardCreator(testTask);
-cardCreator(testTask);
-cardCreator(testTask);
-cardCreator(testTask);
 
-document.querySelectorAll('.minimizeCard').forEach(item => {
-    item.addEventListener('click', event =>{
-        toggleCard(item);
-    })
-});

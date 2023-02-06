@@ -31,6 +31,16 @@
     filter: invert(100%);
 }
 
+.button {
+    background-color: var(--blue);
+    color: var(--white);
+    border-radius: 5px;
+}
+
+.justifyLeft {
+    justify-self: start;
+}
+
 body {
     display: grid;
     grid-template-rows: 42px 1fr;
@@ -83,6 +93,7 @@ nav {
     z-index: 20;
 }
 
+
 main {
     display: grid;
     grid-template-columns: 1fr 4fr;
@@ -125,7 +136,7 @@ main {
     z-index: 15;
     top: 25%;
     right: 33%;
-    width: 33%;
+    width: 25%;
 }
 
 .newTask>form {
@@ -133,8 +144,19 @@ main {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(1fr, 5);
     grid-gap: 5px;
+    
 }
 
+#createTask>label {
+    justify-self: end;
+}
+
+
+input.button {
+    grid-area: 8 / 1 / 9 / 3;
+    width: 250px;
+    justify-self: center;
+}
 
 /*Task Card Styles*/
 .taskCard{
