@@ -151,6 +151,9 @@ main {
     justify-self: end;
 }
 
+.checklistItem {
+    display: flex;
+}
 
 input.button {
     grid-area: 8 / 1 / 9 / 3;

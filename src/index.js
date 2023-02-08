@@ -1,7 +1,7 @@
 import './style.css';
 import { cardControler } from './taskDisplayControler';
 import { taskControler } from './taskControler';
-import { taskInfoHolder } from './taskInfoHolder';
+//import { taskInfoHolder } from './taskInfoHolder';
 
 const openMenuButton = document.querySelector(".openMenuButton");
 const sideMenu = document.querySelector(".sideMenu");
@@ -12,7 +12,9 @@ const createTask = document.querySelector('#createTask');
 const taskMenu = document.querySelector('.newTask');
 const openNewTaskMenu = document.querySelector('#openNewTaskMenu');
 const closeNewTaskMenu = document.querySelector('#closeNewTaskMenu');
-
+const addChecklistItem = document.querySelector('.AddChecklist');
+const checklistContainer = document.querySelector('#checklistContainer');
+let i = 1;
 
 
 openMenuButton.addEventListener("click", toggleSideMenu);
@@ -20,8 +22,8 @@ openNewItemMenu.addEventListener("click", function () {
     toggleHidden(newItemMenu);
 });
 
-createTask.addEventListener("submit", function() {
-    taskControler.newTask();
+createTask.addEventListener("submit", function(event) {
+    taskControler.newTask(event);
     toggleHidden(newItemMenu);
 });
 
@@ -33,6 +35,8 @@ openNewTaskMenu.addEventListener("click", function () {
 closeNewTaskMenu.addEventListener("click", function () {
     toggleHidden(taskMenu);
 })
+
+addChecklistItem.addEventListener("click",checklistController);
 
 function toggleSideMenu() {
     toggleHidden(sideMenu);
@@ -52,12 +56,37 @@ function toggleHidden(hiddenElement) {
     } else {
         hiddenElement.classList.add('hidden');
     }
-}
+};
 
+function checklistController() {
+    const newChecklistDiv = document.createElement('div');
+    newChecklistDiv.setAttribute('class', 'checklistItem');
+    const newChecklistItem = document.createElement('input');
+    newChecklistItem.setAttribute('class','justifyLeft checklistInput');
+    newChecklistItem.setAttribute('type', 'text');
+    newChecklistItem.setAttribute('name', 'checklist');
+    newChecklistItem.setAttribute('id', `checklist${i}`);
+    newChecklistDiv.appendChild(newChecklistItem);
+    const removeChecklistItemIcon = document.createElement('img');
+    removeChecklistItemIcon.setAttribute('class', 'removeChecklist smallIcon end pointer');
+    removeChecklistItemIcon.setAttribute('src', '../src/assets/close.png');
+    removeChecklistItemIcon.setAttribute('alt', 'remove checklist item');
+    newChecklistDiv.appendChild(removeChecklistItemIcon);
+    checklistContainer.appendChild(newChecklistDiv);
 
+    document.querySelectorAll('.removeChecklist').forEach(item => {
+        item.addEventListener('click', event => {
+            item.parentElement.remove();
+        })})
+};
+
+function setCurrentDate () {
+
+};
 
 toggleSideMenu();
 
-cardControler.displayAllTasks();
+setCurrentDate();
 
+cardControler.displayAllTasks();
 

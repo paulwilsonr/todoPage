@@ -37,7 +37,7 @@ export const cardControler = {
         descriptionDiv.appendChild(descriptionText);
         descriptionDiv.appendChild(newDescription);
         newCard.appendChild(descriptionDiv);
-
+        if (newCardInfo.checklist){
         const checklistDiv = document.createElement('div');
         checklistDiv.classList.add('checklist');
         const checklistText = document.createElement('h4');
@@ -59,10 +59,10 @@ export const cardControler = {
             checklistLabel.setAttribute('for', checkName);
             checklistLabel.innerText = newCardInfo.checklist[i];
             checklistItemDiv.appendChild(checklistLabel);
-
+        
             checklistDiv.appendChild(checklistItemDiv);
         };
-
+    }
 
         const editText = document.createElement('p');
         editText.classList.add('edit');
@@ -105,9 +105,8 @@ export const cardControler = {
             })
         });
     },
-    deleteTask(button, id) {
+    deleteTask(button) {
         const taskCard = button.parentElement;
-        console.log(id)
         localStorage.removeItem(button.id);
         taskCard.remove();
 
