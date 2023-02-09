@@ -1,6 +1,7 @@
 import './style.css';
 import { taskControler } from './taskController';
 import { listControler } from './listController';
+import { cardControler } from './taskDisplayControler';
 //import { taskInfoHolder } from './taskInfoHolder';
 
 const openMenuButton = document.querySelector(".openMenuButton");
@@ -9,7 +10,7 @@ const taskContainer = document.querySelector(".taskContainer");
 const openNewItemMenu = document.querySelector(".openNewItemMenu");
 const newItemMenu = document.querySelector(".newItemMenu");
 const createTask = document.querySelector('#createTask');
-const taskMenu = document.querySelector('.newTask');
+const taskMenu = document.querySelector('#newTask');
 const openNewTaskMenu = document.querySelector('#openNewTaskMenu');
 const closeNewTaskMenu = document.querySelector('#closeNewTaskMenu');
 const addChecklistItem = document.querySelector('.AddChecklist');
@@ -18,6 +19,10 @@ const dueToday = document.querySelector('#dueToday');
 const dueTomorrow = document.querySelector('#dueTomorrow');
 const dueThisWeek = document.querySelector('#dueThisWeek');
 const dueAll = document.querySelector('#dueAll');
+const closeNewProjectMenu = document.querySelector('#closeNewProjectMenu');
+const projectMenu = document.querySelector('#newProject')
+const openNewProjectMenu = document.querySelector('#openNewProjectMenu');
+const sideMenuOpenNewProject = document.querySelector('#sideMenuProjectMenu')
 
 
 openMenuButton.addEventListener("click", toggleSideMenu);
@@ -25,8 +30,8 @@ openNewItemMenu.addEventListener("click", function () {
     toggleHidden(newItemMenu);
 });
 
-createTask.addEventListener("submit", function(event) {
-    taskControler.newTask(event);
+createTask.addEventListener("submit", function() {
+    taskControler.newTask();
     toggleHidden(newItemMenu);
 });
 
@@ -43,20 +48,39 @@ addChecklistItem.addEventListener("click",checklistController);
 
 dueToday.addEventListener('click', function() {
     listControler.dueDateArrMaker('today');
+    
 });
 
 dueTomorrow.addEventListener('click', function() {
     listControler.dueDateArrMaker('tomorrow');
+    
 });
 
 dueThisWeek.addEventListener('click', function() {
     listControler.dueDateArrMaker('week');
+    
 });
 
 dueAll.addEventListener('click', function() {
     listControler.dueDateArrMaker('all');
+    
 })
 
+closeNewProjectMenu.addEventListener("click", function () {
+    toggleHidden(projectMenu);
+})
+
+openNewProjectMenu.addEventListener("click", function () {
+    toggleHidden(newItemMenu);
+    toggleHidden(projectMenu);
+
+})
+
+sideMenuOpenNewProject.addEventListener("click", function () {
+    toggleSideMenu();
+    toggleHidden(projectMenu);
+
+})
 function toggleSideMenu() {
     toggleHidden(sideMenu);
     if (sideMenu.classList.contains('hidden')) {

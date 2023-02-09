@@ -18,21 +18,25 @@ export const taskControler = {
 
         task.checklist = checklistValueArr;
     },
-    newTask(event) {
-        //event.preventDefault();
+    newTask() {
         const newTaskArr = Array.from(document.querySelectorAll('#createTask input')
         ).reduce((acc, input) => ({ ...acc, [input.id]: input.value }), {});
         const newTask = new taskInfoHolder(newTaskArr);
+        const importantCheck = document.querySelector('#priority');
         newTask.key = localStorage.length;
+        if (importantCheck.checked){
+            newTask.priority = 'true';
+        } else {
+            newTask.priority = 'false';
+        }
         if (newTask.checklist) {
             taskControler.checklistMaker(newTask);
         };
         if (!newTask.date) {
             newTask.date = listControler.getCurrentDate();
-        }
+        };
         taskControler.saveToStorage(newTask);
-        console.log(newTask);
-        cardControler.displayTasks();
+        listControler.dueDateArrMaker('all');
     },
 
 

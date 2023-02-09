@@ -17,6 +17,11 @@
     display: none;
 }
 
+h1 {
+    color: var(--white);
+    font-size: 40px;
+}
+
 .icon {
     width: 30px;
     height: 30px;
@@ -127,7 +132,7 @@ main {
 
 
 /*New Task Maker*/
-.newTask {
+.newMenu {
     position: absolute;
     background-color: var(--white);
     border-radius: 10px;
@@ -139,7 +144,7 @@ main {
     width: 25%;
 }
 
-.newTask>form {
+.newMenu>form {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(1fr, 5);
@@ -159,6 +164,10 @@ input.button {
     grid-area: 8 / 1 / 9 / 3;
     width: 250px;
     justify-self: center;
+}
+
+#createProject>label {
+    justify-self: end;
 }
 
 /*Task Card Styles*/

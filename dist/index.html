@@ -11,11 +11,12 @@
 <body>
     <nav>
         <img class="icon whiteIcon openMenuButton pointer"  src="../src/assets/menu.png" alt="Open Menu">
+        <h1 id="mainTitle"></h1>
         <img class="icon whiteIcon openNewItemMenu pointer" src="../src/assets/more.png" alt="Create new to-do item">
     </nav>
     <div class="newItemMenu hidden">
         <p id="openNewTaskMenu" class="pointer">New Task</p>
-        <p>New Project</p>
+        <p id="openNewProjectMenu" class="pointer">New Project</p>
     </div>
     <main>
         <div class="sideMenu">
@@ -44,7 +45,7 @@
             <div class="projectSorterContainer">
                 <div class="sideMenuOption sideMenuTitle">
                     <h2>Projects</h2>
-                    <img class="icon " src="../src/assets/more.png" alt="Add new project">
+                    <img class="icon " id="sideMenuProjectMenu" src="../src/assets/more.png" alt="Add new project">
                 </div>
                 <div class="sideMenuOption">
                     <p>Sample Project</p>
@@ -52,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="newTask hidden">
+        <div class="newMenu hidden" id="newTask">
             <div class="menuHeader">
             <h2 class="menuHeaderText">Create New Task</h2>
             <img class="smallIcon whiteIcon end pointer" id="closeNewTaskMenu" src="../src/assets/close.png" alt="Close new task menu">
@@ -64,8 +65,8 @@
                 <input class="justifyLeft" type="date" name="date" id="date" >
                 <label for="description">Task Description:</label>
                 <input class="justifyLeft" type="text" name="descriptoin" id="description">
-                <label for="Priority">Important:</label>
-                <input class="justifyLeft" type="checkbox" name="priority" id="priority">
+                <label for="priority">Important:</label>
+                <input class="justifyLeft" type="checkbox" name="priority" id="priority" value="true">
                 <label for="checklist">Checklist:</label>
                 <div id="checklistContainer">
                 <div>
@@ -74,8 +75,21 @@
                     </div>
                 
                 </div>
-                <label for="repeat">Repeat?</label>
-                <input class="justifyLeft" type="checkbox" name="repeat" id="repeat">
+                <input type="submit" value="Create" class="button">
+            </form>
+        </div>
+        <div id="newProject" class="newMenu">
+            <div class="menuHeader">
+            <h2 class="menuHeaderText">Create New Project</h2>
+            <img class="smallIcon whiteIcon end pointer" id="closeNewProjectMenu" src="../src/assets/close.png" alt="Close new task menu">
+            </div>
+            <form id="createProject">
+                <label for="title">New Project Name:</label>
+                <input class="justifyLeft" type="text" name="title" id="title">
+                <label for="date">Due Date:</label>
+                <input class="justifyLeft" type="date" name="date" id="date" >
+                <label for="description">Project Description:</label>
+                <input class="justifyLeft" type="text" name="descriptoin" id="description">
                 <input type="submit" value="Create" class="button">
             </form>
         </div>

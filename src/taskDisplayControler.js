@@ -110,6 +110,10 @@ export const cardControler = {
         localStorage.removeItem(button.id);
         taskCard.remove();
 
+    },
+    titleChanger(newTitle) {
+        const title = document.querySelector('#mainTitle');
+        title.innerText = newTitle;
     }
 };
 

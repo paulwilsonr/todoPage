@@ -3,6 +3,7 @@ import isToday from "date-fns/isToday";
 import format from "date-fns/format";
 import isTomorrow from "date-fns/isTomorrow";
 import isThisWeek from "date-fns/isThisWeek";
+import isBefore from "date-fns/isBefore";
 import { cardControler } from "./taskDisplayControler";
 
 export const listControler = {
@@ -14,12 +15,16 @@ export const listControler = {
         taskDate = parseISO(taskDate);
         switch (endDate) {
             case 'today':
+                cardControler.titleChanger('Due Today');
                 return isToday(taskDate);
             case 'tomorrow':
+                cardControler.titleChanger('Due Tomorrow');
                 return isTomorrow(taskDate);
             case 'week':
+                cardControler.titleChanger('Due This Week');
                 return isThisWeek(taskDate);
             case 'all':
+                cardControler.titleChanger('All Tasks');
                 return true;
         }
     },
@@ -32,7 +37,41 @@ export const listControler = {
             if (listControler.sortTasksByDate(dueDate, currentTask.date)) {
                 taskArr.push(currentTask);
             }
-            cardControler.displayTasks(taskArr);
+            
         };
+            cardControler.displayTasks(listControler.sortList(taskArr));
+    },
+    sortList (taskArr) {
+        const importantArr = [];
+        const regularArr = [];
+        for(let i = 0; i < taskArr.length; i++) {
+            if(taskArr[i].priority === 'true') {
+                importantArr.push(taskArr[i]);
+            } else {
+                regularArr.push(taskArr[i]);
+            }
+        };
+        listControler.orderByDate(importantArr);
+        listControler.orderByDate(regularArr);
+        
+         return importantArr.concat(regularArr);
+    },
+
+    orderByDate(taskArr) {
+        taskArr.sort((a, b) => {
+            let dateA = parseISO(a.date);
+            let dateB = parseISO(b.date);
+            /*console.log('dateA');
+            console.log(dateA);
+            console.log('dateB');
+            console.log(dateB);*/
+            if (isBefore(dateA, dateB)) {
+                return -1;
+            }
+            if (isBefore(dateB, dateA)) {
+                return 1;
+            }
+            return 0;
+        })
     },
 }
