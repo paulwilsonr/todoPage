@@ -88,10 +88,10 @@ export const cardControler = {
     clearTaskDisplay() {
         document.querySelector('.taskContainer').innerText = '';
     },
-    displayAllTasks() {
+    displayTasks(taskArr) {
         cardControler.clearTaskDisplay();
-        for (let i = 0; i < localStorage.length; i++) {
-            cardControler.createCard(JSON.parse(localStorage.getItem(i)));
+        for (let i = 0; i < taskArr.length; i++) {
+            cardControler.createCard(taskArr[i]);
         }
         document.querySelectorAll('.minimizeCard').forEach(item => {
             item.addEventListener('click', event => {

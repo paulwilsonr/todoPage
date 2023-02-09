@@ -1,6 +1,6 @@
 import './style.css';
-import { cardControler } from './taskDisplayControler';
-import { taskControler } from './taskControler';
+import { taskControler } from './taskController';
+import { listControler } from './listController';
 //import { taskInfoHolder } from './taskInfoHolder';
 
 const openMenuButton = document.querySelector(".openMenuButton");
@@ -14,7 +14,10 @@ const openNewTaskMenu = document.querySelector('#openNewTaskMenu');
 const closeNewTaskMenu = document.querySelector('#closeNewTaskMenu');
 const addChecklistItem = document.querySelector('.AddChecklist');
 const checklistContainer = document.querySelector('#checklistContainer');
-let i = 1;
+const dueToday = document.querySelector('#dueToday');
+const dueTomorrow = document.querySelector('#dueTomorrow');
+const dueThisWeek = document.querySelector('#dueThisWeek');
+const dueAll = document.querySelector('#dueAll');
 
 
 openMenuButton.addEventListener("click", toggleSideMenu);
@@ -37,6 +40,22 @@ closeNewTaskMenu.addEventListener("click", function () {
 })
 
 addChecklistItem.addEventListener("click",checklistController);
+
+dueToday.addEventListener('click', function() {
+    listControler.dueDateArrMaker('today');
+});
+
+dueTomorrow.addEventListener('click', function() {
+    listControler.dueDateArrMaker('tomorrow');
+});
+
+dueThisWeek.addEventListener('click', function() {
+    listControler.dueDateArrMaker('week');
+});
+
+dueAll.addEventListener('click', function() {
+    listControler.dueDateArrMaker('all');
+})
 
 function toggleSideMenu() {
     toggleHidden(sideMenu);
@@ -80,13 +99,7 @@ function checklistController() {
         })})
 };
 
-function setCurrentDate () {
 
-};
-
-toggleSideMenu();
-
-setCurrentDate();
-
-cardControler.displayAllTasks();
+toggleSideMenu(); 
+listControler.dueDateArrMaker('all');
 
