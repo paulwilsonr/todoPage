@@ -123,6 +123,30 @@ main {
     margin: 10px;
 }
 
+.projectCard {
+    display: grid;
+    width: 95%;
+    grid-template-columns: 2fr 1fr 30px;
+
+}
+
+.sideMenuProjectTitle {
+    grid-area: 1/1/2/2;
+}
+
+.sideMenuAddProjectTask {
+    grid-area: 1/3/2/4;
+}
+
+.sideMenuEdit {
+    grid-area: 2/1/3/2;
+    justify-self: end;
+}
+
+.sideMenuDelete {
+    grid-area: 2/2/3/3;
+    margin-left: 10px;
+}
 
 .taskContainer {
     overflow: scroll;

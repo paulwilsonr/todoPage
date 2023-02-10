@@ -1,9 +1,12 @@
 import './style.css';
 import { taskControler } from './taskController';
 import { listControler } from './listController';
-import { cardControler } from './taskDisplayControler';
+import { projectController } from './projectController';
+//import { cardControler } from './taskDisplayControler';
 //import { taskInfoHolder } from './taskInfoHolder';
+import { projectDisplayController } from './projectDisplayController';
 
+let i = 0;
 const openMenuButton = document.querySelector(".openMenuButton");
 const sideMenu = document.querySelector(".sideMenu");
 const taskContainer = document.querySelector(".taskContainer");
@@ -23,6 +26,7 @@ const closeNewProjectMenu = document.querySelector('#closeNewProjectMenu');
 const projectMenu = document.querySelector('#newProject')
 const openNewProjectMenu = document.querySelector('#openNewProjectMenu');
 const sideMenuOpenNewProject = document.querySelector('#sideMenuProjectMenu')
+const createProject = document.querySelector('#newProject');
 
 
 openMenuButton.addEventListener("click", toggleSideMenu);
@@ -34,6 +38,11 @@ createTask.addEventListener("submit", function() {
     taskControler.newTask();
     toggleHidden(newItemMenu);
 });
+
+createProject.addEventListener("submit", function() {
+    projectController.newProject();
+    toggleHidden(projectMenu);
+})
 
 openNewTaskMenu.addEventListener("click", function () {
     toggleHidden(newItemMenu);
@@ -126,4 +135,5 @@ function checklistController() {
 
 toggleSideMenu(); 
 listControler.dueDateArrMaker('all');
-
+projectDisplayController.displayProjects();
+console.log(JSON.parse(localStorage.getItem('projects')))

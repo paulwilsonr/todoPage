@@ -107,7 +107,13 @@ export const cardControler = {
     },
     deleteTask(button) {
         const taskCard = button.parentElement;
-        localStorage.removeItem(button.id);
+        const taskArr = JSON.parse(localStorage.getItem('tasks'))
+        for(let i=0; i<taskArr.length; i++) {
+            if(taskArr[i].key == button.id) {
+                taskArr.splice(i , 1);
+            }
+        }
+        localStorage.setItem('tasks', JSON.stringify(taskArr))
         taskCard.remove();
 
     },

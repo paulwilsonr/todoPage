@@ -30,16 +30,17 @@ export const listControler = {
     },
     dueDateArrMaker(dueDate) {
         const taskArr = [];
-        const tempTaskArr = Object.values(localStorage);
+        const tempTaskArr = JSON.parse(localStorage.getItem('tasks'));
         for (let i = 0; i < tempTaskArr.length; i++) {
 
-            let currentTask = JSON.parse(tempTaskArr[i]);
+            let currentTask = tempTaskArr[i];
             if (listControler.sortTasksByDate(dueDate, currentTask.date)) {
                 taskArr.push(currentTask);
             }
             
         };
             cardControler.displayTasks(listControler.sortList(taskArr));
+            
     },
     sortList (taskArr) {
         const importantArr = [];
