@@ -5,5 +5,7 @@ export class taskInfoHolder {
         this.description = obj.description;
         this.priority = obj.priority;
         this.checklist = obj.checklist;
+        this.completed = false;
+        this.projectId = false;
     }
 }

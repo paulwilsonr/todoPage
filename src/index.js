@@ -37,6 +37,7 @@ openNewItemMenu.addEventListener("click", function () {
 createTask.addEventListener("submit", function() {
     taskControler.newTask();
     toggleHidden(newItemMenu);
+    
 });
 
 createProject.addEventListener("submit", function() {
@@ -102,7 +103,7 @@ function toggleSideMenu() {
 
 //switches between hidden and not hidden for elements
 
-function toggleHidden(hiddenElement) {
+export function toggleHidden(hiddenElement) {
     if (hiddenElement.classList.contains('hidden')) {
         hiddenElement.classList.remove('hidden');
     } else {
@@ -136,4 +137,5 @@ function checklistController() {
 toggleSideMenu(); 
 listControler.dueDateArrMaker('all');
 projectDisplayController.displayProjects();
-console.log(JSON.parse(localStorage.getItem('projects')))
+taskControler.setLocalStorageTaskKey();
+projectController.projectKeyMaker();

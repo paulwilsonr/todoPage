@@ -23,12 +23,21 @@ export const projectController = {
             return newProjectKey;
         }
     },
+
+    pushCurrentProject(editedProject) {
+        const projectArr = JSON.parse(localStorage.getItem('projects'));
+        for(let i = 0; i < projectArr.length; i++){
+            if(projectArr[i].key == editedProject.key) {
+                projectArr.splice(i, 1, editedProject);
+            }
+        }
+        localStorage.setItem('projects', JSON.stringify(projectArr));
+    },
     
     newProject() {
         projectController.setLocalStorageProjectKey();
         const newProjectArr = Array.from(document.querySelectorAll('#newProject input')
         ).reduce((acc, input) => ({ ...acc, [input.id]: input.value }), {});
-        console.log(newProjectArr)
         const newProject = new projectInfoHolder(newProjectArr);
         newProject.key = projectController.projectKeyMaker();
         if (!newProject.date) {

@@ -1,4 +1,7 @@
 import { cardControler } from "./taskDisplayControler";
+//import { taskControler } from "./taskController";
+import { toggleHidden } from "./index";
+import { listControler } from "./listController";
 
 export const projectDisplayController = {
     createProjectSideMenuCard (projectCardInfo) {
@@ -46,9 +49,25 @@ export const projectDisplayController = {
         localStorage.setItem('projects', JSON.stringify(projectArr));
         projectCard.remove();
     },
-    titleChanger(newTitle) {
+    getProjectFromStorage (projectId) {
+        const projectArr = JSON.parse(localStorage.getItem('projects'));
+        for(let i=0; i < projectArr.length; i++) {
+            if(projectArr[i].key == projectId) {
+                return projectArr[i];
+            }
+        } 
+    },
+    projectTaskDisplay(newTitle, projectId) {
         const title = document.querySelector('#mainTitle');
         title.innerText = newTitle;
+        const projectArr = projectDisplayController.getProjectFromStorage(projectId);
+        cardControler.displayTasks(projectArr.taskArr, 'project', projectArr.key)
+    },
+    changeTaskMenu (button) {
+        const title = button.parentElement.firstChild.innerText;
+        document.querySelector('.menuHeaderText').innerHTML = `Create New Task for <br> ${title}`;
+        const projectId = button.parentElement.id;
+        document.querySelector('.submitButton').setAttribute('id', projectId);
     },
     displayProjects () {
         projectDisplayController.clearProjectsDisplay();
@@ -58,12 +77,20 @@ export const projectDisplayController = {
         };
         document.querySelectorAll('.sideMenuDelete').forEach(item => {
             item.addEventListener('click', event => {
-                this.deleteProject(item)
+                this.deleteProject(item);
+                listControler.dueDateArrMaker('all');
             })
         })
         document.querySelectorAll('.sideMenuProjectTitle').forEach(item => {
             item.addEventListener('click', event => {
-                cardControler.titleChanger(item.innerText);
+                const projectId = item.parentElement.id;
+                projectDisplayController.projectTaskDisplay(item.innerText, projectId);
+            })
+        })
+        document.querySelectorAll('.sideMenuAddProjectTask').forEach(item => {
+            item.addEventListener('click', event => {
+                projectDisplayController.changeTaskMenu(item);
+                toggleHidden(document.querySelector('#newTask'));
             })
         })
     }

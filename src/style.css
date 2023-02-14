@@ -27,6 +27,10 @@ h1 {
     height: 30px;
 }
 
+.strikethrough {
+    text-decoration: line-through;
+}
+
 .smallIcon {
     width: 20px;
     height: 20px;
@@ -206,6 +210,10 @@ input.button {
     display: grid;
     grid-template-columns: 3fr 1fr 1fr;
     padding: 5px 0 0 10px;
+}
+
+.taskCompleted {
+    background-color: var(--green);
 }
 
 .taskCard.closed {

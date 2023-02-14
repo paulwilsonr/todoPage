@@ -62,10 +62,7 @@ export const listControler = {
         taskArr.sort((a, b) => {
             let dateA = parseISO(a.date);
             let dateB = parseISO(b.date);
-            /*console.log('dateA');
-            console.log(dateA);
-            console.log('dateB');
-            console.log(dateB);*/
+        
             if (isBefore(dateA, dateB)) {
                 return -1;
             }
