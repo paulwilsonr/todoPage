@@ -16,8 +16,8 @@ const createTask = document.querySelector('#createTask');
 const taskMenu = document.querySelector('#newTask');
 const openNewTaskMenu = document.querySelector('#openNewTaskMenu');
 const closeNewTaskMenu = document.querySelector('#closeNewTaskMenu');
-const addChecklistItem = document.querySelector('.AddChecklist');
-const checklistContainer = document.querySelector('#checklistContainer');
+const addChecklistItem = document.querySelector('#addChecklist');
+const addEditChecklistItem = document.querySelector('#addEditChecklist')
 const dueToday = document.querySelector('#dueToday');
 const dueTomorrow = document.querySelector('#dueTomorrow');
 const dueThisWeek = document.querySelector('#dueThisWeek');
@@ -27,6 +27,9 @@ const projectMenu = document.querySelector('#newProject')
 const openNewProjectMenu = document.querySelector('#openNewProjectMenu');
 const sideMenuOpenNewProject = document.querySelector('#sideMenuProjectMenu')
 const createProject = document.querySelector('#newProject');
+const closeEditMenu = document.querySelector('#closeEditTaskMenu');
+const editMenu = document.querySelector('#editTask')
+const editTask = document.querySelector('#editTaskForm')
 
 
 openMenuButton.addEventListener("click", toggleSideMenu);
@@ -34,16 +37,13 @@ openNewItemMenu.addEventListener("click", function () {
     toggleHidden(newItemMenu);
 });
 
-createTask.addEventListener("submit", function() {
-    taskControler.newTask();
-    toggleHidden(newItemMenu);
-    
-});
+createTask.addEventListener("submit", newTask);
 
-createProject.addEventListener("submit", function() {
-    projectController.newProject();
-    toggleHidden(projectMenu);
-})
+createProject.addEventListener("submit", newProject);
+
+editTask.addEventListener('submit', function() {
+    taskControler.editTask();
+});
 
 openNewTaskMenu.addEventListener("click", function () {
     toggleHidden(newItemMenu);
@@ -52,9 +52,18 @@ openNewTaskMenu.addEventListener("click", function () {
 })
 closeNewTaskMenu.addEventListener("click", function () {
     toggleHidden(taskMenu);
-})
+});
 
-addChecklistItem.addEventListener("click",checklistController);
+closeEditMenu.addEventListener("click", function () {
+    toggleHidden(editMenu);
+});
+
+addEditChecklistItem.addEventListener("click", function() {
+    checklistController('edit')
+});
+addChecklistItem.addEventListener("click", function() {
+    checklistController('new')
+});
 
 dueToday.addEventListener('click', function() {
     listControler.dueDateArrMaker('today');
@@ -111,11 +120,21 @@ export function toggleHidden(hiddenElement) {
     }
 };
 
-function checklistController() {
+export function checklistController(newOrEdit) {
+    let checklistContainer;
+    let inputClass;
+    if(newOrEdit == 'edit'){
+        checklistContainer = document.querySelector('#editChecklistContainer');
+        inputClass = 'editChecklistInput'
+    } else {
+        checklistContainer = document.querySelector('#checklistContainer')
+        inputClass = 'newChecklistInput'
+    }
     const newChecklistDiv = document.createElement('div');
     newChecklistDiv.setAttribute('class', 'checklistItem');
     const newChecklistItem = document.createElement('input');
     newChecklistItem.setAttribute('class','justifyLeft checklistInput');
+    newChecklistItem.classList.add(inputClass);
     newChecklistItem.setAttribute('type', 'text');
     newChecklistItem.setAttribute('name', 'checklist');
     newChecklistItem.setAttribute('id', `checklist${i}`);
@@ -132,6 +151,17 @@ function checklistController() {
             item.parentElement.remove();
         })})
 };
+
+function newTask() {
+    taskControler.newTask();
+    toggleHidden(newItemMenu);
+    
+};
+
+function newProject() {
+    projectController.newProject();
+    toggleHidden(projectMenu);
+}
 
 
 toggleSideMenu(); 

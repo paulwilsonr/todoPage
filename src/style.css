@@ -264,3 +264,9 @@ input.button {
     grid-column: 1 / 4;
     justify-self: center;
 }
+
+#closeEditTaskMenu {
+    position: relative;
+    bottom: 55px;
+    right: 5px;
+}

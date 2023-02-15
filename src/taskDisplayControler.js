@@ -5,6 +5,7 @@ import { taskControler } from "./taskController";
 
 export const cardControler = {
     createCard(newCardInfo, taskType) {
+        console.log(newCardInfo)
         const newCard = document.createElement('div');
         newCard.setAttribute('class', 'taskCard opened');
         newCard.setAttribute('id', newCardInfo.key)
@@ -81,6 +82,7 @@ export const cardControler = {
 
         const editText = document.createElement('p');
         editText.classList.add('edit');
+        editText.classList.add('pointer');
         editText.innerText = 'edit';
         newCard.appendChild(editText);
 
@@ -132,7 +134,12 @@ export const cardControler = {
             item.addEventListener('click', event => {
                 this.completeChecklist(item, projectKey);
             })
-        })
+        });
+        document.querySelectorAll('.edit').forEach(item => {
+            item.addEventListener('click', event => {
+                taskControler.editMenuMaker(item, projectKey);
+            })
+        });
     },
     
     completeTask(button, projectKey) {
