@@ -25,20 +25,20 @@
                     <h2>Due</h2>
             
                 </div>
-                <div class="dueDateSorter sideMenuOption">
-                    <p class="pointer" id="dueToday">Today</p>
+                <div class="dueDateSorter sideMenuSelections sideMenuOption pointer" id="dueToday">
+                    <p>Today</p>
     
                 </div>
-                <div class="dueDateSorter sideMenuOption">
-                    <p class="pointer" id="dueTomorrow">Tomorrow</p>
+                <div id="dueTomorrow" class="dueDateSorter sideMenuSelections sideMenuOption pointer">
+                    <p>Tomorrow</p>
                 
                 </div>
-                <div class="dueDateSorter sideMenuOption">
-                    <p class="pointer" id="dueThisWeek">This Week</p>
+                <div id="dueThisWeek" class="dueDateSorter sideMenuSelections sideMenuOption pointer">
+                    <p>This Week</p>
                     
                 </div>
-                <div class="dueDateSorter sideMenuOption">
-                    <p class="pointer" id="dueAll">All Tasks</p>
+                <div id="dueAll" class="dueDateSorter sideMenuSelections sideMenuOption pointer">
+                    <p>All Tasks</p>
                     
                 </div>
             </div>
@@ -113,6 +113,21 @@
                 <input class="justifyLeft" type="date" name="date" id="date" >
                 <label for="description">Project Description:</label>
                 <input class="justifyLeft" type="text" name="descriptoin" id="description">
+                <input type="submit" value="Create" class="button">
+            </form>
+        </div>
+        <div id="editProject" class="newMenu hidden">
+            <div class="menuHeader">
+            <h2 class="menuHeaderText" id="editProjectHeaderText">Edit Project:</h2>
+            <img class="smallIcon whiteIcon end pointer" id="closeEditProjectMenu" src="../src/assets/close.png" alt="Close new task menu">
+            </div>
+            <form id="createProject">
+                <label for="editProjectTitle">Project Name:</label>
+                <input class="justifyLeft" type="text" name="title" id="editProjectTitle">
+                <label for="editProjectDate">Due Date:</label>
+                <input class="justifyLeft" type="date" name="date" id="editProjectDate" >
+                <label for="editProjectDescription">Project Description:</label>
+                <input class="justifyLeft" type="text" name="descriptoin" id="editProjectDescription">
                 <input type="submit" value="Create" class="button">
             </form>
         </div>

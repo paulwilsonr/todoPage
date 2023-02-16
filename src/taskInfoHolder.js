@@ -6,6 +6,6 @@ export class taskInfoHolder {
         this.priority = obj.priority;
         this.checklist = obj.checklist;
         this.completed = false;
-        this.projectId = false;
+        this.projectId = 'task';
     }
 }

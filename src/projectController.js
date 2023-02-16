@@ -23,7 +23,35 @@ export const projectController = {
             return newProjectKey;
         }
     },
-
+    editProjectMaker (projectKey) {
+        const currentProject = projectDisplayController.getProjectFromStorage(projectKey);
+        localStorage.setItem('tempProjectKey', JSON.stringify(projectKey));
+        document.querySelector('#editProjectHeaderText').innerHTML = `Edit Project:<br>${currentProject.title}`;
+        document.querySelector('#editProjectTitle').value = currentProject.title;
+        document.querySelector('#editProjectDate').value = currentProject.date;
+        document.querySelector('#editProjectDescription').value = currentProject.description;
+    },
+    resetEditProjectMenu(){
+        document.querySelector('#editProjectTitle').value = '';
+        document.querySelector('#editProjectDate').value = '';
+        document.querySelector('#editProjectDescription').value = '';
+    },
+    editProject() {
+        const projectKey = JSON.parse(localStorage.getItem('tempProjectKey'));
+        const currentProject = projectDisplayController.getProjectFromStorage(projectKey);
+        const newProject = currentProject;
+        newProject.title = document.querySelector('#editProjectTitle').value;
+        newProject.date = document.querySelector('#editProjectDate').value;
+        newProject.description = document.querySelector('#editProjectDescription').value;
+        const projectArr = JSON.parse(localStorage.getItem('projects'));
+        for(let i = 0; i < projectArr.length; i++) {
+            if(projectArr[i].key == projectKey) {
+                projectArr.splice(i, 1, newProject);
+            }
+        }
+        localStorage.setItem('projects', JSON.stringify(projectArr));
+        projectController.resetEditProjectMenu();
+    },
     pushCurrentProject(editedProject) {
         const projectArr = JSON.parse(localStorage.getItem('projects'));
         for(let i = 0; i < projectArr.length; i++){
@@ -46,5 +74,6 @@ export const projectController = {
         newProject.taskArr = [];
         projectController.saveToStorage(newProject);
         projectDisplayController.displayProjects();
+        
     }
 }

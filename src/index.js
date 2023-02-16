@@ -30,6 +30,7 @@ const createProject = document.querySelector('#newProject');
 const closeEditMenu = document.querySelector('#closeEditTaskMenu');
 const editMenu = document.querySelector('#editTask')
 const editTask = document.querySelector('#editTaskForm')
+const closeEditProject = document.querySelector('#closeEditProjectMenu');
 
 
 openMenuButton.addEventListener("click", toggleSideMenu);
@@ -47,6 +48,7 @@ editTask.addEventListener('submit', function() {
 
 openNewTaskMenu.addEventListener("click", function () {
     toggleHidden(newItemMenu);
+    taskControler.resetNewTaskMenu();
     toggleHidden(taskMenu);
 
 })
@@ -100,7 +102,17 @@ sideMenuOpenNewProject.addEventListener("click", function () {
     toggleHidden(projectMenu);
 
 })
-function toggleSideMenu() {
+
+closeEditProject.addEventListener('click', function () {
+    toggleHidden(document.querySelector('#editProject'))
+});
+
+document.querySelector('#editProject').addEventListener('submit', function () {
+    projectController.editProject();
+    toggleHidden(document.querySelector('#editProject'));
+})
+
+export function toggleSideMenu() {
     toggleHidden(sideMenu);
     if (sideMenu.classList.contains('hidden')) {
         taskContainer.style.gridColumn = "1 / 3";

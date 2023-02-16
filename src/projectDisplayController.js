@@ -2,6 +2,8 @@ import { cardControler } from "./taskDisplayControler";
 //import { taskControler } from "./taskController";
 import { toggleHidden } from "./index";
 import { listControler } from "./listController";
+import { projectController } from "./projectController";
+import { toggleSideMenu } from "./index";
 
 export const projectDisplayController = {
     createProjectSideMenuCard (projectCardInfo) {
@@ -14,11 +16,21 @@ export const projectDisplayController = {
         newTitle.innerText = projectCardInfo.title;
         newProjectCard.appendChild(newTitle);
 
+        const newDate = document.createElement('p');
+        newDate.setAttribute('class', 'sideMenuProjectDate');
+        newDate.innerText = projectCardInfo.date;
+        newProjectCard.appendChild(newDate);
+
         const taskIcon = document.createElement('img');
         taskIcon.setAttribute('class', 'smallIcon sideMenuAddProjectTask pointer');
         taskIcon.setAttribute('src', '../src/assets/more.png');
         taskIcon.setAttribute('alt', 'Add new task to this project');
         newProjectCard.appendChild(taskIcon);
+
+        const newDesc = document.createElement('p');
+        newDesc.setAttribute('class', 'sideMenuProjectDescription');
+        newDesc.innerText = projectCardInfo.description;
+        newProjectCard.appendChild(newDesc);
 
         const newEdit = document.createElement('p');
         newEdit.setAttribute('class','sideMenuEdit pointer');
@@ -92,6 +104,15 @@ export const projectDisplayController = {
                 projectDisplayController.changeTaskMenu(item);
                 toggleHidden(document.querySelector('#newTask'));
             })
+        });
+        document.querySelectorAll('.sideMenuEdit').forEach(item => {
+            item.addEventListener('click', event => {
+                const projectId = item.parentElement.id;
+                projectController.editProjectMaker(projectId);
+                toggleHidden(document.querySelector('#editProject'))
+                toggleSideMenu();
+            })
         })
+
     }
 }

@@ -8,6 +8,10 @@
     --green: #139A43;
 }
 
+.black {
+    background-color: black;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -127,15 +131,38 @@ main {
     margin: 10px;
 }
 
-.projectCard {
-    display: grid;
-    width: 95%;
-    grid-template-columns: 2fr 1fr 30px;
+.sideMenuSelections {
+    border-radius: 10px;
+    border: solid var(--black) 1px;
+    box-shadow: 5px 3px 3px var(--black);
+    
+}
 
+.sideMenuSelections p {
+    margin: 2px auto;
+}
+.projectCard {
+    padding: 5px 10px;
+    display: grid;
+    width: 90%;
+    grid-template-columns: 2fr 1fr 30px;
+    grid-template-rows: 1fr 1fr 1fr;
+    box-shadow: 5px 3px 3px var(--black);
+    border-radius: 10px;
+    border: solid var(--black) 1px;
+}
+
+.sidMenuProjectDate {
+    grid-area: 1/2/2/3;
+}
+
+.sideMenuProjectDescription {
+    grid-area: 2/1/3/4;
 }
 
 .sideMenuProjectTitle {
     grid-area: 1/1/2/2;
+    font-size: 20px;
 }
 
 .sideMenuAddProjectTask {
@@ -143,12 +170,12 @@ main {
 }
 
 .sideMenuEdit {
-    grid-area: 2/1/3/2;
+    grid-area: 3/1/4/2;
     justify-self: end;
 }
 
 .sideMenuDelete {
-    grid-area: 2/2/3/3;
+    grid-area: 3/2/4/3;
     margin-left: 10px;
 }
 

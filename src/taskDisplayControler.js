@@ -5,7 +5,6 @@ import { taskControler } from "./taskController";
 
 export const cardControler = {
     createCard(newCardInfo, taskType) {
-        console.log(newCardInfo)
         const newCard = document.createElement('div');
         newCard.setAttribute('class', 'taskCard opened');
         newCard.setAttribute('id', newCardInfo.key)
@@ -109,6 +108,7 @@ export const cardControler = {
         document.querySelector('.taskContainer').innerText = '';
     },
     displayTasks(taskArr, taskType = 'task', projectKey = 'task') {
+
         cardControler.clearTaskDisplay();
         for (let i = 0; i < taskArr.length; i++) {
             cardControler.createCard(taskArr[i], taskType);
@@ -140,11 +140,11 @@ export const cardControler = {
                 taskControler.editMenuMaker(item, projectKey);
             })
         });
+       
     },
     
     completeTask(button, projectKey) {
         const taskCard = button.parentElement.parentElement;
-        console.log(taskCard.id)
 
         if (projectKey === 'task') {                                 //changes regular tasks and saves back to tasks localStorage
             const taskArr = JSON.parse(localStorage.getItem('tasks'));
@@ -204,7 +204,6 @@ export const cardControler = {
                 checklistDiv.classList.remove('strikethrough');
                 currentTaskArr[0].checklist[checklistArrNumber][1] = false;
             }
-            console.log(currentProject)
            currentProject.taskArr.splice(currentTaskArr[1], 1, currentTaskArr[0]);
            projectController.pushCurrentProject(currentProject);
         }

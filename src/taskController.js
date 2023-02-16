@@ -8,7 +8,7 @@ import { checklistController } from ".";
 
 export const taskControler = {
     saveToStorage(task) {
-        if (!task.projectId) {           //if task.projectId is false, it's a regular task. Otherwise it's saved in a project
+        if (task.projectId === 'task') {           //if task.projectId is false, it's a regular task. Otherwise it's saved in a project
             const existingTasks = JSON.parse(localStorage.getItem('tasks'));
 
             existingTasks.push(task);
@@ -81,7 +81,6 @@ export const taskControler = {
         
         const currentTaskArr = taskControler.findCurrentTask(taskArr, taskCard.id); 
         const currentTask = currentTaskArr[0];
-        console.log(taskCard)
         toggleHidden(document.querySelector('#editTask'));
         document.querySelector('.menuHeaderTextEdit').innerHTML = `Edit Task:<br>${currentTask.title}`;
         document.querySelector('#editTitle').value = currentTask.title;
@@ -97,14 +96,27 @@ export const taskControler = {
                 checklistController('edit');
             }
         };
-
         localStorage.setItem('tempTaskEditArrMarker', JSON.stringify(currentTaskArr[1]));
+        localStorage.setItem('tempProjectKey', JSON.stringify(projectKey));
     },
     editTask() {
-        //const editedTask = taskControler.getFormInput('#editTask input');
-        const taskArr = JSON.parse(localStorage.getItem('tasks'));
+        const projectKey = JSON.parse(localStorage.getItem('tempProjectKey'))
+        console.log(projectKey)
+        let taskArr;
+        let currentProject;
         const taskArrMarker = JSON.parse(localStorage.getItem('tempTaskEditArrMarker'));
-        const taskBeingEdited = this.findCurrentTask(taskArr, taskArrMarker);
+        if(projectKey == 'task'){
+            console.log('if task')
+            taskArr = JSON.parse(localStorage.getItem('tasks'));
+        } else {
+            console.log('if project')
+            currentProject = projectDisplayController.getProjectFromStorage(projectKey);
+            
+            taskArr = currentProject.taskArr;
+            console.log(taskArr[taskArrMarker])
+        }
+        
+        console.log(taskArr[taskArrMarker]);
         const newTaskArr = Array.from(document.querySelectorAll('#editTask input')   //get all inputs from task menu and save them to newTask
         ).reduce((acc, input) => ({ ...acc, [input.id]: input.value }), {});
         
@@ -113,25 +125,38 @@ export const taskControler = {
         newTask.date = newTaskArr.editDate;
         newTask.description = newTaskArr.editDescription;
         newTask.priority = newTaskArr.editPriority;
+        if (document.querySelector('#editPriority').checked) {
+            newTask.priority = true;
+        } else {
+            newTask.priority = false;
+        }
         newTask.checklist = newTaskArr.editChecklist;
-        newTask.completed = taskBeingEdited.completed;
-        newTask.projectId = taskBeingEdited.projectId;
-        newTask.key = taskControler.taskKeyMaker();
-
+        newTask.completed = false;
+        newTask.projectId = projectKey;
+        newTask.key = taskArr[taskArrMarker].key;
         if(newTask.checklist) {
             taskControler.checklistMaker(newTask);
         };
         if (!newTask.date) {
             newTask.date = listControler.getCurrentDate();
         };
-        
-        console.log('blamo')
         console.log(newTask)
-        
-        
         taskArr.splice(taskArrMarker, 1, newTask);
-        localStorage.setItem('tasks', JSON.stringify(taskArr));
+        console.log(taskArr[taskArrMarker])
+        
+        
+
+        if(projectKey == 'task'){
+            console.log('beep')
+            localStorage.setItem('tasks', JSON.stringify(taskArr));
+        } else {
+            console.log('blamo')
+            currentProject.taskArr = taskArr;
+            projectController.pushCurrentProject(currentProject);
+        }
+        
         localStorage.removeItem('tempTaskEditArrMarker')
+        localStorage.removeItem('tempProjectKey')
     },
     getFormInput(formId) {
         const fullFormId = formId;
@@ -147,7 +172,6 @@ export const taskControler = {
         if (!newTask.date) {
             newTask.date = listControler.getCurrentDate();
         };
-        console.log(newTask)
         return newTask;
     },
     resetNewTaskMenu() {
@@ -178,6 +202,7 @@ export const taskControler = {
         taskControler.saveToStorage(newTask);
         //listControler.dueDateArrMaker('all');
         taskControler.resetNewTaskMenu();
+        console.log(newTask);
     },
 
 
