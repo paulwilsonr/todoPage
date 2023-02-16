@@ -6,6 +6,7 @@
     --red: #FE4A49;
     --white: #FFF;
     --green: #139A43;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .black {
@@ -104,13 +105,14 @@ nav {
     border-radius: 8px;
     box-shadow: 5px 3px 3px var(--black);
     z-index: 20;
+   
 }
 
 
 main {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: 1fr;
+    grid-template-rows:40px 1fr;
     height: 100%;
     background-color: var(--off-white);
 }
@@ -135,11 +137,17 @@ main {
     border-radius: 10px;
     border: solid var(--black) 1px;
     box-shadow: 5px 3px 3px var(--black);
-    
+    background-color: var(--white);
+    height: 30px;
+    padding: 0 10px;
+    width: 150px;
+    margin: 5px 10px;
+    text-align: center;
 }
 
 .sideMenuSelections p {
     margin: 2px auto;
+    font-size: 20px;
 }
 .projectCard {
     padding: 5px 10px;
@@ -170,19 +178,26 @@ main {
 }
 
 .sideMenuEdit {
-    grid-area: 3/1/4/2;
+    position: relative;
+    right: 15px;
+    grid-area: 3/2/4/3;
     justify-self: end;
+    border-right: var(--black) solid 1px;
+    padding-right: 5px;
 }
 
 .sideMenuDelete {
-    grid-area: 3/2/4/3;
+    position: relative;
+    right: 25px;
+    grid-area: 3/3/4/4;
     margin-left: 10px;
+    padding-left: 5px;
 }
 
 .taskContainer {
     overflow: scroll;
     background-color: var(--off-white);
-    grid-column: 1 / 3;
+    grid-area: 2/1/3/2;
 }
 
 
@@ -231,7 +246,7 @@ input.button {
     border-radius: 10px;
     border: solid var(--black) 1px;
     box-shadow: 5px 3px 3px var(--black);
-    width: 99%;
+    width: 98%;
     height: auto;
     margin: 10px auto;
     display: grid;
@@ -267,6 +282,10 @@ input.button {
     grid-area: 1/3/2/4;
 }
 
+.completedCheck input {
+    margin-left: 5px;
+}
+
 .notes {
     grid-area: 2/1/3/4;
 }
@@ -280,15 +299,22 @@ input.button {
 }
 
 .edit {
-    grid-area: 4 / 2 / 5 / 3;
+    grid-area: 4 / 3 / 5 / 4;
+    justify-self: end;
+    position: relative;
+    right: 70px;
+    border-right: solid var(--black) 1px;
+    padding-right: 10px;
 }
 
 .delete {
     grid-area: 4 / 3 / 5 / 4;
+    justify-self: end;
+    margin-right: 10px;
 }
 
 .minimizeCard {
-    grid-column: 1 / 4;
+    grid-area: 4/1/5/4;
     justify-self: center;
 }
 
@@ -296,4 +322,13 @@ input.button {
     position: relative;
     bottom: 55px;
     right: 5px;
+}
+
+/*Due Date Sorting Bar*/
+#dueDateBar{
+    width: 100%;
+    z-index: 99;
+    grid-area: 1/1/2/-1;
+    display: flex;
+    justify-content: space-around;
 }

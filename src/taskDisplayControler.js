@@ -1,6 +1,7 @@
 import { projectController } from "./projectController";
 import { projectDisplayController } from "./projectDisplayController";
 import { taskControler } from "./taskController";
+import { format } from "date-fns";
 
 
 export const cardControler = {
@@ -15,7 +16,7 @@ export const cardControler = {
 
         const newDueDate = document.createElement('h3');
         newDueDate.classList.add('taskDueDate');
-        newDueDate.innerText = newCardInfo.date;
+        newDueDate.innerText = format(new Date(newCardInfo.date), 'MMM-d');
         newCard.appendChild(newDueDate);
 
         const completedCheck = document.createElement('div');
@@ -41,7 +42,7 @@ export const cardControler = {
         const descriptionDiv = document.createElement('div');
         descriptionDiv.setAttribute('class', 'notes');
         descriptionText.innerText = 'Description:';
-        newDescription.classList.add('taskDueDate');
+        newDescription.classList.add('taskDescription');
         newDescription.innerText = newCardInfo.description;
         descriptionDiv.appendChild(descriptionText);
         descriptionDiv.appendChild(newDescription);

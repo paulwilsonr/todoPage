@@ -4,6 +4,7 @@ import { toggleHidden } from "./index";
 import { listControler } from "./listController";
 import { projectController } from "./projectController";
 import { toggleSideMenu } from "./index";
+import { format } from "date-fns";
 
 export const projectDisplayController = {
     createProjectSideMenuCard (projectCardInfo) {
@@ -18,7 +19,7 @@ export const projectDisplayController = {
 
         const newDate = document.createElement('p');
         newDate.setAttribute('class', 'sideMenuProjectDate');
-        newDate.innerText = projectCardInfo.date;
+        newDate.innerText = format(new Date(projectCardInfo.date), 'MMM-d');
         newProjectCard.appendChild(newDate);
 
         const taskIcon = document.createElement('img');

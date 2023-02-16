@@ -116,8 +116,10 @@ export function toggleSideMenu() {
     toggleHidden(sideMenu);
     if (sideMenu.classList.contains('hidden')) {
         taskContainer.style.gridColumn = "1 / 3";
+        document.querySelector('#dueDateBar').style.gridColumn = "1 / 3";
     } else {
         taskContainer.style.gridColumn = "2 / 3";
+        document.querySelector('#dueDateBar').style.gridColumn = "2 / 3";
     }
 };
 

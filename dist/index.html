@@ -10,7 +10,7 @@
 
 <body>
     <nav>
-        <img class="icon whiteIcon openMenuButton pointer"  src="../src/assets/menu.png" alt="Open Menu">
+        <img class="icon whiteIcon openMenuButton pointer" src="../src/assets/menu.png" alt="Open Menu">
         <h1 id="mainTitle"></h1>
         <img class="icon whiteIcon openNewItemMenu pointer" src="../src/assets/more.png" alt="Create new to-do item">
     </nav>
@@ -23,53 +23,41 @@
             <div class="dueDateSorterContainer">
                 <div class="sideMenuOption sideMenuTitle">
                     <h2>Due</h2>
-            
+
                 </div>
-                <div class="dueDateSorter sideMenuSelections sideMenuOption pointer" id="dueToday">
-                    <p>Today</p>
-    
-                </div>
-                <div id="dueTomorrow" class="dueDateSorter sideMenuSelections sideMenuOption pointer">
-                    <p>Tomorrow</p>
-                
-                </div>
-                <div id="dueThisWeek" class="dueDateSorter sideMenuSelections sideMenuOption pointer">
-                    <p>This Week</p>
-                    
-                </div>
-                <div id="dueAll" class="dueDateSorter sideMenuSelections sideMenuOption pointer">
-                    <p>All Tasks</p>
-                    
-                </div>
+
             </div>
             <div class="projectSorterContainer">
                 <div class="sideMenuOption sideMenuTitle">
                     <h2>Projects</h2>
-                    <img class="icon pointer" id="sideMenuProjectMenu" src="../src/assets/more.png" alt="Add new project">
+                    <img class="icon pointer" id="sideMenuProjectMenu" src="../src/assets/more.png"
+                        alt="Add new project">
                 </div>
             </div>
         </div>
         <div class="newMenu hidden" id="newTask">
             <div class="menuHeader">
-            <h2 class="menuHeaderText">Create New Task</h2>
-            <img class="smallIcon whiteIcon end pointer" id="closeNewTaskMenu" src="../src/assets/close.png" alt="Close new task menu">
+                <h2 class="menuHeaderText">Create New Task</h2>
+                <img class="smallIcon whiteIcon end pointer" id="closeNewTaskMenu" src="../src/assets/close.png"
+                    alt="Close new task menu">
             </div>
             <form id="createTask" class="taskForm">
                 <label for="title" id="titleLabel">New Task Name:</label>
                 <input class="justifyLeft" type="text" name="title" id="title">
                 <label for="date">Due Date:</label>
-                <input class="justifyLeft" type="date" name="date" id="date" >
+                <input class="justifyLeft" type="date" name="date" id="date">
                 <label for="description">Task Description:</label>
                 <input class="justifyLeft" type="text" name="descriptoin" id="description">
                 <label for="priority">Important:</label>
                 <input class="justifyLeft" type="checkbox" name="priority" id="priority">
                 <label for="checklist">Checklist:</label>
                 <div id="checklistContainer">
-                <div>
-                    <input class="justifyLeft checklistInput" type="text" name="checklist" id="checklist">
-                    <img src="../src/assets/more.png" alt="Add more checklist items" class="smallIcon end pointer AddChecklist" id="addChecklist">
+                    <div>
+                        <input class="justifyLeft checklistInput" type="text" name="checklist" id="checklist">
+                        <img src="../src/assets/more.png" alt="Add more checklist items"
+                            class="smallIcon end pointer AddChecklist" id="addChecklist">
                     </div>
-                
+
                 </div>
                 <input type="submit" value="Create" class="button submitButton" id="task">
             </form>
@@ -77,25 +65,28 @@
 
         <div class="newMenu hidden" id="editTask">
             <div class="menuHeader">
-            <h2 class="menuHeaderTextEdit">Edit Task:</h2>
-            <img class="smallIcon whiteIcon end pointer" id="closeEditTaskMenu" src="../src/assets/close.png" alt="Close edit task menu">
+                <h2 class="menuHeaderTextEdit">Edit Task:</h2>
+                <img class="smallIcon whiteIcon end pointer" id="closeEditTaskMenu" src="../src/assets/close.png"
+                    alt="Close edit task menu">
             </div>
             <form id="editTaskForm" class="taskForm">
                 <label for="editTitle" id="editTitleLabel">Task Name:</label>
                 <input class="justifyLeft" type="text" name="title" id="editTitle">
                 <label for="editDate">Due Date:</label>
-                <input class="justifyLeft" type="date" name="date" id="editDate" >
+                <input class="justifyLeft" type="date" name="date" id="editDate">
                 <label for="editDescription">Task Description:</label>
                 <input class="justifyLeft" type="text" name="descriptoin" id="editDescription">
                 <label for="editPriority">Important:</label>
                 <input class="justifyLeft" type="checkbox" name="priority" id="editPriority">
                 <label for="editChecklist">Checklist:</label>
                 <div id="editChecklistContainer">
-                <div>
-                    <input class="justifyLeft editChecklistInput checklistInput" type="text" name="checklist" id="editChecklist">
-                    <img src="../src/assets/more.png" alt="Add more checklist items" class="smallIcon end pointer AddChecklist" id="addEditChecklist">
+                    <div>
+                        <input class="justifyLeft editChecklistInput checklistInput" type="text" name="checklist"
+                            id="editChecklist">
+                        <img src="../src/assets/more.png" alt="Add more checklist items"
+                            class="smallIcon end pointer AddChecklist" id="addEditChecklist">
                     </div>
-                
+
                 </div>
                 <input type="submit" value="Edit Task" class="button submitButton" id="task">
             </form>
@@ -103,14 +94,15 @@
 
         <div id="newProject" class="newMenu hidden">
             <div class="menuHeader">
-            <h2 class="menuHeaderText">Create New Project</h2>
-            <img class="smallIcon whiteIcon end pointer" id="closeNewProjectMenu" src="../src/assets/close.png" alt="Close new task menu">
+                <h2 class="menuHeaderText">Create New Project</h2>
+                <img class="smallIcon whiteIcon end pointer" id="closeNewProjectMenu" src="../src/assets/close.png"
+                    alt="Close new task menu">
             </div>
             <form id="createProject">
                 <label for="title">New Project Name:</label>
                 <input class="justifyLeft" type="text" name="title" id="title">
                 <label for="date">Due Date:</label>
-                <input class="justifyLeft" type="date" name="date" id="date" >
+                <input class="justifyLeft" type="date" name="date" id="date">
                 <label for="description">Project Description:</label>
                 <input class="justifyLeft" type="text" name="descriptoin" id="description">
                 <input type="submit" value="Create" class="button">
@@ -118,18 +110,37 @@
         </div>
         <div id="editProject" class="newMenu hidden">
             <div class="menuHeader">
-            <h2 class="menuHeaderText" id="editProjectHeaderText">Edit Project:</h2>
-            <img class="smallIcon whiteIcon end pointer" id="closeEditProjectMenu" src="../src/assets/close.png" alt="Close new task menu">
+                <h2 class="menuHeaderText" id="editProjectHeaderText">Edit Project:</h2>
+                <img class="smallIcon whiteIcon end pointer" id="closeEditProjectMenu" src="../src/assets/close.png"
+                    alt="Close new task menu">
             </div>
             <form id="createProject">
                 <label for="editProjectTitle">Project Name:</label>
                 <input class="justifyLeft" type="text" name="title" id="editProjectTitle">
                 <label for="editProjectDate">Due Date:</label>
-                <input class="justifyLeft" type="date" name="date" id="editProjectDate" >
+                <input class="justifyLeft" type="date" name="date" id="editProjectDate">
                 <label for="editProjectDescription">Project Description:</label>
                 <input class="justifyLeft" type="text" name="descriptoin" id="editProjectDescription">
                 <input type="submit" value="Create" class="button">
             </form>
+        </div>
+        <div id="dueDateBar">
+            <div class="pointer sideMenuSelections" id="dueToday">
+                <p>Today</p>
+
+            </div>
+            <div id="dueTomorrow" class="pointer sideMenuSelections">
+                <p>Tomorrow</p>
+
+            </div>
+            <div id="dueThisWeek" class="pointer sideMenuSelections">
+                <p>This Week</p>
+
+            </div>
+            <div id="dueAll" class="pointer sideMenuSelections">
+                <p>All Tasks</p>
+
+            </div>
         </div>
         <div class="taskContainer">
             
