@@ -1,5 +1,4 @@
 import { taskInfoHolder } from "./taskInfoHolder";
-//import { cardControler } from "./taskDisplayControler";
 import { listControler } from "./listController";
 import { projectDisplayController } from "./projectDisplayController";
 import { projectController } from "./projectController";
@@ -101,22 +100,18 @@ export const taskControler = {
     },
     editTask() {
         const projectKey = JSON.parse(localStorage.getItem('tempProjectKey'))
-        console.log(projectKey)
         let taskArr;
         let currentProject;
         const taskArrMarker = JSON.parse(localStorage.getItem('tempTaskEditArrMarker'));
         if(projectKey == 'task'){
-            console.log('if task')
             taskArr = JSON.parse(localStorage.getItem('tasks'));
         } else {
-            console.log('if project')
             currentProject = projectDisplayController.getProjectFromStorage(projectKey);
             
             taskArr = currentProject.taskArr;
-            console.log(taskArr[taskArrMarker])
         }
         
-        console.log(taskArr[taskArrMarker]);
+        
         const newTaskArr = Array.from(document.querySelectorAll('#editTask input')   //get all inputs from task menu and save them to newTask
         ).reduce((acc, input) => ({ ...acc, [input.id]: input.value }), {});
         
@@ -140,17 +135,15 @@ export const taskControler = {
         if (!newTask.date) {
             newTask.date = listControler.getCurrentDate();
         };
-        console.log(newTask)
+       
         taskArr.splice(taskArrMarker, 1, newTask);
-        console.log(taskArr[taskArrMarker])
+        
         
         
 
         if(projectKey == 'task'){
-            console.log('beep')
             localStorage.setItem('tasks', JSON.stringify(taskArr));
         } else {
-            console.log('blamo')
             currentProject.taskArr = taskArr;
             projectController.pushCurrentProject(currentProject);
         }
@@ -200,9 +193,7 @@ export const taskControler = {
             newTask.priority = false;
         }
         taskControler.saveToStorage(newTask);
-        //listControler.dueDateArrMaker('all');
         taskControler.resetNewTaskMenu();
-        console.log(newTask);
     },
 
 

@@ -1,5 +1,4 @@
 import { cardControler } from "./taskDisplayControler";
-//import { taskControler } from "./taskController";
 import { toggleHidden } from "./index";
 import { listControler } from "./listController";
 import { projectController } from "./projectController";
@@ -76,6 +75,7 @@ export const projectDisplayController = {
         const projectArr = projectDisplayController.getProjectFromStorage(projectId);
         cardControler.displayTasks(projectArr.taskArr, 'project', projectArr.key)
     },
+    
     changeTaskMenu (button) {
         const title = button.parentElement.firstChild.innerText;
         document.querySelector('.menuHeaderText').innerHTML = `Create New Task for <br> ${title}`;
@@ -114,6 +114,7 @@ export const projectDisplayController = {
                 toggleSideMenu();
             })
         })
+        
 
     }
 }

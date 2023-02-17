@@ -2,6 +2,7 @@ import { projectController } from "./projectController";
 import { projectDisplayController } from "./projectDisplayController";
 import { taskControler } from "./taskController";
 import { format } from "date-fns";
+import { listControler } from "./listController";
 
 
 export const cardControler = {
@@ -30,7 +31,7 @@ export const cardControler = {
         completedCheckbox.setAttribute('name', 'Completed');
         completedCheckbox.setAttribute('id', 'completed');
         completedCheckbox.setAttribute('class', 'completed');
-        if(newCardInfo.completed) {
+        if (newCardInfo.completed) {
             completedCheckbox.checked = true;
             newCard.classList.add('taskCompleted')
         }
@@ -68,10 +69,10 @@ export const cardControler = {
 
                 const checklistLabel = document.createElement('label');
                 checklistLabel.setAttribute('for', checkName);
-                if(newCardInfo.checklist[i][1]) {
+                if (newCardInfo.checklist[i][1]) {
                     checklistItem.checked = true;
                     checklistItemDiv.classList.add('strikethrough');
-                    
+
                 }
                 checklistLabel.innerText = newCardInfo.checklist[i][0];
                 checklistItemDiv.appendChild(checklistLabel);
@@ -105,6 +106,22 @@ export const cardControler = {
 
         document.querySelector('.taskContainer').appendChild(newCard);
     },
+    sideBarTaskCardMaker(newCardInfo) {
+        const newTaskCard = document.createElement('div');
+        newTaskCard.setAttribute('id', newCardInfo.key);
+        newTaskCard.setAttribute('class', 'sideMenuOption pointer sideMenuTaskCard');
+
+        const newTaskTitle = document.createElement('p');
+        newTaskTitle.setAttribute('class', 'sideMenuTaskTitle');
+        newTaskTitle.innerHTML = newCardInfo.title;
+        newTaskCard.appendChild(newTaskTitle);
+
+        const newTaskDate = document.createElement('p');
+        newTaskDate.setAttribute('class', 'sideMenuTaskDate');
+        newTaskDate.innerText = format(new Date(newCardInfo.date), 'MMM-d');
+        newTaskCard.appendChild(newTaskDate);
+        document.querySelector('#tasksSideMenuContainer').appendChild(newTaskCard);
+    },
     clearTaskDisplay() {
         document.querySelector('.taskContainer').innerText = '';
     },
@@ -114,6 +131,11 @@ export const cardControler = {
         for (let i = 0; i < taskArr.length; i++) {
             cardControler.createCard(taskArr[i], taskType);
         }
+        cardControler.addEvents(projectKey)
+
+    },
+
+    addEvents(projectKey) {
         document.querySelectorAll('.minimizeCard').forEach(item => {
             item.addEventListener('click', event => {
                 toggleCard(item, event.target.id);
@@ -141,9 +163,18 @@ export const cardControler = {
                 taskControler.editMenuMaker(item, projectKey);
             })
         });
-       
+        document.querySelectorAll('.sideMenuTaskCard').forEach(item => {
+            item.addEventListener('click', event => {
+                cardControler.clearTaskDisplay();
+                const currentTask = [];
+                currentTask.push(taskControler.findCurrentTask(JSON.parse(localStorage.getItem('tasks')), item.id)[0]);
+                cardControler.displayTasks(currentTask);
+                
+            })
+        })
+
     },
-    
+
     completeTask(button, projectKey) {
         const taskCard = button.parentElement.parentElement;
 
@@ -178,12 +209,12 @@ export const cardControler = {
     completeChecklist(button, projectKey) {
         const taskCard = button.parentElement.parentElement.parentElement;
         const checklistDiv = button.parentElement;
-        let checklistArrNumber = button.id.replace('checklist','');
+        let checklistArrNumber = button.id.replace('checklist', '');
         if (projectKey === 'task') {
-            
-            const taskArr = JSON.parse(localStorage.getItem('tasks'));      
+
+            const taskArr = JSON.parse(localStorage.getItem('tasks'));
             const currentTaskArr = taskControler.findCurrentTask(taskArr, taskCard.id);
-           
+
             if (button.checked) {                                   //toggles completed status
                 checklistDiv.classList.add('strikethrough');
                 currentTaskArr[0].checklist[checklistArrNumber][1] = true;
@@ -194,7 +225,7 @@ export const cardControler = {
 
             taskArr.splice(currentTaskArr[1], 1, currentTaskArr[0]);
             localStorage.setItem('tasks', JSON.stringify(taskArr));
-            
+
         } else {
             const currentProject = projectDisplayController.getProjectFromStorage(projectKey);
             const currentTaskArr = taskControler.findCurrentTask(currentProject.taskArr, taskCard.id);
@@ -205,9 +236,22 @@ export const cardControler = {
                 checklistDiv.classList.remove('strikethrough');
                 currentTaskArr[0].checklist[checklistArrNumber][1] = false;
             }
-           currentProject.taskArr.splice(currentTaskArr[1], 1, currentTaskArr[0]);
-           projectController.pushCurrentProject(currentProject);
+            currentProject.taskArr.splice(currentTaskArr[1], 1, currentTaskArr[0]);
+            projectController.pushCurrentProject(currentProject);
         }
+    },
+    sideMenuTaskDisplay() {
+        cardControler.ClearSideMenuTasks();
+        let taskArr = JSON.parse(localStorage.getItem('tasks'));
+        taskArr = listControler.sortList(taskArr);
+        for (let i = 0; i < taskArr.length; i++) {
+            cardControler.sideBarTaskCardMaker(taskArr[i]);
+        };
+    },
+    ClearSideMenuTasks () {
+        document.querySelectorAll('.sideMenuTaskCard').forEach(item => {
+            item.remove();
+        })
     },
     deleteTask(button, projectKey) {
         const taskCard = button.parentElement;
@@ -231,7 +275,7 @@ export const cardControler = {
             projectController.pushCurrentProject(currentProject);
         }
         taskCard.remove();
-
+        cardControler.sideMenuTaskDisplay();
     },
     titleChanger(newTitle) {
         const title = document.querySelector('#mainTitle');

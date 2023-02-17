@@ -49,20 +49,18 @@ h1 {
     background-color: var(--blue);
     color: var(--white);
     border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 20px;
 }
 
 .justifyLeft {
     justify-self: start;
 }
 
-body {
-    display: grid;
-    grid-template-rows: 42px 1fr;
-    height: 100vh;
-    
-}
 
 .menuHeader {
+    display: grid;
+    grid-template-columns: 1fr 30px;
     background-color: var(--blue);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -91,6 +89,8 @@ nav {
     align-items: center;
     background-color: var(--blue);
     border-radius: 8px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
     box-shadow: 5px 3px 3px var(--black);
     z-index: 9;
 }
@@ -104,9 +104,10 @@ nav {
     padding: 10px;
     border-radius: 8px;
     box-shadow: 5px 3px 3px var(--black);
-    z-index: 20;
+    z-index: 99;
    
 }
+
 
 
 main {
@@ -125,6 +126,7 @@ main {
     border: solid var(--black) 1px;
     box-shadow: 5px 3px 3px var(--black);
     z-index: 10;
+    height: 100vh;
 }
 
 .sideMenuOption {
@@ -158,6 +160,7 @@ main {
     box-shadow: 5px 3px 3px var(--black);
     border-radius: 10px;
     border: solid var(--black) 1px;
+    background-color: var(--white);
 }
 
 .sidMenuProjectDate {
@@ -200,6 +203,18 @@ main {
     grid-area: 2/1/3/2;
 }
 
+.sideMenuTaskCard {
+    border-radius: 5px;
+    border: solid var(--black) 1px;
+    box-shadow: 5px 3px 3px var(--black);
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+}
+
+.sideMenuTaskTitle {
+    font-size: 20px;
+}
 
 /*New Task Maker*/
 .newMenu {
@@ -228,6 +243,10 @@ main {
 
 .checklistItem {
     display: flex;
+}
+
+.checklistInput {
+    margin-right: 10px;
 }
 
 input.button {
@@ -318,17 +337,18 @@ input.button {
     justify-self: center;
 }
 
-#closeEditTaskMenu {
+/*#closeEditTaskMenu {
     position: relative;
     bottom: 55px;
     right: 5px;
 }
+*/
 
 /*Due Date Sorting Bar*/
 #dueDateBar{
     width: 100%;
-    z-index: 99;
     grid-area: 1/1/2/-1;
     display: flex;
     justify-content: space-around;
 }
+

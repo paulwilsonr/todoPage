@@ -12,7 +12,7 @@
     <nav>
         <img class="icon whiteIcon openMenuButton pointer" src="../src/assets/menu.png" alt="Open Menu">
         <h1 id="mainTitle"></h1>
-        <img class="icon whiteIcon openNewItemMenu pointer" src="../src/assets/more.png" alt="Create new to-do item">
+        <img class="icon whiteIcon pointer" id="openNewItemMenu" src="../src/assets/more.png" alt="Create new to-do item">
     </nav>
     <div class="newItemMenu hidden">
         <p id="openNewTaskMenu" class="pointer">New Task</p>
@@ -20,19 +20,19 @@
     </div>
     <main>
         <div class="sideMenu">
-            <div class="dueDateSorterContainer">
-                <div class="sideMenuOption sideMenuTitle">
-                    <h2>Due</h2>
-
-                </div>
-
-            </div>
             <div class="projectSorterContainer">
                 <div class="sideMenuOption sideMenuTitle">
                     <h2>Projects</h2>
                     <img class="icon pointer" id="sideMenuProjectMenu" src="../src/assets/more.png"
                         alt="Add new project">
                 </div>
+            </div>
+            <div id="tasksSideMenuContainer">
+                <div class="sideMenuOption sideMenuTitle">
+                    <h2>Tasks</h2>
+                    <img src="../src/assets/more.png" alt="Add new task" class="icon pointer" id="sideMenuNewTasksMenu">
+                </div>
+                
             </div>
         </div>
         <div class="newMenu hidden" id="newTask">
@@ -52,7 +52,7 @@
                 <input class="justifyLeft" type="checkbox" name="priority" id="priority">
                 <label for="checklist">Checklist:</label>
                 <div id="checklistContainer">
-                    <div>
+                    <div class="checklistItem">
                         <input class="justifyLeft checklistInput" type="text" name="checklist" id="checklist">
                         <img src="../src/assets/more.png" alt="Add more checklist items"
                             class="smallIcon end pointer AddChecklist" id="addChecklist">
@@ -80,7 +80,7 @@
                 <input class="justifyLeft" type="checkbox" name="priority" id="editPriority">
                 <label for="editChecklist">Checklist:</label>
                 <div id="editChecklistContainer">
-                    <div>
+                    <div class="checklistItem">
                         <input class="justifyLeft editChecklistInput checklistInput" type="text" name="checklist"
                             id="editChecklist">
                         <img src="../src/assets/more.png" alt="Add more checklist items"

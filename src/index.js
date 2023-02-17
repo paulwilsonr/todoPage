@@ -2,15 +2,14 @@ import './style.css';
 import { taskControler } from './taskController';
 import { listControler } from './listController';
 import { projectController } from './projectController';
-//import { cardControler } from './taskDisplayControler';
-//import { taskInfoHolder } from './taskInfoHolder';
+import { cardControler } from './taskDisplayControler';
 import { projectDisplayController } from './projectDisplayController';
 
 let i = 0;
 const openMenuButton = document.querySelector(".openMenuButton");
 const sideMenu = document.querySelector(".sideMenu");
 const taskContainer = document.querySelector(".taskContainer");
-const openNewItemMenu = document.querySelector(".openNewItemMenu");
+const openNewItemMenu = document.querySelector("#openNewItemMenu");
 const newItemMenu = document.querySelector(".newItemMenu");
 const createTask = document.querySelector('#createTask');
 const taskMenu = document.querySelector('#newTask');
@@ -37,6 +36,10 @@ openMenuButton.addEventListener("click", toggleSideMenu);
 openNewItemMenu.addEventListener("click", function () {
     toggleHidden(newItemMenu);
 });
+
+document.querySelector('#sideMenuNewTasksMenu').addEventListener('click', function() {
+    toggleHidden(taskMenu);
+})
 
 createTask.addEventListener("submit", newTask);
 
@@ -178,6 +181,7 @@ function newProject() {
 }
 
 
+cardControler.sideMenuTaskDisplay();
 toggleSideMenu(); 
 listControler.dueDateArrMaker('all');
 projectDisplayController.displayProjects();
