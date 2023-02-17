@@ -31,6 +31,12 @@ export const listControler = {
     dueDateArrMaker(dueDate) {
         const taskArr = [];
         const tempTaskArr = JSON.parse(localStorage.getItem('tasks'));
+        const projectsArr = JSON.parse(localStorage.getItem('projects'));
+        for(let i = 0; i < projectsArr.length; i++) {
+            for(let j = 0; j < projectsArr[i].taskArr.length; j++) {
+                tempTaskArr.push(projectsArr[i].taskArr[j]);
+            }
+        };
         for (let i = 0; i < tempTaskArr.length; i++) {
 
             let currentTask = tempTaskArr[i];

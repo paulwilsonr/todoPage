@@ -169,6 +169,7 @@ export const cardControler = {
                 const currentTask = [];
                 currentTask.push(taskControler.findCurrentTask(JSON.parse(localStorage.getItem('tasks')), item.id)[0]);
                 cardControler.displayTasks(currentTask);
+                document.querySelector('#mainTitle').innerText = currentTask[0].title;
                 
             })
         })
