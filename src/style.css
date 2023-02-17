@@ -6,12 +6,12 @@
     --red: #FE4A49;
     --white: #FFF;
     --green: #139A43;
+    --lightGrey: #e6e6e6;
+    --darkGrey: #b3b3b3;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--off-white);
 }
 
-.black {
-    background-color: black;
-}
 
 * {
     margin: 0;
@@ -129,6 +129,8 @@ main {
     height: 100vh;
 }
 
+
+
 .sideMenuOption {
     display: flex;
     justify-content: space-between;
@@ -138,7 +140,7 @@ main {
 .sideMenuSelections {
     border-radius: 10px;
     border: solid var(--black) 1px;
-    box-shadow: 5px 3px 3px var(--black);
+    
     background-color: var(--white);
     height: 30px;
     padding: 0 10px;
@@ -157,7 +159,7 @@ main {
     width: 90%;
     grid-template-columns: 2fr 1fr 30px;
     grid-template-rows: 1fr 1fr 1fr;
-    box-shadow: 5px 3px 3px var(--black);
+    
     border-radius: 10px;
     border: solid var(--black) 1px;
     background-color: var(--white);
@@ -206,7 +208,6 @@ main {
 .sideMenuTaskCard {
     border-radius: 5px;
     border: solid var(--black) 1px;
-    box-shadow: 5px 3px 3px var(--black);
     display: flex;
     justify-content: space-between;
     padding: 5px 10px;
@@ -352,3 +353,11 @@ input.button {
     justify-content: space-around;
 }
 
+.hoverButton:hover {
+    box-shadow: 5px 3px 3px var(--black);
+}
+
+.clickedButton {
+    background-color: var(--lightGrey);
+    box-shadow: 5px 3px 3px var(--black);
+}

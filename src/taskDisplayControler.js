@@ -82,8 +82,7 @@ export const cardControler = {
         }
 
         const editText = document.createElement('p');
-        editText.classList.add('edit');
-        editText.classList.add('pointer');
+        editText.setAttribute('class', 'edit pointer');
         editText.innerText = 'edit';
         newCard.appendChild(editText);
 
@@ -109,7 +108,7 @@ export const cardControler = {
     sideBarTaskCardMaker(newCardInfo) {
         const newTaskCard = document.createElement('div');
         newTaskCard.setAttribute('id', newCardInfo.key);
-        newTaskCard.setAttribute('class', 'sideMenuOption pointer sideMenuTaskCard');
+        newTaskCard.setAttribute('class', 'sideMenuOption pointer sideMenuTaskCard hoverButton');
 
         const newTaskTitle = document.createElement('p');
         newTaskTitle.setAttribute('class', 'sideMenuTaskTitle');
@@ -171,6 +170,17 @@ export const cardControler = {
                 cardControler.displayTasks(currentTask);
                 document.querySelector('#mainTitle').innerText = currentTask[0].title;
                 
+            })
+        })
+
+        const hoverButtons = document.querySelectorAll('.hoverButton');
+
+        hoverButtons.forEach(item => {
+            item.addEventListener('click', event => {
+                hoverButtons.forEach(item => {
+                    item.classList.remove('clickedButton')
+                })
+                item.classList.add('clickedButton');
             })
         })
 

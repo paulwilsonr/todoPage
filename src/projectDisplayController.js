@@ -9,7 +9,7 @@ export const projectDisplayController = {
     createProjectSideMenuCard (projectCardInfo) {
         const newProjectCard = document.createElement('div');
         newProjectCard.setAttribute('id', projectCardInfo.key);
-        newProjectCard.setAttribute('class', 'sideMenuOption projectCard');
+        newProjectCard.setAttribute('class', 'sideMenuOption projectCard hoverButton');
         
         const newTitle = document.createElement('p');
         newTitle.setAttribute('class','sideMenuProjectTitle pointer');
