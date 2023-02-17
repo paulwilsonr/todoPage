@@ -16,7 +16,8 @@ const taskMenu = document.querySelector('#newTask');
 const openNewTaskMenu = document.querySelector('#openNewTaskMenu');
 const closeNewTaskMenu = document.querySelector('#closeNewTaskMenu');
 const addChecklistItem = document.querySelector('#addChecklist');
-const addEditChecklistItem = document.querySelector('#addEditChecklist')
+const addEditChecklistItem = document.querySelector('#addEditChecklist');
+const pastDue = document.querySelector('#pastDue');
 const dueToday = document.querySelector('#dueToday');
 const dueTomorrow = document.querySelector('#dueTomorrow');
 const dueThisWeek = document.querySelector('#dueThisWeek');
@@ -69,6 +70,10 @@ addEditChecklistItem.addEventListener("click", function() {
 addChecklistItem.addEventListener("click", function() {
     checklistController('new')
 });
+
+pastDue.addEventListener('click', function() {
+    listControler.dueDateArrMaker('pastDue');
+})
 
 dueToday.addEventListener('click', function() {
     listControler.dueDateArrMaker('today');
@@ -180,13 +185,38 @@ function newProject() {
     toggleHidden(projectMenu);
 }
 
+export function dueDateButtonController() {
+    const taskArr = [];
+        const tempTaskArr = JSON.parse(localStorage.getItem('tasks'));
+        const projectsArr = JSON.parse(localStorage.getItem('projects'));
+        for(let i = 0; i < projectsArr.length; i++) {
+            for(let j = 0; j < projectsArr[i].taskArr.length; j++) {
+                tempTaskArr.push(projectsArr[i].taskArr[j]);
+            }
+        };
+        for (let i = 0; i < tempTaskArr.length; i++) {
+
+            let currentTask = tempTaskArr[i];
+            if (listControler.sortTasksByDate('pastDue', currentTask.date, currentTask.completed)) {
+                const taskId = '#'+currentTask.key;
+                taskArr.push(currentTask);
+            }
+            
+        };
+        if(taskArr.length > 0) {
+            document.querySelector('#pastDue').classList.add('pastDueButton');
+        } else {
+            document.querySelector('#pastDue').classList.remove('pastDueButton');
+            document.querySelector('#pastDue').classList.remove('pastDueButtonClicked');
+        }
+}
+
 function initialSetup() {
     if(!JSON.parse(localStorage.getItem('tasks'))|| !JSON.parse(localStorage.getItem('projects'))) {
     localStorage.setItem('tasks',JSON.stringify([]));
     localStorage.setItem('projects', JSON.stringify([]));
     localStorage.setItem('projectKey', JSON.stringify([]));
     localStorage.setItem('taskKey', JSON.stringify([]))
-    console.log('blamo')
     }
 }
 initialSetup();
@@ -196,5 +226,4 @@ listControler.dueDateArrMaker('all');
 projectDisplayController.displayProjects();
 taskControler.setLocalStorageTaskKey();
 projectController.projectKeyMaker();
-console.log(localStorage)
-//localStorage.clear()
+dueDateButtonController();

@@ -3,6 +3,8 @@ import { projectDisplayController } from "./projectDisplayController";
 import { taskControler } from "./taskController";
 import { format } from "date-fns";
 import { listControler } from "./listController";
+import isBefore from "date-fns/isBefore";
+import { dueDateButtonController } from ".";
 
 
 export const cardControler = {
@@ -19,6 +21,10 @@ export const cardControler = {
         newDueDate.classList.add('taskDueDate');
         newDueDate.innerText = format(new Date(newCardInfo.date), 'MMM-d');
         newCard.appendChild(newDueDate);
+        const currentDate = listControler.getCurrentDate();
+        if(isBefore(new Date(newCardInfo.date), new Date(currentDate))) {
+            newCard.classList.add('pastDue');
+        }
 
         const completedCheck = document.createElement('div');
         completedCheck.classList.add('completedCheck');
@@ -79,6 +85,7 @@ export const cardControler = {
 
                 checklistDiv.appendChild(checklistItemDiv);
             };
+
         }
 
         const editText = document.createElement('p');
@@ -131,8 +138,10 @@ export const cardControler = {
             cardControler.createCard(taskArr[i], taskType);
         }
         cardControler.addEvents(projectKey)
-
+        dueDateButtonController();
     },
+
+    
 
     addEvents(projectKey) {
         document.querySelectorAll('.minimizeCard').forEach(item => {
@@ -179,8 +188,12 @@ export const cardControler = {
             item.addEventListener('click', event => {
                 hoverButtons.forEach(item => {
                     item.classList.remove('clickedButton')
+                    item.classList.remove('pastDueButtonClicked');
                 })
                 item.classList.add('clickedButton');
+                if(item.classList.contains('pastDueButton')) {
+                    item.classList.add('pastDueButtonClicked');
+                }
             })
         })
 
@@ -216,6 +229,8 @@ export const cardControler = {
             taskArr.splice(currentTaskArr[1], 1, currentTaskArr[0]);
             projectController.pushCurrentProject(currentProject);
         };
+        
+        dueDateButtonController();
     },
     completeChecklist(button, projectKey) {
         const taskCard = button.parentElement.parentElement.parentElement;
@@ -287,6 +302,7 @@ export const cardControler = {
         }
         taskCard.remove();
         cardControler.sideMenuTaskDisplay();
+        dueDateButtonController();
     },
     titleChanger(newTitle) {
         const title = document.querySelector('#mainTitle');

@@ -5,15 +5,24 @@ import isTomorrow from "date-fns/isTomorrow";
 import isThisWeek from "date-fns/isThisWeek";
 import isBefore from "date-fns/isBefore";
 import { cardControler } from "./taskDisplayControler";
+import { startOfDay } from "date-fns";
 
 export const listControler = {
     getCurrentDate() {
         const date = format(new Date(), 'yyyy-LL-dd');
         return date;
     },
-    sortTasksByDate(endDate, taskDate) {
+    sortTasksByDate(endDate, taskDate, completedTask = '') {
         taskDate = parseISO(taskDate);
         switch (endDate) {
+            case 'pastDue':
+                cardControler.titleChanger('Past Due')
+                if(isBefore(taskDate, startOfDay(new Date())) && !completedTask) {
+                    return true;
+                } else {
+                    return false;
+                }
+
             case 'today':
                 cardControler.titleChanger('Due Today');
                 return isToday(taskDate);
@@ -40,7 +49,7 @@ export const listControler = {
         for (let i = 0; i < tempTaskArr.length; i++) {
 
             let currentTask = tempTaskArr[i];
-            if (listControler.sortTasksByDate(dueDate, currentTask.date)) {
+            if (listControler.sortTasksByDate(dueDate, currentTask.date, currentTask.completed)) {
                 taskArr.push(currentTask);
             }
             
