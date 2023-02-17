@@ -180,10 +180,21 @@ function newProject() {
     toggleHidden(projectMenu);
 }
 
-
+function initialSetup() {
+    if(!JSON.parse(localStorage.getItem('tasks'))|| !JSON.parse(localStorage.getItem('projects'))) {
+    localStorage.setItem('tasks',JSON.stringify([]));
+    localStorage.setItem('projects', JSON.stringify([]));
+    localStorage.setItem('projectKey', JSON.stringify([]));
+    localStorage.setItem('taskKey', JSON.stringify([]))
+    console.log('blamo')
+    }
+}
+initialSetup();
 cardControler.sideMenuTaskDisplay();
 toggleSideMenu(); 
 listControler.dueDateArrMaker('all');
 projectDisplayController.displayProjects();
 taskControler.setLocalStorageTaskKey();
 projectController.projectKeyMaker();
+console.log(localStorage)
+//localStorage.clear()
