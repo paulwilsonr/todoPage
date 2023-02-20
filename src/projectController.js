@@ -74,6 +74,5 @@ export const projectController = {
         newProject.taskArr = [];
         projectController.saveToStorage(newProject);
         projectDisplayController.displayProjects();
-        
     }
 }

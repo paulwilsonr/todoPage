@@ -182,7 +182,7 @@ export const cardControler = {
             })
         })
 
-        const hoverButtons = document.querySelectorAll('.hoverButton');
+        const hoverButtons = document.querySelectorAll('.sideMenuSelections');
 
         hoverButtons.forEach(item => {
             item.addEventListener('click', event => {

@@ -31,7 +31,10 @@ const closeEditMenu = document.querySelector('#closeEditTaskMenu');
 const editMenu = document.querySelector('#editTask')
 const editTask = document.querySelector('#editTaskForm')
 const closeEditProject = document.querySelector('#closeEditProjectMenu');
-
+const taskTitle = document.querySelector('#title');
+const editTaskTitle = document.querySelector('#editTitle');
+const projectTitle = document.querySelector('#projectTitle');
+const editProjectTitle = document.querySelector('#editProjectTitle');
 
 openMenuButton.addEventListener("click", toggleSideMenu);
 openNewItemMenu.addEventListener("click", function () {
@@ -46,7 +49,35 @@ createTask.addEventListener("submit", newTask);
 
 createProject.addEventListener("submit", newProject);
 
-editTask.addEventListener('submit', function() {
+document.querySelector('#task').addEventListener('click', (event) => {
+    if(taskTitle.validity.valueMissing) {
+        taskTitle.setCustomValidity("Each task requires a name")
+    }
+
+})
+document.querySelector('#editTask').addEventListener('click', (event) => {
+    if(editTaskTitle.validity.valueMissing) {
+        editTaskTitle.setCustomValidity("Each task requires a name")
+    }
+
+})
+   
+document.querySelector('#projectSubmit').addEventListener('click', (event) => {
+    if(projectTitle.validity.valueMissing) {
+        projectTitle.setCustomValidity("Each project requires a name")
+    }
+
+})
+
+document.querySelector('#editProjectSubmit').addEventListener('click', (event) => {
+    if(editProjectTitle.validity.valueMissing) {
+        editProjectTitle.setCustomValidity("Each project requires a name")
+    }
+
+})
+
+editTask.addEventListener('submit', (event) => {
+    
     taskControler.editTask();
 });
 

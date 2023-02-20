@@ -43,7 +43,7 @@
             </div>
             <form id="createTask" class="taskForm">
                 <label for="title" id="titleLabel">New Task Name:</label>
-                <input class="justifyLeft" type="text" name="title" id="title">
+                <input class="justifyLeft" type="text" name="title" id="title" required>
                 <label for="date">Due Date:</label>
                 <input class="justifyLeft" type="date" name="date" id="date">
                 <label for="description">Task Description:</label>
@@ -71,7 +71,7 @@
             </div>
             <form id="editTaskForm" class="taskForm">
                 <label for="editTitle" id="editTitleLabel">Task Name:</label>
-                <input class="justifyLeft" type="text" name="title" id="editTitle">
+                <input class="justifyLeft" type="text" name="title" id="editTitle" required>
                 <label for="editDate">Due Date:</label>
                 <input class="justifyLeft" type="date" name="date" id="editDate">
                 <label for="editDescription">Task Description:</label>
@@ -88,7 +88,7 @@
                     </div>
 
                 </div>
-                <input type="submit" value="Edit Task" class="button submitButton hoverButton" id="task">
+                <input type="submit" value="Edit Task" class="button submitButton hoverButton" id="editTask">
             </form>
         </div>
 
@@ -100,12 +100,12 @@
             </div>
             <form id="createProject">
                 <label for="title">New Project Name:</label>
-                <input class="justifyLeft" type="text" name="title" id="title">
+                <input class="justifyLeft" type="text" name="title" id="projectTitle" required>
                 <label for="date">Due Date:</label>
                 <input class="justifyLeft" type="date" name="date" id="date">
                 <label for="description">Project Description:</label>
                 <input class="justifyLeft" type="text" name="descriptoin" id="description">
-                <input type="submit" value="Create" class="button hoverButton">
+                <input type="submit" value="Create" class="button hoverButton" id="projectSubmit">
             </form>
         </div>
         <div id="editProject" class="newMenu hidden">
@@ -114,14 +114,14 @@
                 <img class="smallIcon whiteIcon end pointer" id="closeEditProjectMenu" src="../src/assets/close.png"
                     alt="Close new task menu">
             </div>
-            <form id="createProject">
+            <form id="editProject">
                 <label for="editProjectTitle">Project Name:</label>
-                <input class="justifyLeft" type="text" name="title" id="editProjectTitle">
+                <input class="justifyLeft" type="text" name="title" id="editProjectTitle" required>
                 <label for="editProjectDate">Due Date:</label>
                 <input class="justifyLeft" type="date" name="date" id="editProjectDate">
                 <label for="editProjectDescription">Project Description:</label>
                 <input class="justifyLeft" type="text" name="descriptoin" id="editProjectDescription">
-                <input type="submit" value="Create" class="button hoverButton">
+                <input type="submit" value="Edit Project" class="button hoverButton" id="editProjectSubmit">
             </form>
         </div>
         <div id="dueDateBar">
