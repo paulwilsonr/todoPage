@@ -1,0 +1,140 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Task details Modal > does not show modal on load 1`] = `
+<div>
+  <div>
+    <div
+      class="flex justify-between px-1 mx-2 border-black border-2"
+    >
+      <div
+        class="flex px-1"
+      >
+        <input
+          id="taskDone"
+          name="taskDone"
+          type="checkbox"
+        />
+        <h2
+          class="ml-1"
+        >
+          testTask1
+        </h2>
+      </div>
+      <div
+        class="flex"
+      >
+        <button
+          class="ml-1"
+        >
+          Details
+        </button>
+        <p
+          class="ml-1"
+        >
+          10-27-2023
+        </p>
+        <svg
+          class="ml-1"
+          fill="#000000"
+          height="20px"
+          viewBox="0 0 24 24"
+          width="20px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g
+            id="SVGRepo_bgCarrier"
+            stroke-width="0"
+          />
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <g
+            id="SVGRepo_iconCarrier"
+          >
+             
+            <title />
+             
+            <g
+              id="Complete"
+            >
+               
+              <g
+                id="edit"
+              >
+                 
+                <g>
+                   
+                  <path
+                    d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8"
+                    fill="none"
+                    stroke="#000000"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  />
+                   
+                  <polygon
+                    fill="none"
+                    points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8"
+                    stroke="#000000"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  />
+                   
+                </g>
+                 
+              </g>
+               
+            </g>
+             
+          </g>
+        </svg>
+        <svg
+          class="ml-1"
+          fill="#000000"
+          height="20px"
+          id="Capa_1"
+          version="1.1"
+          viewBox="0 0 490.646 490.646"
+          width="20px"
+          xml:space="preserve"
+        >
+          <g
+            id="SVGRepo_bgCarrier"
+            stroke-width="0"
+          />
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <g
+            id="SVGRepo_iconCarrier"
+          >
+             
+            <g>
+               
+              <g>
+                 
+                <path
+                  d="M399.179,67.285l-74.794,0.033L324.356,0L166.214,0.066l0.029,67.318l-74.802,0.033l0.025,62.914h307.739L399.179,67.285z M198.28,32.11l94.03-0.041l0.017,35.262l-94.03,0.041L198.28,32.11z"
+                />
+                 
+                <path
+                  d="M91.465,490.646h307.739V146.359H91.465V490.646z M317.461,193.372h16.028v250.259h-16.028V193.372L317.461,193.372z M237.321,193.372h16.028v250.259h-16.028V193.372L237.321,193.372z M157.18,193.372h16.028v250.259H157.18V193.372z"
+                />
+                 
+              </g>
+               
+            </g>
+             
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+`;
