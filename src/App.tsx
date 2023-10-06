@@ -4,8 +4,9 @@ import CloseSVG from './components/SVGs/CloseSVG'
 import { useState } from 'react'
 import handleVisibility from './utils/handleVisibility'
 import SideMenu from './components/SideMenu'
+import AddItem from './components/Modals/AddItem'
 
-const taskArr = [
+const testTaskArr = [
   {
     name: 'testTask1',
     details: 'test test test details',
@@ -25,7 +26,9 @@ const taskArr = [
 ]
 
 function App () {
-  const [menuVisible, setMenuVisible] = useState(false)
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [taskArr, setTaskArr] = useState(testTaskArr);
+  const [addItemVisible, setAddItemVisible] = useState(true);
 
   return (
     <div>
@@ -47,8 +50,9 @@ function App () {
           </button>
         )}
       </header>
-      {menuVisible ? <SideMenu /> : ''}
+      {menuVisible ? <SideMenu setAddItemVisible={setAddItemVisible} /> : ''}
       <TaskList tasksArr={taskArr} />
+      {addItemVisible? <AddItem  setAddItemVisible={setAddItemVisible}/>: ''}
     </div>
   )
 }

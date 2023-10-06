@@ -34,9 +34,9 @@ function TaskDetails ({
     >
       <div className='bg-white w-72 grid grid-cols-2 grid-rows-5 pl-2'>
         <p className='col-span-full row-start-1 pt-2'>{task.name}</p>
-        <button aria-label='close-details' onClick={() => handleVisibility.hide(setDetailsVisible)}>
+        <button aria-label='close-details' className='col-start-2 row-start-1 justify-self-end mr-2 mt-2' onClick={() => handleVisibility.hide(setDetailsVisible)}>
         <CloseSVG
-          classes='col-start-2 row-start-1 justify-self-end mr-2 mt-2'
+          classes=''
           color='#0f0f0f'
           width={20}
         /></button>

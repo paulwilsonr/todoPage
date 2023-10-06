@@ -17,5 +17,15 @@ describe('SideBar Display', () => {
 
         expect(screen.getByText('Today').textContent).toMatch(/Today/i)
 
+    });
+    it('Shows Add item Modal on click', async () => {
+        const user = userEvent.setup();
+        render(<App />);
+        const button = screen.getByLabelText('open-menu');
+        await user.click(button)
+        const addButton = screen.getByLabelText('new-item')
+        await user.click(addButton)
+
+        expect(screen.getByText('Create New...').textContent).toMatch(/Create new/i);
     })
 }) 
