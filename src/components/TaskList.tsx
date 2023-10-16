@@ -6,7 +6,7 @@ type objType = {
   due: string
   priority: string
   project: string
-  id: number
+  id: string
 }
 function TaskList ({ tasksArr }: { tasksArr: Array<objType> }) {
   return (

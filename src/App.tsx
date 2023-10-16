@@ -5,6 +5,7 @@ import { useState } from 'react'
 import handleVisibility from './utils/handleVisibility'
 import SideMenu from './components/SideMenu'
 import AddItem from './components/Modals/AddItem'
+import { v4 as uuidv4 } from 'uuid'
 
 const testTaskArr = [
   {
@@ -13,7 +14,7 @@ const testTaskArr = [
     due: '10-27-2023',
     priority: 'low',
     project: 'none',
-    id: 1
+    id: "1"
   },
   {
     name: 'testTask2',
@@ -21,14 +22,14 @@ const testTaskArr = [
     due: '03-24-2024',
     priority: 'low',
     project: 'none',
-    id: 2
+    id: "2"
   }
 ]
 
 function App () {
   const [menuVisible, setMenuVisible] = useState(false);
   const [taskArr, setTaskArr] = useState(testTaskArr);
-  const [addItemVisible, setAddItemVisible] = useState(true);
+  const [addItemVisible, setAddItemVisible] = useState(false);
 
   return (
     <div>
@@ -50,9 +51,16 @@ function App () {
           </button>
         )}
       </header>
-      {menuVisible ? <SideMenu setAddItemVisible={setAddItemVisible} /> : ''}
+      {menuVisible ? <SideMenu setAddItemVisible={setAddItemVisible} setMenuVisible={setMenuVisible} /> : ''}
       <TaskList tasksArr={taskArr} />
-      {addItemVisible? <AddItem  setAddItemVisible={setAddItemVisible}/>: ''}
+      {addItemVisible? <AddItem currentTask={{
+    name: '',
+    details: '',
+    due: '',
+    priority: '',
+    project: 'none',
+    id: uuidv4()
+  }}  setAddItemVisible={setAddItemVisible} taskArr={taskArr} setTaskArr={setTaskArr} />: ''}
     </div>
   )
 }

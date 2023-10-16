@@ -8,7 +8,7 @@ type objType = {
   due: string
   priority: string
   project: string
-  id: number
+  id: string
 }
 
 function TaskDetails ({

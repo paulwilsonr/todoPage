@@ -1,6 +1,13 @@
-import CloseSVG from "./SVGs/CloseSVG"
+import CloseSVG from './SVGs/CloseSVG'
+import handleVisibility from '../utils/handleVisibility'
 
-function SideMenu ({setAddItemVisible}: {setAddItemVisible: React.Dispatch<React.SetStateAction<boolean>>}) {
+function SideMenu ({
+  setAddItemVisible,
+  setMenuVisible
+}: {
+  setAddItemVisible: React.Dispatch<React.SetStateAction<boolean>>
+  setMenuVisible: React.Dispatch<React.SetStateAction<boolean>>
+}) {
   return (
     <div className='absolute border border-black h-[90dvh] w-32 right-0 top-16 bg-white flex flex-col justify-between'>
       <ul className='ml-1'>
@@ -11,7 +18,16 @@ function SideMenu ({setAddItemVisible}: {setAddItemVisible: React.Dispatch<React
         <li>Projects</li>
         <li>Notes</li>
       </ul>
-      <button onClick={()=> setAddItemVisible(true)} aria-label="new-item" className="border-2 border-black rounded-full w-16 h-16 grid self-center place-items-center rotate-45"><CloseSVG classes="" width={48} color="#000" /></button>
+      <button
+        onClick={() => {
+          handleVisibility.open(setAddItemVisible)
+          handleVisibility.hide(setMenuVisible)
+        }}
+        aria-label='new-item'
+        className='border-2 border-black rounded-full w-16 h-16 grid self-center place-items-center rotate-45'
+      >
+        <CloseSVG classes='' width={48} color='#000' />
+      </button>
     </div>
   )
 }

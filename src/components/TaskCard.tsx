@@ -10,7 +10,7 @@ type objType = {
     due: string
     priority: string
     project: string
-    id: number
+    id: string
   }
 
 function TaskCard({task}:{task: objType}) {
