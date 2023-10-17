@@ -1,8 +1,7 @@
 import CloseSVG from '../SVGs/CloseSVG'
 import handleVisibility from '../../utils/handleVisibility'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import AddTaskForm from '../AddTaskForm'
-import AddProjectForm from '../AddProjectForm'
 
 type objType = {
   name: string
@@ -13,23 +12,20 @@ type objType = {
   id: string
 }
 
-function AddItem ({
-  setAddItemVisible,
-  currentTask,
+function EditTask ({
+  setEditTaskVisible,
+  task,
   taskArr,
   setTaskArr,
-  projectArr,
-  setProjectArr
+  projectArr
 }: {
-  setAddItemVisible: React.Dispatch<React.SetStateAction<boolean>>
-  currentTask: objType
+  setEditTaskVisible: React.Dispatch<React.SetStateAction<boolean>>
+  task: objType
   taskArr: objType[]
   setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>
   projectArr: string[]
-  setProjectArr: React.Dispatch<React.SetStateAction<string[]>>
 }) {
   const ref = useRef(null)
-  const [formChoice, setFormChoice] = useState('task')
 
   return (
     <div
@@ -39,47 +35,34 @@ function AddItem ({
         if (e.target !== ref.current) {
           return null
         } else {
-          handleVisibility.hide(setAddItemVisible)
+          handleVisibility.hide(setEditTaskVisible)
         }
       }}
     >
       <div className='bg-white w-80 grid grid-cols-[80px_1fr] grid-rows-[50px_1fr]'>
         <h2 className='col-span-full row-start-1 bg-blue-400 pl-2 pt-3 h-full'>
-          Create New...
+          Edit Task
         </h2>
         <button
           aria-label='close-add-item'
           className='col-start-2 row-start-1 justify-self-end mr-2'
-          onClick={() => handleVisibility.hide(setAddItemVisible)}
+          onClick={() => handleVisibility.hide(setEditTaskVisible)}
         >
           <CloseSVG classes='' color='#0f0f0f' width={20} />
         </button>
-        <ul>
-          <li onClick={() => setFormChoice('task')}>To Do</li>
-          <li onClick={() => setFormChoice('project')}>Project</li>
-          <li onClick={() => setFormChoice('note')}>Note</li>
-        </ul>
-        {formChoice === 'task' ? (
+
           <AddTaskForm
-            currentTask={currentTask}
+            currentTask={task}
             taskArr={taskArr}
             setTaskArr={setTaskArr}
-            setAddItemVisible={setAddItemVisible}
+            setAddItemVisible={setEditTaskVisible}
             projectArr={projectArr}
-            newTask={true}
+            newTask={false}
           />
-        ) : formChoice === 'project' ? (
-          <AddProjectForm
-            projectArr={projectArr}
-            setProjectArr={setProjectArr}
-            setAddItemVisible={setAddItemVisible}
-          />
-        ) : (
-          ''
-        )}
+        
       </div>
     </div>
   )
 }
 
-export default AddItem
+export default EditTask;

@@ -61,7 +61,11 @@ function App () {
       ) : (
         ''
       )}
-      <TaskList tasksArr={taskArr} setTaskArr={setTaskArr}/>
+      <TaskList
+        tasksArr={taskArr}
+        setTaskArr={setTaskArr}
+        projectArr={projectArr}
+      />
       {addItemVisible ? (
         <AddItem
           currentTask={{

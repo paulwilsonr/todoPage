@@ -17,16 +17,18 @@ function AddTaskForm ({
   taskArr,
   setTaskArr,
   setAddItemVisible,
-  projectArr
+  projectArr,
+  newTask
 }: {
   currentTask: objType
   taskArr: objType[]
   setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>
   setAddItemVisible: React.Dispatch<React.SetStateAction<boolean>>
   projectArr: string[]
+  newTask: boolean
 }) {
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
-  const [priorityChoice, setPriorityChoice] = useState('')
+  const textAreaRef = useRef<HTMLTextAreaElement>(null)
+  const [priorityChoice, setPriorityChoice] = useState(currentTask.priority)
   const [task, setTask] = useState(currentTask)
 
   useAutosizeTextArea(textAreaRef.current, task.details)
@@ -39,6 +41,13 @@ function AddTaskForm ({
     let tempTask = { ...task }
     tempTask = { ...tempTask, [taskKey]: value }
     setTask(tempTask)
+  }
+
+  function handleSubmit () {
+    newTask?handleTaskChanges.addTask(task, taskArr, setTaskArr) :
+    handleTaskChanges.editTask(task, currentTask, taskArr, setTaskArr);
+
+    handleVisibility.hide(setAddItemVisible)
   }
 
   return (
@@ -57,7 +66,7 @@ function AddTaskForm ({
       <label className='flex mt-2'>
         Details:
         <textarea
-        ref={textAreaRef}
+          ref={textAreaRef}
           className='ml-1 w-[185px] h-6'
           id='taskDetails'
           placeholder='eg. internet, phone, rent'
@@ -149,24 +158,19 @@ function AddTaskForm ({
           >
             <option value='none'>None</option>
             {projectArr.map(project => {
-              if(project === '') {
-                return;
+              if (project === '') {
+                return
               }
-              return (
-                <option value={project}>{project}</option>
-              )
+              return <option value={project}>{project}</option>
             })}
           </select>
         </label>
         <button
           type='button'
           className='border px-2 border-black rounded-md bg-blue-400 mb-3'
-          onClick={() => {
-            handleTaskChanges.addTask(task, taskArr, setTaskArr);
-            handleVisibility.hide(setAddItemVisible)
-          }}
+          onClick={handleSubmit}
         >
-          Create Task
+          {newTask ? 'Create Task' : 'Update Task'}
         </button>
       </div>
     </div>

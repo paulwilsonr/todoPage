@@ -30,7 +30,21 @@ const handleTaskChanges = {
     tempTaskArr.splice(taskIndex, 1)
     setTaskArr(tempTaskArr)
   },
-  editTask () {}
+  editTask (
+    editedTask: objType,
+    prevTask: objType,
+    taskArr: objType[],
+    setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>
+    ) {
+      const tempTaskArr = [...taskArr]
+      const taskIndex = tempTaskArr.indexOf(prevTask);
+      if (taskIndex === -1) {
+        console.log('Error: Task not found')
+        return
+      }
+      tempTaskArr.splice(taskIndex, 1, editedTask)
+      setTaskArr(tempTaskArr)
+    }
 }
 
 export default handleTaskChanges

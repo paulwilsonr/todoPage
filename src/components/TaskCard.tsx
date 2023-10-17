@@ -4,6 +4,7 @@ import TaskDetails from './Modals/TaskDetails'
 import { useState } from 'react'
 import handleVisibility from '../utils/handleVisibility'
 import DeleteTask from './Modals/DeleteTask'
+import EditTask from './Modals/EditTask'
 
 type objType = {
   name: string
@@ -17,14 +18,17 @@ type objType = {
 function TaskCard ({
   task,
   taskArr,
-  setTaskArr
+  setTaskArr,
+  projectArr
 }: {
   task: objType
   taskArr: objType[]
   setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>
+  projectArr: string[]
 }) {
   const [detailsVisible, setDetailsVisible] = useState(false)
   const [deleteTaskVisible, setDeleteTaskVisible] = useState(false)
+  const [editTaskVisible, setEditTaskVisible] = useState(true);
 
   return (
     <div
@@ -43,7 +47,9 @@ function TaskCard ({
           Details
         </button>
         <p className='ml-1'>{task.due}</p>
-        <EditSVG classes='ml-1' />
+        <button onClick={() => {
+          handleVisibility.open(setEditTaskVisible)
+        }} ><EditSVG classes='ml-1' /></button>
         <button onClick={() => {
           handleVisibility.open(setDeleteTaskVisible)
         }} >
@@ -63,6 +69,17 @@ function TaskCard ({
           setTaskArr={setTaskArr}
         />
       ) : (
+        ''
+      )}
+      {editTaskVisible? (
+        <EditTask
+          setEditTaskVisible={setEditTaskVisible}
+          task={task}
+          taskArr={taskArr}
+          setTaskArr={setTaskArr}
+          projectArr={projectArr}
+          />
+      ): (
         ''
       )}
     </div>

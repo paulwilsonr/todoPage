@@ -10,10 +10,12 @@ type objType = {
 }
 function TaskList ({
   tasksArr,
-  setTaskArr
+  setTaskArr,
+  projectArr
 }: {
   tasksArr: Array<objType>
   setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>
+  projectArr: string[]
 }) {
   return (
     <div>
@@ -24,6 +26,7 @@ function TaskList ({
             task={task}
             taskArr={tasksArr}
             setTaskArr={setTaskArr}
+            projectArr={projectArr}
           />
         )
       })}
