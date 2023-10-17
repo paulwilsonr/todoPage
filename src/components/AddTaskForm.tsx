@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import handleVisibility from '../utils/handleVisibility'
+import useAutosizeTextArea from '../utils/useAutosizeTextArea'
+import handleTaskChanges from '../utils/handleTaskChanges'
 
-interface currentTask {
+type objType = {
   name: string
   details: string
   due: string
@@ -14,33 +16,20 @@ function AddTaskForm ({
   currentTask,
   taskArr,
   setTaskArr,
-  setAddItemVisible
+  setAddItemVisible,
+  projectArr
 }: {
-  currentTask: currentTask
-  taskArr: {
-    name: string
-    details: string
-    due: string
-    priority: string
-    project: string
-    id: string
-  }[]
-  setTaskArr: React.Dispatch<
-    React.SetStateAction<
-      {
-        name: string
-        details: string
-        due: string
-        priority: string
-        project: string
-        id: string
-      }[]
-    >
-  >
+  currentTask: objType
+  taskArr: objType[]
+  setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>
   setAddItemVisible: React.Dispatch<React.SetStateAction<boolean>>
+  projectArr: string[]
 }) {
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [priorityChoice, setPriorityChoice] = useState('')
   const [task, setTask] = useState(currentTask)
+
+  useAutosizeTextArea(textAreaRef.current, task.details)
 
   function changePriority (choice: string) {
     setPriorityChoice(choice)
@@ -50,13 +39,6 @@ function AddTaskForm ({
     let tempTask = { ...task }
     tempTask = { ...tempTask, [taskKey]: value }
     setTask(tempTask)
-  }
-
-  function handleSubmitNewTask () {
-    const tempTaskArr = [...taskArr]
-    tempTaskArr.push(task)
-    setTaskArr(tempTaskArr)
-    handleVisibility.hide(setAddItemVisible)
   }
 
   return (
@@ -75,7 +57,8 @@ function AddTaskForm ({
       <label className='flex mt-2'>
         Details:
         <textarea
-          className='ml-1 w-[150px]'
+        ref={textAreaRef}
+          className='ml-1 w-[185px] h-6'
           id='taskDetails'
           placeholder='eg. internet, phone, rent'
           value={task.details}
@@ -165,15 +148,25 @@ function AddTaskForm ({
             onChange={e => changeTaskData('project', e.target.value)}
           >
             <option value='none'>None</option>
-            <option value='test'>Test</option>
+            {projectArr.map(project => {
+              if(project === '') {
+                return;
+              }
+              return (
+                <option value={project}>{project}</option>
+              )
+            })}
           </select>
         </label>
         <button
           type='button'
           className='border px-2 border-black rounded-md bg-blue-400 mb-3'
-          onClick={handleSubmitNewTask}
+          onClick={() => {
+            handleTaskChanges.addTask(task, taskArr, setTaskArr);
+            handleVisibility.hide(setAddItemVisible)
+          }}
         >
-          Add To-Do
+          Create Task
         </button>
       </div>
     </div>

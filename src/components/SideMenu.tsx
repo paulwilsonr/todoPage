@@ -3,11 +3,15 @@ import handleVisibility from '../utils/handleVisibility'
 
 function SideMenu ({
   setAddItemVisible,
-  setMenuVisible
+  setMenuVisible,
+  projectArr
 }: {
   setAddItemVisible: React.Dispatch<React.SetStateAction<boolean>>
   setMenuVisible: React.Dispatch<React.SetStateAction<boolean>>
+  projectArr: string[]
 }) {
+  let projKey = 0
+
   return (
     <div className='absolute border border-black h-[90dvh] w-32 right-0 top-16 bg-white flex flex-col justify-between'>
       <ul className='ml-1'>
@@ -15,7 +19,15 @@ function SideMenu ({
         <li>Today</li>
         <li>Tomorrow</li>
         <li>Next 7 Days</li>
-        <li>Projects</li>
+        <li>
+          Projects
+          <ul>
+            {projectArr.map(project => {
+              projKey++
+              return <li key={projKey}>{project}</li>
+            })}
+          </ul>
+        </li>
         <li>Notes</li>
       </ul>
       <button

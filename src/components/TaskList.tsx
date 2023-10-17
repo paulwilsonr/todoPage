@@ -1,4 +1,4 @@
-import TaskCard from "./TaskCard"
+import TaskCard from './TaskCard'
 
 type objType = {
   name: string
@@ -8,14 +8,25 @@ type objType = {
   project: string
   id: string
 }
-function TaskList ({ tasksArr }: { tasksArr: Array<objType> }) {
+function TaskList ({
+  tasksArr,
+  setTaskArr
+}: {
+  tasksArr: Array<objType>
+  setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>
+}) {
   return (
     <div>
       {tasksArr.map(task => {
-        return <TaskCard key={task.id} task={task} />
+        return (
+          <TaskCard
+            key={task.id}
+            task={task}
+            taskArr={tasksArr}
+            setTaskArr={setTaskArr}
+          />
+        )
       })}
-
-      
     </div>
   )
 }

@@ -1,9 +1,10 @@
 import CloseSVG from '../SVGs/CloseSVG'
 import handleVisibility from '../../utils/handleVisibility'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import AddTaskForm from '../AddTaskForm'
+import AddProjectForm from '../AddProjectForm'
 
-interface currentTask {
+type objType = {
   name: string
   details: string
   due: string
@@ -16,32 +17,19 @@ function AddItem ({
   setAddItemVisible,
   currentTask,
   taskArr,
-  setTaskArr
+  setTaskArr,
+  projectArr,
+  setProjectArr
 }: {
   setAddItemVisible: React.Dispatch<React.SetStateAction<boolean>>
-  currentTask: currentTask
-  taskArr: {
-    name: string
-    details: string
-    due: string
-    priority: string
-    project: string
-    id: string
-  }[]
-  setTaskArr: React.Dispatch<
-    React.SetStateAction<
-      {
-        name: string
-        details: string
-        due: string
-        priority: string
-        project: string
-        id: string
-      }[]
-    >
-  >
+  currentTask: objType
+  taskArr: objType[]
+  setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>
+  projectArr: string[]
+  setProjectArr: React.Dispatch<React.SetStateAction<string[]>>
 }) {
   const ref = useRef(null)
+  const [formChoice, setFormChoice] = useState('task')
 
   return (
     <div
@@ -67,16 +55,27 @@ function AddItem ({
           <CloseSVG classes='' color='#0f0f0f' width={20} />
         </button>
         <ul>
-          <li>To Do</li>
-          <li>Project</li>
-          <li>Note</li>
+          <li onClick={() => setFormChoice('task')}>To Do</li>
+          <li onClick={() => setFormChoice('project')}>Project</li>
+          <li onClick={() => setFormChoice('note')}>Note</li>
         </ul>
-        <AddTaskForm
-          currentTask={currentTask}
-          taskArr={taskArr}
-          setTaskArr={setTaskArr}
-          setAddItemVisible={setAddItemVisible}
-        />
+        {formChoice === 'task' ? (
+          <AddTaskForm
+            currentTask={currentTask}
+            taskArr={taskArr}
+            setTaskArr={setTaskArr}
+            setAddItemVisible={setAddItemVisible}
+            projectArr={projectArr}
+          />
+        ) : formChoice === 'project' ? (
+          <AddProjectForm
+            projectArr={projectArr}
+            setProjectArr={setProjectArr}
+            setAddItemVisible={setAddItemVisible}
+          />
+        ) : (
+          ''
+        )}
       </div>
     </div>
   )
