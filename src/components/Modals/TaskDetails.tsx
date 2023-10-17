@@ -1,6 +1,7 @@
 import CloseSVG from '../SVGs/CloseSVG'
 import handleVisibility from '../../utils/handleVisibility'
 import { useRef } from 'react'
+import formatDate from '../../utils/formatDate'
 
 type objType = {
   name: string
@@ -42,7 +43,7 @@ function TaskDetails ({
         /></button>
         <p className='col-span-full'>{task.project}</p>
         <p className='col-span-full'>{task.priority}</p>
-        <p className='col-span-full'>{task.due}</p>
+        <p className='col-span-full'>{formatDate(task.due, false)}</p>
         <p className='col-span-full'>{task.details}</p>
       </div>
     </div>

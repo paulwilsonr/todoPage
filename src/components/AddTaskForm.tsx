@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import handleVisibility from '../utils/handleVisibility'
 import useAutosizeTextArea from '../utils/useAutosizeTextArea'
-import handleTaskChanges from '../utils/handleTaskChanges'
+import formFunctions from '../utils/formFunctions'
 
 type objType = {
   name: string
@@ -33,23 +33,6 @@ function AddTaskForm ({
 
   useAutosizeTextArea(textAreaRef.current, task.details)
 
-  function changePriority (choice: string) {
-    setPriorityChoice(choice)
-  }
-
-  function changeTaskData (taskKey: string, value: string) {
-    let tempTask = { ...task }
-    tempTask = { ...tempTask, [taskKey]: value }
-    setTask(tempTask)
-  }
-
-  function handleSubmit () {
-    newTask?handleTaskChanges.addTask(task, taskArr, setTaskArr) :
-    handleTaskChanges.editTask(task, currentTask, taskArr, setTaskArr);
-
-    handleVisibility.hide(setAddItemVisible)
-  }
-
   return (
     <div className='w-[250px] bg-white'>
       <label className='flex mt-2'>
@@ -60,7 +43,7 @@ function AddTaskForm ({
           id='taskTitle'
           placeholder='Pay bills'
           value={task.name}
-          onChange={e => changeTaskData('name', e.target.value)}
+          onChange={e => formFunctions.changeTaskData('name', e.target.value, task, setTask)}
         ></input>
       </label>
       <label className='flex mt-2'>
@@ -71,7 +54,7 @@ function AddTaskForm ({
           id='taskDetails'
           placeholder='eg. internet, phone, rent'
           value={task.details}
-          onChange={e => changeTaskData('details', e.target.value)}
+          onChange={e => formFunctions.changeTaskData('details', e.target.value, task, setTask)}
         ></textarea>
       </label>
       <label className='flex my-2'>
@@ -82,7 +65,9 @@ function AddTaskForm ({
           id='taskDate'
           placeholder='MM/DD/YYYY'
           value={task.due}
-          onChange={e => changeTaskData('due', e.target.value)}
+          onChange={e => {
+            formFunctions.changeTaskData('due', e.target.value, task, setTask)
+          }}
         ></input>
       </label>
       <label>
@@ -97,8 +82,8 @@ function AddTaskForm ({
           Low
           <input
             onClick={() => {
-              changePriority('low')
-              changeTaskData('priority', 'low')
+              formFunctions.changePriority('low', setPriorityChoice)
+              formFunctions.changeTaskData('priority', 'low', task, setTask)
             }}
             className='appearance-none'
             type='radio'
@@ -117,8 +102,8 @@ function AddTaskForm ({
           Medium
           <input
             onClick={() => {
-              changePriority('medium')
-              changeTaskData('priority', 'medium')
+              formFunctions.changePriority('medium', setPriorityChoice)
+              formFunctions.changeTaskData('priority', 'medium', task, setTask)
             }}
             className='appearance-none bg-black hover:bg-blue-400'
             type='radio'
@@ -137,8 +122,8 @@ function AddTaskForm ({
           High
           <input
             onClick={() => {
-              changePriority('high')
-              changeTaskData('priority', 'high')
+              formFunctions.changePriority('high', setPriorityChoice)
+              formFunctions.changeTaskData('priority', 'high', task, setTask)
             }}
             className='appearance-none bg-black hover:bg-blue-400'
             type='radio'
@@ -154,21 +139,24 @@ function AddTaskForm ({
           <select
             className='ml-1'
             id='taskProject'
-            onChange={e => changeTaskData('project', e.target.value)}
+            onChange={e => formFunctions.changeTaskData('project', e.target.value, task, setTask)}
           >
             <option value='none'>None</option>
-            {projectArr.map(project => {
+            {projectArr.map((project, index) => {
               if (project === '') {
                 return
               }
-              return <option value={project}>{project}</option>
+              return <option key={index} value={project}>{project}</option>
             })}
           </select>
         </label>
         <button
           type='button'
           className='border px-2 border-black rounded-md bg-blue-400 mb-3'
-          onClick={handleSubmit}
+          onClick={() => {
+            formFunctions.handleSubmit(newTask, task, taskArr, setTaskArr, currentTask)
+            handleVisibility.hide(setAddItemVisible)
+          }}
         >
           {newTask ? 'Create Task' : 'Update Task'}
         </button>

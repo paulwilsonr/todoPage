@@ -5,6 +5,7 @@ import { useState } from 'react'
 import handleVisibility from '../utils/handleVisibility'
 import DeleteTask from './Modals/DeleteTask'
 import EditTask from './Modals/EditTask'
+import formatDate from '../utils/formatDate'
 
 type objType = {
   name: string
@@ -28,7 +29,8 @@ function TaskCard ({
 }) {
   const [detailsVisible, setDetailsVisible] = useState(false)
   const [deleteTaskVisible, setDeleteTaskVisible] = useState(false)
-  const [editTaskVisible, setEditTaskVisible] = useState(true);
+  const [editTaskVisible, setEditTaskVisible] = useState(false);
+
 
   return (
     <div
@@ -41,12 +43,12 @@ function TaskCard ({
       </div>
       <div className='flex'>
         <button
-          className='ml-1'
+          className='mx-1'
           onClick={() => handleVisibility.open(setDetailsVisible)}
         >
           Details
         </button>
-        <p className='ml-1'>{task.due}</p>
+        <p className='ml-1 w-24'>{formatDate(task.due, true)}</p>
         <button onClick={() => {
           handleVisibility.open(setEditTaskVisible)
         }} ><EditSVG classes='ml-1' /></button>
