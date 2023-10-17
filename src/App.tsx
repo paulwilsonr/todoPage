@@ -1,36 +1,95 @@
 import TaskList from './components/TaskList'
 import BurgerSVG from './components/SVGs/BurgerSVG'
 import CloseSVG from './components/SVGs/CloseSVG'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import handleVisibility from './utils/handleVisibility'
 import SideMenu from './components/SideMenu'
 import AddItem from './components/Modals/AddItem'
 import { v4 as uuidv4 } from 'uuid'
 
-const testTaskArr = [
-  {
-    name: 'testTask1',
-    details: 'test test test details',
-    due: '10-27-2023',
-    priority: 'low',
-    project: 'none',
-    id: '1'
-  },
-  {
-    name: 'testTask2',
-    details: 'test test test details2',
-    due: '03-24-2024',
-    priority: 'low',
-    project: 'none',
-    id: '2'
+type objType = {
+  name: string
+  details: string
+  due: string
+  priority: string
+  project: string
+  id: string
+}
+const taskTemplate:objType = {
+    name: '',
+    details: '',
+    due: '',
+    priority: '',
+    project: '',
+    id: '',
   }
-]
 
 function App () {
+  
   const [menuVisible, setMenuVisible] = useState(false)
-  const [taskArr, setTaskArr] = useState(testTaskArr)
+  const [taskArr, setTaskArr] = useState([taskTemplate])
   const [addItemVisible, setAddItemVisible] = useState(false)
   const [projectArr, setProjectArr] = useState([''])
+
+useEffect(() => {
+  const savedTasks = localStorage.getItem('taskArr')
+  const savedProjects = localStorage.getItem('projectArr')
+  if(savedTasks) {
+    const parsedSavedTasks: objType[] = JSON.parse(savedTasks)
+    setTaskArr(parsedSavedTasks)
+  } else {
+    localStorage.setItem('taskArr', JSON.stringify([taskTemplate]))
+  }
+
+  if(savedProjects) {
+    const parsedSavedProjects: string[] = JSON.parse(savedProjects)
+    setProjectArr(parsedSavedProjects)
+    console.log(localStorage.getItem('projectArr'))
+  } else {
+    localStorage.setItem('projectArr', JSON.stringify(['']))
+  }
+
+
+  // if(localStorage.taskArr) {
+    
+  //   // const savedTasks = localStorage.getItem("taskArr")
+  //   console.log(savedTasks)
+  //   if(savedTasks){
+  //     setTaskArr(JSON.parse(savedTasks))
+  //   }
+  // } else {
+  //   localStorage.setItem('taskArr', JSON.stringify([{
+  //     name: '',
+  //     details: '',
+  //     due: '',
+  //     priority: '',
+  //     project: '',
+  //     id: '',
+  //   }]));
+  // }
+  // if(localStorage.projectArr) {
+  //   const savedProjects = localStorage.getItem("projectArr")
+  //   if(savedProjects) {setProjectArr(JSON.parse(savedProjects))}
+  // } else {
+  //   localStorage.setItem('projectArr', JSON.stringify(['']));
+  // }
+}, [])
+
+useEffect(() => {
+  if(taskArr[0] !== taskTemplate) {
+    localStorage.setItem('taskArr', JSON.stringify(taskArr))
+  }
+}, [taskArr])
+
+// useEffect(() => {
+//   if()
+// })
+
+useEffect(() => {
+  if(projectArr[0] !== ''){
+    localStorage.setItem('projectArr', JSON.stringify(projectArr))
+  }
+}, [projectArr])
 
   return (
     <div>

@@ -20,6 +20,9 @@ function TaskList ({
   return (
     <div>
       {tasksArr.map(task => {
+        if(task.id === '') {
+          return ''
+        }
         return (
           <TaskCard
             key={task.id}

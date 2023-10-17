@@ -13,33 +13,34 @@ function SideMenu ({
   let projKey = 0
 
   return (
-    <div className='absolute border border-black h-[90dvh] w-32 right-0 top-16 bg-white flex flex-col justify-between'>
-      <ul className='ml-1'>
-        <li>All</li>
-        <li>Today</li>
-        <li>Tomorrow</li>
-        <li>Next 7 Days</li>
-        <li>
-          Projects
-          <ul>
-            {projectArr.map(project => {
-              projKey++
-              return <li key={projKey}>{project}</li>
-            })}
-          </ul>
-        </li>
-        <li>Notes</li>
-      </ul>
-      <button
-        onClick={() => {
-          handleVisibility.open(setAddItemVisible)
-          handleVisibility.hide(setMenuVisible)
-        }}
-        aria-label='new-item'
-        className='border-2 border-black rounded-full w-16 h-16 grid self-center place-items-center rotate-45'
-      >
-        <CloseSVG classes='' width={48} color='#000' />
-      </button>
+    <div className='w-screen h-screen bg-[rgba(0, 0, 0, 100)] absolute' onClick={() => {handleVisibility.hide(setMenuVisible)}}>
+      <div className='absolute border border-black h-[90dvh] w-32 right-0 top-0 bg-white flex flex-col justify-between'>
+        <ul className='ml-1'>
+          <li>All</li>
+          <li>Today</li>
+          <li>Tomorrow</li>
+          <li>Next 7 Days</li>
+          <li>
+            Projects
+            <ul>
+              {projectArr.map(project => {
+                projKey++
+                return <li key={projKey}>{project}</li>
+              })}
+            </ul>
+          </li>
+        </ul>
+        <button
+          onClick={() => {
+            handleVisibility.open(setAddItemVisible)
+            handleVisibility.hide(setMenuVisible)
+          }}
+          aria-label='new-item'
+          className='border-2 border-black rounded-full w-16 h-16 grid self-center place-items-center rotate-45'
+        >
+          <CloseSVG classes='' width={48} color='#000' />
+        </button>
+      </div>
     </div>
   )
 }

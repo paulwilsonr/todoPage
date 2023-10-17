@@ -14,6 +14,9 @@ const handleTaskChanges = {
   ) {
     const tempTaskArr = [...taskArr]
     tempTaskArr.push(task)
+    if(tempTaskArr[0].id === '') {
+      tempTaskArr.splice(0, 1);
+    }
     setTaskArr(tempTaskArr)
   },
   deleteTask (

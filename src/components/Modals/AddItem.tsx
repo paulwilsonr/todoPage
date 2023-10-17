@@ -55,9 +55,9 @@ function AddItem ({
           <CloseSVG classes='' color='#0f0f0f' width={20} />
         </button>
         <ul>
-          <li onClick={() => setFormChoice('task')}>To Do</li>
-          <li onClick={() => setFormChoice('project')}>Project</li>
-          <li onClick={() => setFormChoice('note')}>Note</li>
+          <li className={formChoice === 'task'? 'border-b-4 border-blue-400 w-3/4 h-6 mt-1 cursor-pointer': 'h-6 mt-1 cursor-pointer'} onClick={() => setFormChoice('task')}>To Do</li>
+          <li className={formChoice === 'project'? 'border-b-4 border-blue-400 w-3/4 h-6 mt-1 cursor-pointer': 'h-6 mt-1 cursor-pointer'} onClick={() => setFormChoice('project')}>Project</li>
+          
         </ul>
         {formChoice === 'task' ? (
           <AddTaskForm
