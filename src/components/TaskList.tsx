@@ -11,16 +11,18 @@ type objType = {
 function TaskList ({
   tasksArr,
   setTaskArr,
-  projectArr
+  projectArr,
+  setFilterRange
 }: {
   tasksArr: Array<objType>
   setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>
   projectArr: string[]
+  setFilterRange: React.Dispatch<React.SetStateAction<string[]>>
 }) {
   return (
     <div>
       {tasksArr.map(task => {
-        if(task.id === '') {
+        if (task.id === '') {
           return ''
         }
         return (
@@ -30,6 +32,7 @@ function TaskList ({
             taskArr={tasksArr}
             setTaskArr={setTaskArr}
             projectArr={projectArr}
+            setFilterRange={setFilterRange}
           />
         )
       })}

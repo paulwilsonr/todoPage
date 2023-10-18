@@ -17,8 +17,8 @@ function AddProjectForm ({
   function handleSubmitNewProject () {
     const tempProjectArr = [...projectArr]
     tempProjectArr.push(project)
-    if(tempProjectArr[0] === '') {
-      tempProjectArr.splice(0, 1);
+    if (tempProjectArr[0] === '') {
+      tempProjectArr.splice(0, 1)
     }
     setProjectArr(tempProjectArr)
     handleVisibility.hide(setAddItemVisible)

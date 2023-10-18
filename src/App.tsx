@@ -16,53 +16,51 @@ type objType = {
   project: string
   id: string
 }
-const taskTemplate:objType = {
-    name: '',
-    details: '',
-    due: '',
-    priority: '',
-    project: '',
-    id: '',
-  }
+const taskTemplate: objType = {
+  name: '',
+  details: '',
+  due: '',
+  priority: '',
+  project: '',
+  id: ''
+}
 
 function App () {
-  
   const [menuVisible, setMenuVisible] = useState(false)
   const [taskArr, setTaskArr] = useState([taskTemplate])
   const [addItemVisible, setAddItemVisible] = useState(false)
   const [projectArr, setProjectArr] = useState([''])
   const [filterRange, setFilterRange] = useState(['all', 'none'])
 
-useEffect(() => {
-  const savedTasks = localStorage.getItem('taskArr')
-  const savedProjects = localStorage.getItem('projectArr')
-  if(savedTasks) {
-    const parsedSavedTasks: objType[] = JSON.parse(savedTasks)
-    setTaskArr(parsedSavedTasks)
-  } else {
-    localStorage.setItem('taskArr', JSON.stringify([taskTemplate]))
-  }
+  useEffect(() => {
+    const savedTasks = localStorage.getItem('taskArr')
+    const savedProjects = localStorage.getItem('projectArr')
+    if (savedTasks) {
+      const parsedSavedTasks: objType[] = JSON.parse(savedTasks)
+      setTaskArr(parsedSavedTasks)
+    } else {
+      localStorage.setItem('taskArr', JSON.stringify([taskTemplate]))
+    }
 
-  if(savedProjects) {
-    const parsedSavedProjects: string[] = JSON.parse(savedProjects)
-    setProjectArr(parsedSavedProjects)
-  } else {
-    localStorage.setItem('projectArr', JSON.stringify(['']))
-  }
-}, [])
+    if (savedProjects) {
+      const parsedSavedProjects: string[] = JSON.parse(savedProjects)
+      setProjectArr(parsedSavedProjects)
+    } else {
+      localStorage.setItem('projectArr', JSON.stringify(['']))
+    }
+  }, [])
 
-useEffect(() => {
-  if(taskArr[0] !== taskTemplate) {
-    localStorage.setItem('taskArr', JSON.stringify(taskArr))
-  }
-}, [taskArr])
+  useEffect(() => {
+    if (taskArr[0] !== taskTemplate) {
+      localStorage.setItem('taskArr', JSON.stringify(taskArr))
+    }
+  }, [taskArr])
 
-useEffect(() => {
-  if(projectArr[0] !== ''){
-    localStorage.setItem('projectArr', JSON.stringify(projectArr))
-  }
-}, [projectArr])
-
+  useEffect(() => {
+    if (projectArr[0] !== '') {
+      localStorage.setItem('projectArr', JSON.stringify(projectArr))
+    }
+  }, [projectArr])
 
   return (
     <div>
@@ -98,6 +96,7 @@ useEffect(() => {
         tasksArr={filterTasks(taskArr, filterRange)}
         setTaskArr={setTaskArr}
         projectArr={projectArr}
+        setFilterRange={setFilterRange}
       />
       {addItemVisible ? (
         <AddItem

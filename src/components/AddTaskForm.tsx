@@ -45,7 +45,9 @@ function AddTaskForm ({
           id='taskTitle'
           placeholder='Pay bills'
           value={task.name}
-          onChange={e => formFunctions.changeTaskData('name', e.target.value, task, setTask)}
+          onChange={e =>
+            formFunctions.changeTaskData('name', e.target.value, task, setTask)
+          }
         ></input>
       </label>
       <label className='flex mt-2'>
@@ -56,7 +58,14 @@ function AddTaskForm ({
           id='taskDetails'
           placeholder='eg. internet, phone, rent'
           value={task.details}
-          onChange={e => formFunctions.changeTaskData('details', e.target.value, task, setTask)}
+          onChange={e =>
+            formFunctions.changeTaskData(
+              'details',
+              e.target.value,
+              task,
+              setTask
+            )
+          }
         ></textarea>
       </label>
       <label className='flex my-2'>
@@ -141,14 +150,25 @@ function AddTaskForm ({
           <select
             className='ml-1'
             id='taskProject'
-            onChange={e => formFunctions.changeTaskData('project', e.target.value, task, setTask)}
+            onChange={e =>
+              formFunctions.changeTaskData(
+                'project',
+                e.target.value,
+                task,
+                setTask
+              )
+            }
           >
             <option value='none'>None</option>
             {projectArr.map((project, index) => {
               if (project === '') {
                 return
               }
-              return <option key={index} value={project}>{project}</option>
+              return (
+                <option key={index} value={project}>
+                  {project}
+                </option>
+              )
             })}
           </select>
         </label>
@@ -156,7 +176,14 @@ function AddTaskForm ({
           type='button'
           className='border px-2 border-black rounded-md bg-blue-400 mb-3'
           onClick={() => {
-            formFunctions.handleSubmit(newTask, task, taskArr, setTaskArr, currentTask, setFilterRange)
+            formFunctions.handleSubmit(
+              newTask,
+              task,
+              taskArr,
+              setTaskArr,
+              currentTask,
+              setFilterRange
+            )
             handleVisibility.hide(setAddItemVisible)
           }}
         >

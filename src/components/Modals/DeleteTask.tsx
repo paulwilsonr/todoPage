@@ -38,19 +38,28 @@ function DeleteTask ({
       }}
     >
       <div className='bg-white w-72 grid grid-cols-1 grid-rows-2 pl-2'>
-        <button aria-label='close-delete-task' className='col-start-1 row-start-1 justify-self-end self-start mr-2 mt-2 z-20' onClick={() => handleVisibility.hide(setDeleteTaskVisible)}>
-        <CloseSVG
-          classes=''
-          color='#0f0f0f'
-          width={20}
-        /></button>
-        <p className='text-center row-start-1 col-start-1 pt-5 mr-2 z-10' >Are you sure you wish to delete {task.name} task?</p>
+        <button
+          aria-label='close-delete-task'
+          className='col-start-1 row-start-1 justify-self-end self-start mr-2 mt-2 z-20'
+          onClick={() => handleVisibility.hide(setDeleteTaskVisible)}
+        >
+          <CloseSVG classes='' color='#0f0f0f' width={20} />
+        </button>
+        <p className='text-center row-start-1 col-start-1 pt-5 mr-2 z-10'>
+          Are you sure you wish to delete {task.name} task?
+        </p>
         <div className='grid grid-cols-2 grid-rows-1'>
-        <button onClick={() => {
-          handleTaskChanges.deleteTask(task, taskArr, setTaskArr);
-          handleVisibility.hide(setDeleteTaskVisible);
-        }} >Yes</button>
-        <button onClick={() => handleVisibility.hide(setDeleteTaskVisible)}>No</button>
+          <button
+            onClick={() => {
+              handleTaskChanges.deleteTask(task, taskArr, setTaskArr)
+              handleVisibility.hide(setDeleteTaskVisible)
+            }}
+          >
+            Yes
+          </button>
+          <button onClick={() => handleVisibility.hide(setDeleteTaskVisible)}>
+            No
+          </button>
         </div>
       </div>
     </div>

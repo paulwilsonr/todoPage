@@ -17,13 +17,15 @@ function EditTask ({
   task,
   taskArr,
   setTaskArr,
-  projectArr
+  projectArr,
+  setFilterRange
 }: {
   setEditTaskVisible: React.Dispatch<React.SetStateAction<boolean>>
   task: objType
   taskArr: objType[]
   setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>
   projectArr: string[]
+  setFilterRange: React.Dispatch<React.SetStateAction<string[]>>
 }) {
   const ref = useRef(null)
 
@@ -51,18 +53,18 @@ function EditTask ({
           <CloseSVG classes='' color='#0f0f0f' width={20} />
         </button>
 
-          <AddTaskForm
-            currentTask={task}
-            taskArr={taskArr}
-            setTaskArr={setTaskArr}
-            setAddItemVisible={setEditTaskVisible}
-            projectArr={projectArr}
-            newTask={false}
-          />
-        
+        <AddTaskForm
+          currentTask={task}
+          taskArr={taskArr}
+          setTaskArr={setTaskArr}
+          setAddItemVisible={setEditTaskVisible}
+          projectArr={projectArr}
+          newTask={false}
+          setFilterRange={setFilterRange}
+        />
       </div>
     </div>
   )
 }
 
-export default EditTask;
+export default EditTask

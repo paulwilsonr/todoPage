@@ -20,17 +20,18 @@ function TaskCard ({
   task,
   taskArr,
   setTaskArr,
-  projectArr
+  projectArr,
+  setFilterRange
 }: {
   task: objType
   taskArr: objType[]
   setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>
   projectArr: string[]
+  setFilterRange: React.Dispatch<React.SetStateAction<string[]>>
 }) {
   const [detailsVisible, setDetailsVisible] = useState(false)
   const [deleteTaskVisible, setDeleteTaskVisible] = useState(false)
-  const [editTaskVisible, setEditTaskVisible] = useState(false);
-
+  const [editTaskVisible, setEditTaskVisible] = useState(false)
 
   return (
     <div
@@ -49,12 +50,18 @@ function TaskCard ({
           Details
         </button>
         <p className='ml-1 w-24'>{formatDate(task.due, true)}</p>
-        <button onClick={() => {
-          handleVisibility.open(setEditTaskVisible)
-        }} ><EditSVG classes='ml-1' /></button>
-        <button onClick={() => {
-          handleVisibility.open(setDeleteTaskVisible)
-        }} >
+        <button
+          onClick={() => {
+            handleVisibility.open(setEditTaskVisible)
+          }}
+        >
+          <EditSVG classes='ml-1' />
+        </button>
+        <button
+          onClick={() => {
+            handleVisibility.open(setDeleteTaskVisible)
+          }}
+        >
           <TrashCan classes='ml-1' />
         </button>
       </div>
@@ -73,15 +80,16 @@ function TaskCard ({
       ) : (
         ''
       )}
-      {editTaskVisible? (
+      {editTaskVisible ? (
         <EditTask
           setEditTaskVisible={setEditTaskVisible}
           task={task}
           taskArr={taskArr}
           setTaskArr={setTaskArr}
           projectArr={projectArr}
-          />
-      ): (
+          setFilterRange={setFilterRange}
+        />
+      ) : (
         ''
       )}
     </div>

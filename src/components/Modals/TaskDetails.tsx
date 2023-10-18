@@ -35,12 +35,13 @@ function TaskDetails ({
     >
       <div className='bg-white w-72 grid grid-cols-2 grid-rows-5 pl-2'>
         <p className='col-span-full row-start-1 pt-2'>{task.name}</p>
-        <button aria-label='close-details' className='col-start-2 row-start-1 justify-self-end mr-2 mt-2' onClick={() => handleVisibility.hide(setDetailsVisible)}>
-        <CloseSVG
-          classes=''
-          color='#0f0f0f'
-          width={20}
-        /></button>
+        <button
+          aria-label='close-details'
+          className='col-start-2 row-start-1 justify-self-end mr-2 mt-2'
+          onClick={() => handleVisibility.hide(setDetailsVisible)}
+        >
+          <CloseSVG classes='' color='#0f0f0f' width={20} />
+        </button>
         <p className='col-span-full'>{task.project}</p>
         <p className='col-span-full'>{task.priority}</p>
         <p className='col-span-full'>{formatDate(task.due, false)}</p>
