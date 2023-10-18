@@ -18,7 +18,8 @@ function AddTaskForm ({
   setTaskArr,
   setAddItemVisible,
   projectArr,
-  newTask
+  newTask,
+  setFilterRange
 }: {
   currentTask: objType
   taskArr: objType[]
@@ -26,6 +27,7 @@ function AddTaskForm ({
   setAddItemVisible: React.Dispatch<React.SetStateAction<boolean>>
   projectArr: string[]
   newTask: boolean
+  setFilterRange: React.Dispatch<React.SetStateAction<string[]>>
 }) {
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const [priorityChoice, setPriorityChoice] = useState(currentTask.priority)
@@ -154,7 +156,7 @@ function AddTaskForm ({
           type='button'
           className='border px-2 border-black rounded-md bg-blue-400 mb-3'
           onClick={() => {
-            formFunctions.handleSubmit(newTask, task, taskArr, setTaskArr, currentTask)
+            formFunctions.handleSubmit(newTask, task, taskArr, setTaskArr, currentTask, setFilterRange)
             handleVisibility.hide(setAddItemVisible)
           }}
         >

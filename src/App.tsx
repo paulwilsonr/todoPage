@@ -6,6 +6,7 @@ import handleVisibility from './utils/handleVisibility'
 import SideMenu from './components/SideMenu'
 import AddItem from './components/Modals/AddItem'
 import { v4 as uuidv4 } from 'uuid'
+import filterTasks from './utils/filterTasks'
 
 type objType = {
   name: string
@@ -30,6 +31,7 @@ function App () {
   const [taskArr, setTaskArr] = useState([taskTemplate])
   const [addItemVisible, setAddItemVisible] = useState(false)
   const [projectArr, setProjectArr] = useState([''])
+  const [filterRange, setFilterRange] = useState(['all', 'none'])
 
 useEffect(() => {
   const savedTasks = localStorage.getItem('taskArr')
@@ -44,35 +46,9 @@ useEffect(() => {
   if(savedProjects) {
     const parsedSavedProjects: string[] = JSON.parse(savedProjects)
     setProjectArr(parsedSavedProjects)
-    console.log(localStorage.getItem('projectArr'))
   } else {
     localStorage.setItem('projectArr', JSON.stringify(['']))
   }
-
-
-  // if(localStorage.taskArr) {
-    
-  //   // const savedTasks = localStorage.getItem("taskArr")
-  //   console.log(savedTasks)
-  //   if(savedTasks){
-  //     setTaskArr(JSON.parse(savedTasks))
-  //   }
-  // } else {
-  //   localStorage.setItem('taskArr', JSON.stringify([{
-  //     name: '',
-  //     details: '',
-  //     due: '',
-  //     priority: '',
-  //     project: '',
-  //     id: '',
-  //   }]));
-  // }
-  // if(localStorage.projectArr) {
-  //   const savedProjects = localStorage.getItem("projectArr")
-  //   if(savedProjects) {setProjectArr(JSON.parse(savedProjects))}
-  // } else {
-  //   localStorage.setItem('projectArr', JSON.stringify(['']));
-  // }
 }, [])
 
 useEffect(() => {
@@ -81,15 +57,12 @@ useEffect(() => {
   }
 }, [taskArr])
 
-// useEffect(() => {
-//   if()
-// })
-
 useEffect(() => {
   if(projectArr[0] !== ''){
     localStorage.setItem('projectArr', JSON.stringify(projectArr))
   }
 }, [projectArr])
+
 
   return (
     <div>
@@ -116,12 +89,13 @@ useEffect(() => {
           setAddItemVisible={setAddItemVisible}
           setMenuVisible={setMenuVisible}
           projectArr={projectArr}
+          setFilterRange={setFilterRange}
         />
       ) : (
         ''
       )}
       <TaskList
-        tasksArr={taskArr}
+        tasksArr={filterTasks(taskArr, filterRange)}
         setTaskArr={setTaskArr}
         projectArr={projectArr}
       />
@@ -140,6 +114,7 @@ useEffect(() => {
           setTaskArr={setTaskArr}
           projectArr={projectArr}
           setProjectArr={setProjectArr}
+          setFilterRange={setFilterRange}
         />
       ) : (
         ''

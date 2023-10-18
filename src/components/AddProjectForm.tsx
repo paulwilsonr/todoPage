@@ -4,11 +4,13 @@ import handleVisibility from '../utils/handleVisibility'
 function AddProjectForm ({
   projectArr,
   setProjectArr,
-  setAddItemVisible
+  setAddItemVisible,
+  setFilterRange
 }: {
   projectArr: string[]
   setProjectArr: React.Dispatch<React.SetStateAction<string[]>>
   setAddItemVisible: React.Dispatch<React.SetStateAction<boolean>>
+  setFilterRange: React.Dispatch<React.SetStateAction<string[]>>
 }) {
   const [project, setProject] = useState('')
 
@@ -20,6 +22,7 @@ function AddProjectForm ({
     }
     setProjectArr(tempProjectArr)
     handleVisibility.hide(setAddItemVisible)
+    setFilterRange(['all', 'none'])
   }
 
   return (

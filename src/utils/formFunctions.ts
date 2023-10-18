@@ -30,13 +30,15 @@ const formFunctions = {
     task: objType,
     taskArr: objType[],
     setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>,
-    currentTask: objType
+    currentTask: objType,
+    setFilterRange: React.Dispatch<React.SetStateAction<string[]>>
   ) {
-    newTask
-      ? handleTaskChanges.addTask(task, taskArr, setTaskArr)
-      : handleTaskChanges.editTask(task, currentTask, taskArr, setTaskArr)
-
-  
+    if (newTask) {
+      handleTaskChanges.addTask(task, taskArr, setTaskArr)
+      setFilterRange(['all', 'none'])
+    } else {
+      handleTaskChanges.editTask(task, currentTask, taskArr, setTaskArr)
+    }
   }
 }
 

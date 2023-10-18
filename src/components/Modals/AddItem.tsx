@@ -19,7 +19,8 @@ function AddItem ({
   taskArr,
   setTaskArr,
   projectArr,
-  setProjectArr
+  setProjectArr,
+  setFilterRange
 }: {
   setAddItemVisible: React.Dispatch<React.SetStateAction<boolean>>
   currentTask: objType
@@ -27,6 +28,7 @@ function AddItem ({
   setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>
   projectArr: string[]
   setProjectArr: React.Dispatch<React.SetStateAction<string[]>>
+  setFilterRange: React.Dispatch<React.SetStateAction<string[]>>
 }) {
   const ref = useRef(null)
   const [formChoice, setFormChoice] = useState('task')
@@ -67,12 +69,14 @@ function AddItem ({
             setAddItemVisible={setAddItemVisible}
             projectArr={projectArr}
             newTask={true}
+            setFilterRange={setFilterRange}
           />
         ) : formChoice === 'project' ? (
           <AddProjectForm
             projectArr={projectArr}
             setProjectArr={setProjectArr}
             setAddItemVisible={setAddItemVisible}
+            setFilterRange={setFilterRange}
           />
         ) : (
           ''

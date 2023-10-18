@@ -1,6 +1,5 @@
 function formatDate (date: string, inTaskCard: boolean) {
-    console.log(date)
-  let newDate = new Date(date).toDateString()
+  let newDate = new Date(date.replace(/-/g, '/')).toDateString()
   newDate = newDate.slice(0, 3) + ',' + newDate.slice(3, newDate.length)
   inTaskCard
     ? (newDate = newDate.slice(0, 11))
