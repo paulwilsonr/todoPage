@@ -1,16 +1,16 @@
-import CloseSVG from '../SVGs/CloseSVG'
-import handleVisibility from '../../utils/handleVisibility'
-import { useRef } from 'react'
-import handleTaskChanges from '../../utils/handleTaskChanges'
+import CloseSVG from '../SVGs/CloseSVG';
+import handleVisibility from '../../utils/handleVisibility';
+import { useRef } from 'react';
+import handleTaskChanges from '../../utils/handleTaskChanges';
 
 type objType = {
-  name: string
-  details: string
-  due: string
-  priority: string
-  project: string
-  id: string
-}
+  name: string;
+  details: string;
+  due: string;
+  priority: string;
+  project: string;
+  id: string;
+};
 
 function DeleteTask ({
   setDeleteTaskVisible,
@@ -18,12 +18,12 @@ function DeleteTask ({
   taskArr,
   setTaskArr
 }: {
-  setDeleteTaskVisible: React.Dispatch<React.SetStateAction<boolean>>
-  task: objType
-  taskArr: objType[]
-  setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>
+  setDeleteTaskVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  task: objType;
+  taskArr: objType[];
+  setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>;
 }) {
-  const ref = useRef(null)
+  const ref = useRef(null);
 
   return (
     <div
@@ -31,9 +31,9 @@ function DeleteTask ({
       className='absolute bg-greyedOut w-full h-full inset-0 flex justify-center items-center'
       onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         if (e.target !== ref.current) {
-          return null
+          return null;
         } else {
-          handleVisibility.hide(setDeleteTaskVisible)
+          handleVisibility.hide(setDeleteTaskVisible);
         }
       }}
     >
@@ -51,8 +51,8 @@ function DeleteTask ({
         <div className='grid grid-cols-2 grid-rows-1'>
           <button
             onClick={() => {
-              handleTaskChanges.deleteTask(task, taskArr, setTaskArr)
-              handleVisibility.hide(setDeleteTaskVisible)
+              handleTaskChanges.deleteTask(task, taskArr, setTaskArr);
+              handleVisibility.hide(setDeleteTaskVisible);
             }}
           >
             Yes
@@ -63,7 +63,7 @@ function DeleteTask ({
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default DeleteTask
+export default DeleteTask;

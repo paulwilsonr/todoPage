@@ -1,29 +1,29 @@
-import TaskCard from './TaskCard'
+import TaskCard from './TaskCard';
 
 type objType = {
-  name: string
-  details: string
-  due: string
-  priority: string
-  project: string
-  id: string
-}
-function TaskList ({
+  name: string;
+  details: string;
+  due: string;
+  priority: string;
+  project: string;
+  id: string;
+};
+function TaskList({
   tasksArr,
   setTaskArr,
   projectArr,
-  setFilterRange
+  setFilterRange,
 }: {
-  tasksArr: Array<objType>
-  setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>
-  projectArr: string[]
-  setFilterRange: React.Dispatch<React.SetStateAction<string[]>>
+  tasksArr: Array<objType>;
+  setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>;
+  projectArr: string[];
+  setFilterRange: React.Dispatch<React.SetStateAction<string[]>>;
 }) {
   return (
     <div>
       {tasksArr.map(task => {
         if (task.id === '') {
-          return ''
+          return '';
         }
         return (
           <TaskCard
@@ -34,10 +34,10 @@ function TaskList ({
             projectArr={projectArr}
             setFilterRange={setFilterRange}
           />
-        )
+        );
       })}
     </div>
-  )
+  );
 }
 
-export default TaskList
+export default TaskList;
