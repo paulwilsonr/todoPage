@@ -63,10 +63,10 @@ function App() {
   }, [projectArr]);
 
   return (
-    <div>
-      <header className="flex justify-between items-center bg-blue-400 h-16 px-2">
-        <h1 className="text-white text-5xl">To-Do</h1>
-        {menuVisible ? (
+    <div className="h-screen">
+      <header className="flex h-16 items-center justify-between bg-blue-400 px-2 sm:h-[5%]">
+        <h1 className="text-5xl text-white">To-Do</h1>
+        {menuVisible && window.innerWidth < 640 ? (
           <button
             aria-label="close-menu"
             onClick={() => handleVisibility.hide(setMenuVisible)}
@@ -75,6 +75,7 @@ function App() {
           </button>
         ) : (
           <button
+            className=" sm:hidden"
             aria-label="open-menu"
             onClick={() => handleVisibility.open(setMenuVisible)}
           >
@@ -82,22 +83,33 @@ function App() {
           </button>
         )}
       </header>
-      {menuVisible ? (
-        <SideMenu
-          setAddItemVisible={setAddItemVisible}
-          setMenuVisible={setMenuVisible}
-          projectArr={projectArr}
-          setFilterRange={setFilterRange}
-        />
-      ) : (
-        ''
-      )}
-      <TaskList
-        tasksArr={filterTasks(taskArr, filterRange)}
-        setTaskArr={setTaskArr}
-        projectArr={projectArr}
-        setFilterRange={setFilterRange}
-      />
+      <div className="sm:flex sm:h-[95%]">
+        {!menuVisible && window.innerWidth < 640 ? (
+          ''
+        ) : (
+          <SideMenu
+            setAddItemVisible={setAddItemVisible}
+            setMenuVisible={setMenuVisible}
+            projectArr={projectArr}
+            setFilterRange={setFilterRange}
+          />
+        )}
+        <div className="w-full">
+          <h2 className="ml-3 text-2xl">
+            {filterRange[0] !== 'project'
+              ? filterRange[0].slice(0, 1).toUpperCase() +
+                filterRange[0].slice(1)
+              : filterRange[1].slice(0, 1).toUpperCase() +
+                filterRange[1].slice(1)}
+          </h2>
+          <TaskList
+            tasksArr={filterTasks(taskArr, filterRange)}
+            setTaskArr={setTaskArr}
+            projectArr={projectArr}
+            setFilterRange={setFilterRange}
+          />
+        </div>
+      </div>
       {addItemVisible ? (
         <AddItem
           currentTask={{

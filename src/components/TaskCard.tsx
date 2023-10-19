@@ -33,23 +33,53 @@ function TaskCard({
   const [deleteTaskVisible, setDeleteTaskVisible] = useState(false);
   const [editTaskVisible, setEditTaskVisible] = useState(false);
 
+  let priorityColor = '';
+  switch (task.priority) {
+    case 'low':
+      priorityColor = ' border-l-emerald-500 border-l-8';
+      break;
+    case 'medium':
+      priorityColor = ' border-l-yellow-300 border-l-8';
+      break;
+    case 'high':
+      priorityColor = ' border-l-red-700 border-l-8';
+      break;
+    default:
+      break;
+  }
+
+  let taskName = task.name;
+  if (taskName.length >= 16 && window.innerWidth < 640) {
+    taskName = taskName.slice(0, 12) + '...';
+  }
+
   return (
     <div
-      className="flex justify-between px-1 mx-2 border-black border-2"
+      className={
+        'mx-2 my-3 flex justify-start border-2 border-black px-1 sm:h-20 sm:items-center' +
+        priorityColor
+      }
       key={task.id}
     >
-      <div className="flex px-1">
-        <input type="checkbox" name="taskDone" id="taskDone" />
-        <h2 className="ml-1">{task.name}</h2>
+      <div className="flex px-1 sm:w-3/4">
+        <input
+          className="sm:w-10"
+          type="checkbox"
+          name="taskDone"
+          id="taskDone"
+        />
+        <h2 className="ml-1 sm:ml-4  sm:text-4xl">{taskName}</h2>
       </div>
-      <div className="flex">
+      <div className="flex sm:mr-5 sm:w-1/4 sm:justify-between">
         <button
-          className="mx-1"
+          className="mx-1 sm:w-fit sm:text-4xl"
           onClick={() => handleVisibility.open(setDetailsVisible)}
         >
           Details
         </button>
-        <p className="ml-1 w-24">{formatDate(task.due, true)}</p>
+        <p className="ml-1 w-24 sm:w-fit sm:text-4xl">
+          {formatDate(task.due, true)}
+        </p>
         <button
           onClick={() => {
             handleVisibility.open(setEditTaskVisible);

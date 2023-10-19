@@ -164,9 +164,14 @@ function AddTaskForm({
               if (project === '') {
                 return;
               }
+              let projectName = project;
+              if(projectName.length >= 12) {
+                projectName = projectName.slice(0, 9) + '...'
+              }
               return (
                 <option key={index} value={project}>
-                  {project}
+                
+                  {projectName}
                 </option>
               );
             })}
@@ -174,7 +179,7 @@ function AddTaskForm({
         </label>
         <button
           type="button"
-          className="border px-2 border-black rounded-md bg-blue-400 mb-3"
+          className="border px-2 border-black rounded-md bg-blue-400 mb-3 h-6 whitespace-nowrap self-end text-sm"
           onClick={() => {
             formFunctions.handleSubmit(
               newTask,
@@ -187,7 +192,7 @@ function AddTaskForm({
             handleVisibility.hide(setAddItemVisible);
           }}
         >
-          {newTask ? 'Create Task' : 'Update Task'}
+          {newTask ? 'Create' : 'Update'}
         </button>
       </div>
     </div>

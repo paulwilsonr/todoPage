@@ -32,7 +32,7 @@ function EditTask({
   return (
     <div
       ref={ref}
-      className="absolute bg-greyedOut w-full h-full inset-0 flex justify-center items-center"
+      className="absolute inset-0 flex h-full w-full items-center justify-center bg-greyedOut"
       onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         if (e.target !== ref.current) {
           return null;
@@ -41,27 +41,28 @@ function EditTask({
         }
       }}
     >
-      <div className="bg-white w-80 grid grid-cols-[80px_1fr] grid-rows-[50px_1fr]">
-        <h2 className="col-span-full row-start-1 bg-blue-400 pl-2 pt-3 h-full">
+      <div className="grid w-80 grid-cols-[80px_1fr] grid-rows-[50px_1fr] bg-white">
+        <h2 className="col-span-full row-start-1 h-full bg-blue-400 pl-2 pt-3">
           Edit Task
         </h2>
         <button
           aria-label="close-add-item"
-          className="col-start-2 row-start-1 justify-self-end mr-2"
+          className="col-start-2 row-start-1 mr-2 justify-self-end"
           onClick={() => handleVisibility.hide(setEditTaskVisible)}
         >
           <CloseSVG classes="" color="#0f0f0f" width={20} />
         </button>
-
-        <AddTaskForm
-          currentTask={task}
-          taskArr={taskArr}
-          setTaskArr={setTaskArr}
-          setAddItemVisible={setEditTaskVisible}
-          projectArr={projectArr}
-          newTask={false}
-          setFilterRange={setFilterRange}
-        />
+        <div className="ml-2">
+          <AddTaskForm
+            currentTask={task}
+            taskArr={taskArr}
+            setTaskArr={setTaskArr}
+            setAddItemVisible={setEditTaskVisible}
+            projectArr={projectArr}
+            newTask={false}
+            setFilterRange={setFilterRange} 
+          />
+        </div>
       </div>
     </div>
   );
