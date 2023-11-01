@@ -6,6 +6,7 @@ import handleVisibility from '../utils/handleVisibility';
 import DeleteTask from './Modals/DeleteTask';
 import EditTask from './Modals/EditTask';
 import formatDate from '../utils/formatDate';
+import formFunctions from '../utils/formFunctions';
 
 type objType = {
   name: string;
@@ -14,6 +15,7 @@ type objType = {
   priority: string;
   project: string;
   id: string;
+  completed: boolean;
 };
 
 function TaskCard({
@@ -56,7 +58,7 @@ function TaskCard({
   return (
     <div
       className={
-        'mx-2 my-3 flex justify-start border-2 border-black px-1 sm:h-20 sm:items-center' +
+        'mx-2 my-3 flex justify-between border-2 border-black px-1 sm:h-20 sm:items-center sm:justify-start' +
         priorityColor
       }
       key={task.id}
@@ -67,8 +69,17 @@ function TaskCard({
           type="checkbox"
           name="taskDone"
           id="taskDone"
+          onChange={() =>
+            formFunctions.changedChecked(
+              task,
+              taskArr,
+              setTaskArr,
+              !task.completed,
+            )
+          }
+          checked={task.completed}
         />
-        <h2 className="ml-1 sm:ml-4  sm:text-4xl">{taskName}</h2>
+        <h2 className="ml-1 truncate  sm:ml-4 sm:text-4xl">{taskName}</h2>
       </div>
       <div className="flex sm:mr-5 sm:w-1/4 sm:justify-between">
         <button

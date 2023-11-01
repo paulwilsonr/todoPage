@@ -10,6 +10,7 @@ type objType = {
   priority: string;
   project: string;
   id: string;
+  completed: boolean;
 };
 
 function AddTaskForm({
@@ -37,7 +38,7 @@ function AddTaskForm({
 
   return (
     <div className="w-[250px] bg-white">
-      <label className="flex mt-2">
+      <label className="mt-2 flex">
         Title:
         <input
           className="ml-1"
@@ -50,11 +51,11 @@ function AddTaskForm({
           }
         ></input>
       </label>
-      <label className="flex mt-2">
+      <label className="mt-2 flex">
         Details:
         <textarea
           ref={textAreaRef}
-          className="ml-1 w-[185px] h-6"
+          className="ml-1 h-6 w-[185px]"
           id="taskDetails"
           placeholder="eg. internet, phone, rent"
           value={task.details}
@@ -68,7 +69,7 @@ function AddTaskForm({
           }
         ></textarea>
       </label>
-      <label className="flex my-2">
+      <label className="my-2 flex">
         Due Date:
         <input
           className="ml-1"
@@ -86,8 +87,8 @@ function AddTaskForm({
         <label
           className={
             priorityChoice === 'low'
-              ? 'ml-2 border border-black py-0.5 px-1 rounded-md bg-blue-400'
-              : 'ml-2 border border-black py-0.5 px-1 rounded-md '
+              ? 'ml-2 rounded-md border border-black bg-blue-400 px-1 py-0.5'
+              : 'ml-2 rounded-md border border-black px-1 py-0.5 '
           }
         >
           Low
@@ -106,8 +107,8 @@ function AddTaskForm({
         <label
           className={
             priorityChoice === 'medium'
-              ? 'ml-2 border border-black py-0.5 px-1 rounded-md bg-blue-400'
-              : 'ml-2 border border-black py-0.5 px-1 rounded-md '
+              ? 'ml-2 rounded-md border border-black bg-blue-400 px-1 py-0.5'
+              : 'ml-2 rounded-md border border-black px-1 py-0.5 '
           }
         >
           Medium
@@ -126,8 +127,8 @@ function AddTaskForm({
         <label
           className={
             priorityChoice === 'high'
-              ? 'ml-2 border border-black py-0.5 px-1 rounded-md bg-blue-400'
-              : 'ml-2 border border-black py-0.5 px-1 rounded-md '
+              ? 'ml-2 rounded-md border border-black bg-blue-400 px-1 py-0.5'
+              : 'ml-2 rounded-md border border-black px-1 py-0.5 '
           }
         >
           High
@@ -144,7 +145,7 @@ function AddTaskForm({
           ></input>
         </label>
       </label>
-      <div className="flex justify-between pr-1 mt-3">
+      <div className="mt-3 flex justify-between pr-1">
         <label>
           Project:
           <select
@@ -165,12 +166,11 @@ function AddTaskForm({
                 return;
               }
               let projectName = project;
-              if(projectName.length >= 12) {
-                projectName = projectName.slice(0, 9) + '...'
+              if (projectName.length >= 12) {
+                projectName = projectName.slice(0, 9) + '...';
               }
               return (
                 <option key={index} value={project}>
-                
                   {projectName}
                 </option>
               );
@@ -179,7 +179,7 @@ function AddTaskForm({
         </label>
         <button
           type="button"
-          className="border px-2 border-black rounded-md bg-blue-400 mb-3 h-6 whitespace-nowrap self-end text-sm"
+          className="mb-3 h-6 self-end whitespace-nowrap rounded-md border border-black bg-blue-400 px-2 text-sm"
           onClick={() => {
             formFunctions.handleSubmit(
               newTask,

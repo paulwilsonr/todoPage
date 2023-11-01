@@ -11,6 +11,7 @@ type objType = {
   priority: string;
   project: string;
   id: string;
+  completed: boolean;
 };
 
 function AddItem({
@@ -36,7 +37,7 @@ function AddItem({
   return (
     <div
       ref={ref}
-      className="absolute bg-greyedOut w-full h-full inset-0 flex justify-center items-center"
+      className="absolute inset-0 flex h-full w-full items-center justify-center bg-greyedOut"
       onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         if (e.target !== ref.current) {
           return null;
@@ -45,13 +46,13 @@ function AddItem({
         }
       }}
     >
-      <div className="bg-white w-80 grid grid-cols-[80px_1fr] grid-rows-[50px_1fr]">
-        <h2 className="col-span-full row-start-1 bg-blue-400 pl-2 pt-3 h-full">
+      <div className="grid w-80 grid-cols-[80px_1fr] grid-rows-[50px_1fr] bg-white">
+        <h2 className="col-span-full row-start-1 h-full bg-blue-400 pl-2 pt-3">
           Create New...
         </h2>
         <button
           aria-label="close-add-item"
-          className="col-start-2 row-start-1 justify-self-end mr-2"
+          className="col-start-2 row-start-1 mr-2 justify-self-end"
           onClick={() => handleVisibility.hide(setAddItemVisible)}
         >
           <CloseSVG classes="" color="#0f0f0f" width={20} />
@@ -60,8 +61,8 @@ function AddItem({
           <li
             className={
               formChoice === 'task'
-                ? 'border-b-4 border-blue-400 w-3/4 h-6 mt-1 cursor-pointer'
-                : 'h-6 mt-1 cursor-pointer'
+                ? 'mt-1 h-6 w-3/4 cursor-pointer border-b-4 border-blue-400'
+                : 'mt-1 h-6 cursor-pointer'
             }
             onClick={() => setFormChoice('task')}
           >
@@ -70,8 +71,8 @@ function AddItem({
           <li
             className={
               formChoice === 'project'
-                ? 'border-b-4 border-blue-400 w-3/4 h-6 mt-1 cursor-pointer'
-                : 'h-6 mt-1 cursor-pointer'
+                ? 'mt-1 h-6 w-3/4 cursor-pointer border-b-4 border-blue-400'
+                : 'mt-1 h-6 cursor-pointer'
             }
             onClick={() => setFormChoice('project')}
           >

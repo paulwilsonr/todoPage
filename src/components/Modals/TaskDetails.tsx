@@ -10,6 +10,7 @@ type objType = {
   priority: string;
   project: string;
   id: string;
+  completed: boolean;
 };
 
 function TaskDetails({
@@ -24,7 +25,7 @@ function TaskDetails({
   return (
     <div
       ref={ref}
-      className="absolute bg-greyedOut w-full h-full inset-0 flex justify-center items-center"
+      className="absolute inset-0 flex h-full w-full items-center justify-center bg-greyedOut"
       onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         if (e.target !== ref.current) {
           return null;
@@ -33,11 +34,11 @@ function TaskDetails({
         }
       }}
     >
-      <div className="bg-white w-72 grid grid-cols-2 grid-rows-5 pl-2">
+      <div className="grid w-72 grid-cols-2 grid-rows-5 bg-white pl-2">
         <p className="col-span-full row-start-1 pt-2">{task.name}</p>
         <button
           aria-label="close-details"
-          className="col-start-2 row-start-1 justify-self-end mr-2 mt-2"
+          className="col-start-2 row-start-1 mr-2 mt-2 justify-self-end"
           onClick={() => handleVisibility.hide(setDetailsVisible)}
         >
           <CloseSVG classes="" color="#0f0f0f" width={20} />

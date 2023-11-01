@@ -6,6 +6,8 @@ type objType = {
   priority: string;
   project: string;
   id: string;
+  completed: boolean;
+
 };
 
 const formFunctions = {
@@ -14,6 +16,15 @@ const formFunctions = {
     setPriorityChoice: React.Dispatch<React.SetStateAction<string>>,
   ) {
     setPriorityChoice(choice);
+  },
+  changedChecked(
+    task: objType,
+    taskArr: objType[],
+    setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>,
+    value: boolean) {
+    const editedTask = { ...task, completed: value };
+    console.log(taskArr)
+    handleTaskChanges.editTask(editedTask, task, taskArr, setTaskArr)
   },
   changeTaskData(
     taskKey: string,

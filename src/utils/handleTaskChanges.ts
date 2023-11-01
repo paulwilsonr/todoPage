@@ -5,6 +5,8 @@ type objType = {
   priority: string;
   project: string;
   id: string;
+  completed: boolean;
+
 };
 const handleTaskChanges = {
   addTask(
@@ -41,6 +43,7 @@ const handleTaskChanges = {
   ) {
     const tempTaskArr = [...taskArr];
     const taskIndex = tempTaskArr.indexOf(prevTask);
+    console.log(prevTask)
     if (taskIndex === -1) {
       console.log('Error: Task not found');
       return;

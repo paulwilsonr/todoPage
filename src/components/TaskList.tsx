@@ -8,6 +8,7 @@ type objType = {
   priority: string;
   project: string;
   id: string;
+  completed: boolean;
 };
 function TaskList({
   tasksArr,

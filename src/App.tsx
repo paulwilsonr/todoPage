@@ -1,12 +1,11 @@
 import TaskList from './components/TaskList';
-import BurgerSVG from './components/SVGs/BurgerSVG';
-import CloseSVG from './components/SVGs/CloseSVG';
 import { useEffect, useState } from 'react';
-import handleVisibility from './utils/handleVisibility';
-import SideMenu from './components/SideMenu';
 import AddItem from './components/Modals/AddItem';
 import { v4 as uuidv4 } from 'uuid';
 import filterTasks from './utils/filterTasks';
+import AddNewItemButton from './components/AddNewItemButton';
+import ProjectList from './components/ProjectList';
+import FilterDropdown from './components/FilterDropdown';
 
 type objType = {
   name: string;
@@ -15,6 +14,7 @@ type objType = {
   priority: string;
   project: string;
   id: string;
+  completed: boolean;
 };
 const taskTemplate: objType = {
   name: '',
@@ -23,10 +23,10 @@ const taskTemplate: objType = {
   priority: '',
   project: '',
   id: '',
+  completed: false,
 };
 
 function App() {
-  const [menuVisible, setMenuVisible] = useState(false);
   const [taskArr, setTaskArr] = useState([taskTemplate]);
   const [addItemVisible, setAddItemVisible] = useState(false);
   const [projectArr, setProjectArr] = useState(['']);
@@ -63,45 +63,10 @@ function App() {
   }, [projectArr]);
 
   return (
-    <div className="h-screen">
-      <header className="flex h-16 items-center justify-between bg-blue-400 px-2 sm:h-[5%]">
-        <h1 className="text-5xl text-white">To-Do</h1>
-        {menuVisible && window.innerWidth < 640 ? (
-          <button
-            aria-label="close-menu"
-            onClick={() => handleVisibility.hide(setMenuVisible)}
-          >
-            <CloseSVG classes="" width={48} color="#fff" />
-          </button>
-        ) : (
-          <button
-            className=" sm:hidden"
-            aria-label="open-menu"
-            onClick={() => handleVisibility.open(setMenuVisible)}
-          >
-            <BurgerSVG classes="" />
-          </button>
-        )}
-      </header>
+    <div className="h-screen font-sans">
       <div className="sm:flex sm:h-[95%]">
-        {!menuVisible && window.innerWidth < 640 ? (
-          ''
-        ) : (
-          <SideMenu
-            setAddItemVisible={setAddItemVisible}
-            setMenuVisible={setMenuVisible}
-            projectArr={projectArr}
-            setFilterRange={setFilterRange}
-          />
-        )}
         <div className="w-full">
-          <h2 className="ml-3 text-2xl">
-            {filterRange[0] !== 'project'
-              ? filterRange[0].slice(0, 1).toUpperCase() +
-                filterRange[0].slice(1)
-              : filterRange[1].slice(0, 1).toUpperCase() +
-                filterRange[1].slice(1)}
-          </h2>
+          <FilterDropdown setFilterRange={setFilterRange} />
           <TaskList
             tasksArr={filterTasks(taskArr, filterRange)}
             setTaskArr={setTaskArr}
@@ -109,6 +74,12 @@ function App() {
             setFilterRange={setFilterRange}
           />
         </div>
+        <ProjectList
+          projectArr={projectArr}
+          taskArr={taskArr}
+          setTaskArr={setTaskArr}
+          setFilterRange={setFilterRange}
+        />
       </div>
       {addItemVisible ? (
         <AddItem
@@ -119,6 +90,7 @@ function App() {
             priority: '',
             project: 'none',
             id: uuidv4(),
+            completed: false,
           }}
           setAddItemVisible={setAddItemVisible}
           taskArr={taskArr}
@@ -130,6 +102,7 @@ function App() {
       ) : (
         ''
       )}
+      <AddNewItemButton setAddItemVisible={setAddItemVisible} />
     </div>
   );
 }

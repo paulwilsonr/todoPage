@@ -10,6 +10,7 @@ type objType = {
   priority: string;
   project: string;
   id: string;
+  completed: boolean;
 };
 
 function EditTask({
@@ -60,7 +61,7 @@ function EditTask({
             setAddItemVisible={setEditTaskVisible}
             projectArr={projectArr}
             newTask={false}
-            setFilterRange={setFilterRange} 
+            setFilterRange={setFilterRange}
           />
         </div>
       </div>
