@@ -1,3 +1,4 @@
+import filterTasks from '../utils/filterTasks';
 import sortTasks from '../utils/sortTasks';
 import TaskCard from './TaskCard';
 
@@ -15,33 +16,39 @@ function TaskList({
   setTaskArr,
   projectArr,
   setFilterRange,
+  taskFilter,
 }: {
   tasksArr: Array<objType>;
   setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>;
   projectArr: string[];
   setFilterRange: React.Dispatch<React.SetStateAction<string[]>>;
+  taskFilter: string[];
 }) {
-  const sortedTaskArr = sortTasks(tasksArr);
+  const sortedTaskArr = sortTasks(filterTasks(tasksArr, taskFilter));
 
   return (
     <div>
-      {sortedTaskArr.map(task => {
-        if (task) {
-          if (task.id === '') {
-            return '';
+      {sortedTaskArr.length === 0 ? (
+        <p className="ml-4">No Tasks</p>
+      ) : (
+        sortedTaskArr.map(task => {
+          if (task) {
+            if (task.id === '') {
+              return '';
+            }
+            return (
+              <TaskCard
+                key={task.id}
+                task={task}
+                taskArr={tasksArr}
+                setTaskArr={setTaskArr}
+                projectArr={projectArr}
+                setFilterRange={setFilterRange}
+              />
+            );
           }
-          return (
-            <TaskCard
-              key={task.id}
-              task={task}
-              taskArr={tasksArr}
-              setTaskArr={setTaskArr}
-              projectArr={projectArr}
-              setFilterRange={setFilterRange}
-            />
-          );
-        }
-      })}
+        })
+      )}
     </div>
   );
 }

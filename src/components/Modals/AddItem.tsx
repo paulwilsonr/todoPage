@@ -91,10 +91,14 @@ function AddItem({
           />
         ) : formChoice === 'project' ? (
           <AddProjectForm
+            currentProject=""
             projectArr={projectArr}
             setProjectArr={setProjectArr}
             setAddItemVisible={setAddItemVisible}
             setFilterRange={setFilterRange}
+            newProject={true}
+            taskArr={taskArr}
+            setTaskArr={setTaskArr}
           />
         ) : (
           ''

@@ -23,7 +23,6 @@ const formFunctions = {
     setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>,
     value: boolean) {
     const editedTask = { ...task, completed: value };
-    console.log(taskArr)
     handleTaskChanges.editTask(editedTask, task, taskArr, setTaskArr)
   },
   changeTaskData(

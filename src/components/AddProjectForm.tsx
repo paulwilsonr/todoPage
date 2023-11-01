@@ -1,33 +1,73 @@
 import { useState } from 'react';
 import handleVisibility from '../utils/handleVisibility';
+import handleProjectChanges from '../utils/handleProjectChanges';
+
+type objType = {
+  name: string;
+  details: string;
+  due: string;
+  priority: string;
+  project: string;
+  id: string;
+  completed: boolean;
+};
 
 function AddProjectForm({
+  currentProject,
   projectArr,
   setProjectArr,
   setAddItemVisible,
   setFilterRange,
+  newProject,
+  taskArr,
+  setTaskArr,
 }: {
+  currentProject: string;
   projectArr: string[];
   setProjectArr: React.Dispatch<React.SetStateAction<string[]>>;
   setAddItemVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setFilterRange: React.Dispatch<React.SetStateAction<string[]>>;
+  newProject: boolean;
+  taskArr: objType[];
+  setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>;
 }) {
-  const [project, setProject] = useState('');
+  const [project, setProject] = useState(currentProject);
+  let formHeight = '';
 
   function handleSubmitNewProject() {
-    const tempProjectArr = [...projectArr];
-    tempProjectArr.push(project);
-    if (tempProjectArr[0] === '') {
-      tempProjectArr.splice(0, 1);
+    if (newProject) {
+      const tempProjectArr = [...projectArr];
+      tempProjectArr.push(project);
+      if (tempProjectArr[0] === '') {
+        tempProjectArr.splice(0, 1);
+      }
+      setProjectArr(tempProjectArr);
+
+      setFilterRange(['all', 'none']);
+    } else {
+      handleProjectChanges.editProject(
+        currentProject,
+        projectArr,
+        setProjectArr,
+        project,
+        taskArr,
+        setTaskArr,
+      );
+      handleVisibility.hide(setAddItemVisible);
     }
-    setProjectArr(tempProjectArr);
-    handleVisibility.hide(setAddItemVisible);
-    setFilterRange(['all', 'none']);
+  }
+
+  if (newProject) {
+    formHeight = ' h-44 w-[250px]';
+  } else {
+    formHeight = ' h-24 w-[300px]';
   }
 
   return (
-    <div className="flex justify-between flex-col w-[250px] bg-white h-44 pr-1">
-      <label className="flex mt-2">
+    <div
+      className={'flex  flex-col justify-between bg-white pr-1' + formHeight}
+    >
+      <label className="mt-2 flex">
         Title:
         <input
           className="ml-1"
@@ -40,10 +80,10 @@ function AddProjectForm({
       </label>
       <button
         type="button"
-        className="border place-self-end px-2 border-black rounded-md bg-blue-400 mb-3"
+        className="mb-3 place-self-end rounded-md border border-black bg-blue-400 px-2"
         onClick={handleSubmitNewProject}
       >
-        Create Project
+        {newProject ? 'Create Project' : 'Edit Project'}
       </button>
     </div>
   );

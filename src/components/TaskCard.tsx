@@ -47,6 +47,7 @@ function TaskCard({
       priorityColor = ' border-l-red-700 border-l-8';
       break;
     default:
+      priorityColor = ' pl-3';
       break;
   }
 

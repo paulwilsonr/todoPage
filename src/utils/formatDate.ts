@@ -1,11 +1,17 @@
 function formatDate(date: string, inTaskCard: boolean) {
-  let newDate = new Date(date.replace(/-/g, '/')).toDateString();
-  newDate = newDate.slice(0, 3) + ',' + newDate.slice(3, newDate.length);
-  inTaskCard
-    ? (newDate = newDate.slice(0, 11))
-    : (newDate =
+
+  if (date === 'N/A') {
+    return date;
+  } else {
+
+    let newDate = new Date(date.replace(/-/g, '/')).toDateString();
+    newDate = newDate.slice(0, 3) + ',' + newDate.slice(3, newDate.length);
+    inTaskCard
+      ? (newDate = newDate.slice(0, 11))
+      : (newDate =
         newDate.slice(0, 11) + ',' + newDate.slice(11, newDate.length));
-  return newDate;
+    return newDate;
+  }
 }
 
 export default formatDate;

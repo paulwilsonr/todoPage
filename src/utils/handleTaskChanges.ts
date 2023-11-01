@@ -14,8 +14,12 @@ const handleTaskChanges = {
     taskArr: objType[],
     setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>,
   ) {
+    const tempTask = { ...task }
+    if (tempTask.due === '') {
+      tempTask.due = 'N/A';
+    }
     const tempTaskArr = [...taskArr];
-    tempTaskArr.push(task);
+    tempTaskArr.push(tempTask);
     if (tempTaskArr[0].id === '') {
       tempTaskArr.splice(0, 1);
     }
@@ -43,7 +47,6 @@ const handleTaskChanges = {
   ) {
     const tempTaskArr = [...taskArr];
     const taskIndex = tempTaskArr.indexOf(prevTask);
-    console.log(prevTask)
     if (taskIndex === -1) {
       console.log('Error: Task not found');
       return;

@@ -27,27 +27,22 @@ function filterTasks(taskArr: objType[], range: string[]) {
       break;
     case 'today':
       return taskArr.filter(task => {
-
-        const taskDate = dayjs(task.due);
-        return taskDate.isSame(dateRange, 'day')
-        //   let withinRange:boolean = false;
-        // const taskDate = new Date(task.due.replace(/-/g, '/'));
-        // console.log('task time ' +taskDate.getTime())
-        // console.log('date time ' +dateRange.getTime())
-        // if(dateRange.getTime() === taskDate.getTime()
-        // ) {
-        //   withinRange = true;
-        // } 
-        // return withinRange;
+        if (!task.completed) {
+          const taskDate = dayjs(task.due);
+          return taskDate.isSame(dateRange, 'day')
+        }
+        return false;
       });
       break;
     case 'tomorrow':
       dateRange = dateRange.add(1, 'day')
-
       return taskArr.filter(task => {
-        const taskDate = dayjs(task.due);
-        return taskDate.isSame(dateRange, 'day')
+        if (!task.completed) {
+          const taskDate = dayjs(task.due);
+          return taskDate.isSame(dateRange, 'day')
 
+        }
+        return false;
       }
       );
       break;
@@ -55,8 +50,29 @@ function filterTasks(taskArr: objType[], range: string[]) {
       topDateRange = dateRange.add(7, 'day')
       return taskArr.filter(task => {
         const taskDate = dayjs(task.due);
-        return taskDate.isBetween(dateRange.startOf('day'), topDateRange.endOf('day'), 'day', '[)')
+        if (!task.completed) {
+          return taskDate.isBetween(dateRange.startOf('day'), topDateRange.endOf('day'), 'day', '[)')
+        }
+        return false;
       });
+      break;
+    case 'past':
+      return taskArr.filter(task => {
+        const taskDate = dayjs(task.due);
+        if (!task.completed) {
+          return taskDate.isBefore(dateRange, 'day');
+        }
+        return false;
+      })
+      break;
+    case 'completed':
+      return taskArr.filter(task => {
+        if (task.completed) {
+          return true;
+        }
+        return false;
+      })
+
       break;
     case 'project':
       return taskArr.filter(task => {

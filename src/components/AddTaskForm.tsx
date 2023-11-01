@@ -33,11 +33,18 @@ function AddTaskForm({
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [priorityChoice, setPriorityChoice] = useState(currentTask.priority);
   const [task, setTask] = useState(currentTask);
+  let formWidth = '';
 
   useAutosizeTextArea(textAreaRef.current, task.details);
 
+  if (newTask) {
+    formWidth = ' w-[250px]';
+  } else {
+    formWidth = ' w-[300px]';
+  }
+
   return (
-    <div className="w-[250px] bg-white">
+    <div className={'bg-white' + formWidth}>
       <label className="mt-2 flex">
         Title:
         <input
@@ -151,6 +158,7 @@ function AddTaskForm({
           <select
             className="ml-1"
             id="taskProject"
+            value={task.project}
             onChange={e =>
               formFunctions.changeTaskData(
                 'project',

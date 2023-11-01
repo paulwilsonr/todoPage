@@ -15,11 +15,13 @@ function ProjectList({
   setTaskArr,
   projectArr,
   setFilterRange,
+  setProjectArr,
 }: {
   taskArr: Array<objType>;
   setTaskArr: React.Dispatch<React.SetStateAction<objType[]>>;
   projectArr: string[];
   setFilterRange: React.Dispatch<React.SetStateAction<string[]>>;
+  setProjectArr: React.Dispatch<React.SetStateAction<string[]>>;
 }) {
   let projectKey = 0;
   return (
@@ -35,6 +37,7 @@ function ProjectList({
             setTaskArr={setTaskArr}
             projectArr={projectArr}
             setFilterRange={setFilterRange}
+            setProjectArr={setProjectArr}
           />
         );
       })}

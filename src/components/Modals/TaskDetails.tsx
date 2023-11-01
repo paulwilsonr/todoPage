@@ -34,19 +34,30 @@ function TaskDetails({
         }
       }}
     >
-      <div className="grid w-72 grid-cols-2 grid-rows-5 bg-white pl-2">
-        <p className="col-span-full row-start-1 pt-2">{task.name}</p>
+      <div className="grid w-72 grid-cols-2 grid-rows-[50px_30px_minmax(30px,_50px)_minmax(50px,_1fr)] bg-white pl-2">
+        <p className="col-span-full row-start-1 pt-2 text-2xl font-bold">
+          {task.name}
+        </p>
         <button
           aria-label="close-details"
-          className="col-start-2 row-start-1 mr-2 mt-2 justify-self-end"
+          className="col-start-2 row-start-1 mr-2 justify-self-end"
           onClick={() => handleVisibility.hide(setDetailsVisible)}
         >
           <CloseSVG classes="" color="#0f0f0f" width={20} />
         </button>
-        <p className="col-span-full">{task.project}</p>
-        <p className="col-span-full">{task.priority}</p>
-        <p className="col-span-full">{formatDate(task.due, false)}</p>
-        <p className="col-span-full">{task.details}</p>
+        <p className="col-span-full">Due: {formatDate(task.due, false)}</p>
+        {task.project === 'none' ? (
+          ''
+        ) : (
+          <p className="col-start-1">Project: {task.project}</p>
+        )}
+        {task.priority === '' ? (
+          ''
+        ) : (
+          <p className="col-start-2">Priority: {task.priority}</p>
+        )}
+
+        <p className="col-span-full mb-2">Details: {task.details}</p>
       </div>
     </div>
   );

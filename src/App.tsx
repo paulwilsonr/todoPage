@@ -2,7 +2,6 @@ import TaskList from './components/TaskList';
 import { useEffect, useState } from 'react';
 import AddItem from './components/Modals/AddItem';
 import { v4 as uuidv4 } from 'uuid';
-import filterTasks from './utils/filterTasks';
 import AddNewItemButton from './components/AddNewItemButton';
 import ProjectList from './components/ProjectList';
 import FilterDropdown from './components/FilterDropdown';
@@ -68,10 +67,11 @@ function App() {
         <div className="w-full">
           <FilterDropdown setFilterRange={setFilterRange} />
           <TaskList
-            tasksArr={filterTasks(taskArr, filterRange)}
+            tasksArr={taskArr}
             setTaskArr={setTaskArr}
             projectArr={projectArr}
             setFilterRange={setFilterRange}
+            taskFilter={filterRange}
           />
         </div>
         <ProjectList
@@ -79,6 +79,7 @@ function App() {
           taskArr={taskArr}
           setTaskArr={setTaskArr}
           setFilterRange={setFilterRange}
+          setProjectArr={setProjectArr}
         />
       </div>
       {addItemVisible ? (
