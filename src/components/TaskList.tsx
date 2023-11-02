@@ -29,7 +29,7 @@ function TaskList({
   return (
     <div>
       {sortedTaskArr.length === 0 ? (
-        <p className="ml-4">No Tasks</p>
+        <p className="my-2 ml-4 sm:text-2xl">No Tasks</p>
       ) : (
         sortedTaskArr.map(task => {
           if (task) {

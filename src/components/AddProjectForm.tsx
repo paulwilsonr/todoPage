@@ -35,6 +35,7 @@ function AddProjectForm({
   let formHeight = '';
 
   function handleSubmitNewProject() {
+    handleVisibility.hide(setAddItemVisible);
     if (newProject) {
       const tempProjectArr = [...projectArr];
       tempProjectArr.push(project);
@@ -53,7 +54,6 @@ function AddProjectForm({
         taskArr,
         setTaskArr,
       );
-      handleVisibility.hide(setAddItemVisible);
     }
   }
 
@@ -65,12 +65,15 @@ function AddProjectForm({
 
   return (
     <div
-      className={'flex  flex-col justify-between bg-white pr-1' + formHeight}
+      className={
+        'flex flex-col justify-between bg-white pr-1 sm:h-full sm:w-11/12 sm:text-xl' +
+        formHeight
+      }
     >
-      <label className="mt-2 flex">
+      <label className="mt-2 flex font-semibold sm:mt-4">
         Title:
         <input
-          className="ml-1"
+          className="ml-1 font-medium sm:w-4/5"
           type="text"
           id="projectTitle"
           placeholder="Gym"
@@ -80,7 +83,7 @@ function AddProjectForm({
       </label>
       <button
         type="button"
-        className="mb-3 place-self-end rounded-md border border-black bg-blue-400 px-2"
+        className="mb-3 place-self-end rounded-md border border-black bg-blue-300 px-2 hover:bg-blue-400 active:bg-blue-500 sm:mb-4 sm:rounded-xl sm:px-4 sm:py-1"
         onClick={handleSubmitNewProject}
       >
         {newProject ? 'Create Project' : 'Edit Project'}

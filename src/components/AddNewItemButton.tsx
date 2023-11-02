@@ -12,7 +12,7 @@ function AddNewItemButton({
         handleVisibility.open(setAddItemVisible);
       }}
       aria-label="new-item"
-      className="fixed bottom-4 right-4 mb-2 grid h-20 w-20 rotate-45 place-items-center self-center rounded-full border-2 border-black bg-blue-400"
+      className="fixed inset-x-0 bottom-4 z-10 mx-auto  mb-2 grid h-20 w-20 rotate-45 place-items-center rounded-full border-2 border-black bg-blue-300 hover:bg-blue-400 active:bg-blue-500"
     >
       <CloseSVG classes="" width={48} color="#000" />
     </button>

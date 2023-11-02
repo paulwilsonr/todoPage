@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import AddNewItemButton from './components/AddNewItemButton';
 import ProjectList from './components/ProjectList';
 import FilterDropdown from './components/FilterDropdown';
+import TitleBar from './components/TitleBar';
 
 type objType = {
   name: string;
@@ -62,8 +63,9 @@ function App() {
   }, [projectArr]);
 
   return (
-    <div className="h-screen font-sans">
-      <div className="sm:flex sm:h-[95%]">
+    <div className="bg-slate-200 font-sans">
+      <TitleBar />
+      <div className="sm:mx-5 sm:flex sm:h-[95%] sm:flex-col sm:pt-5">
         <div className="w-full">
           <FilterDropdown setFilterRange={setFilterRange} />
           <TaskList

@@ -37,7 +37,7 @@ function AddItem({
   return (
     <div
       ref={ref}
-      className="absolute inset-0 flex h-full w-full items-center justify-center bg-greyedOut"
+      className="absolute inset-0 z-20 flex h-full w-full items-center justify-center bg-greyedOut"
       onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         if (e.target !== ref.current) {
           return null;
@@ -46,23 +46,23 @@ function AddItem({
         }
       }}
     >
-      <div className="grid w-80 grid-cols-[80px_1fr] grid-rows-[50px_1fr] bg-white">
-        <h2 className="col-span-full row-start-1 h-full bg-blue-400 pl-2 pt-3">
+      <div className="grid w-80 grid-cols-[80px_1fr] grid-rows-[50px_1fr] bg-white sm:w-2/5 sm:grid-cols-[240px_1fr] sm:grid-rows-[70px_minmax(250px,_1fr)]">
+        <h2 className="col-span-full row-start-1 h-full bg-blue-400 pl-2 pt-3 font-bold sm:pl-5 sm:text-3xl">
           Create New...
         </h2>
         <button
           aria-label="close-add-item"
-          className="col-start-2 row-start-1 mr-2 justify-self-end"
+          className="col-start-2 row-start-1 mr-2 mt-2 self-start justify-self-end sm:mr-4 sm:mt-4"
           onClick={() => handleVisibility.hide(setAddItemVisible)}
         >
           <CloseSVG classes="" color="#0f0f0f" width={20} />
         </button>
-        <ul>
+        <ul className="font-semibold sm:text-xl">
           <li
             className={
               formChoice === 'task'
-                ? 'mt-1 h-6 w-3/4 cursor-pointer border-b-4 border-blue-400'
-                : 'mt-1 h-6 cursor-pointer'
+                ? 'mt-1 h-6 w-3/4 cursor-pointer border-b-4 border-blue-400 sm:h-10'
+                : 'mt-1 h-6 cursor-pointer sm:h-10'
             }
             onClick={() => setFormChoice('task')}
           >
@@ -71,8 +71,8 @@ function AddItem({
           <li
             className={
               formChoice === 'project'
-                ? 'mt-1 h-6 w-3/4 cursor-pointer border-b-4 border-blue-400'
-                : 'mt-1 h-6 cursor-pointer'
+                ? 'mt-1 h-6 w-3/4 cursor-pointer border-b-4 border-blue-400 sm:h-10'
+                : 'mt-1 h-6 cursor-pointer sm:h-10'
             }
             onClick={() => setFormChoice('project')}
           >

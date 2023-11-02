@@ -35,7 +35,7 @@ function EditProject({
   return (
     <div
       ref={ref}
-      className="absolute inset-0 flex h-full w-full items-center justify-center bg-greyedOut"
+      className="absolute inset-0 z-20 flex h-full w-full items-center justify-center bg-greyedOut"
       onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         if (e.target !== ref.current) {
           return null;
@@ -44,18 +44,18 @@ function EditProject({
         }
       }}
     >
-      <div className="grid w-80 grid-cols-[80px_1fr] grid-rows-[50px_1fr] bg-white">
-        <h2 className="col-span-full row-start-1 h-full bg-blue-400 pl-2 pt-3">
-          Edit Task
+      <div className="grid w-80 grid-rows-[50px_1fr] bg-white sm:h-1/4 sm:w-2/5 sm:grid-rows-[70px_1fr]">
+        <h2 className="col-span-full row-start-1 h-full bg-blue-400 pl-2 pt-3 font-bold sm:pl-4 sm:text-3xl">
+          Edit Project
         </h2>
         <button
           aria-label="close-add-item"
-          className="col-start-2 row-start-1 mr-2 justify-self-end"
+          className="col-start-1 row-start-1 mr-2 mt-2 self-start justify-self-end sm:mr-4 sm:mt-4"
           onClick={() => handleVisibility.hide(setEditProjectVisible)}
         >
           <CloseSVG classes="" color="#0f0f0f" width={20} />
         </button>
-        <div className="ml-2">
+        <div className="ml-2 sm:flex sm:justify-center">
           <AddProjectForm
             currentProject={project}
             projectArr={projectArr}

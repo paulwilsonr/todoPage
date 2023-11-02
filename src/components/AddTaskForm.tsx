@@ -44,11 +44,11 @@ function AddTaskForm({
   }
 
   return (
-    <div className={'bg-white' + formWidth}>
-      <label className="mt-2 flex">
+    <div className={'bg-white sm:w-11/12 sm:text-xl' + formWidth}>
+      <label className="mt-2 flex font-semibold sm:my-4">
         Title:
         <input
-          className="ml-1"
+          className="ml-1 font-medium sm:w-4/5"
           type="text"
           id="taskTitle"
           placeholder="Pay bills"
@@ -58,11 +58,11 @@ function AddTaskForm({
           }
         ></input>
       </label>
-      <label className="mt-2 flex">
+      <label className="mt-2 flex font-semibold sm:mb-4">
         Details:
         <textarea
           ref={textAreaRef}
-          className="ml-1 h-6 w-[185px]"
+          className="ml-1 h-6 w-[185px] font-medium sm:w-4/5"
           id="taskDetails"
           placeholder="eg. internet, phone, rent"
           value={task.details}
@@ -76,10 +76,10 @@ function AddTaskForm({
           }
         ></textarea>
       </label>
-      <label className="my-2 flex">
+      <label className="my-2 flex font-semibold sm:mb-4">
         Due Date:
         <input
-          className="ml-1"
+          className="ml-1 font-medium"
           type="date"
           id="taskDate"
           placeholder="MM/DD/YYYY"
@@ -89,13 +89,13 @@ function AddTaskForm({
           }}
         ></input>
       </label>
-      <label>
+      <label className="font-semibold">
         Priority:
         <label
           className={
             priorityChoice === 'low'
-              ? 'ml-2 rounded-md border border-black bg-blue-400 px-1 py-0.5'
-              : 'ml-2 rounded-md border border-black px-1 py-0.5 '
+              ? 'ml-2 rounded-md border border-black bg-blue-400 px-1 py-0.5 font-medium sm:mx-6'
+              : 'ml-2 rounded-md border border-black px-1 py-0.5 font-medium sm:mx-6 '
           }
         >
           Low
@@ -114,8 +114,8 @@ function AddTaskForm({
         <label
           className={
             priorityChoice === 'medium'
-              ? 'ml-2 rounded-md border border-black bg-blue-400 px-1 py-0.5'
-              : 'ml-2 rounded-md border border-black px-1 py-0.5 '
+              ? 'ml-2 rounded-md border border-black bg-blue-400 px-1 py-0.5 font-medium sm:mr-6'
+              : 'ml-2 rounded-md border border-black px-1 py-0.5 font-medium sm:mr-6 '
           }
         >
           Medium
@@ -134,8 +134,8 @@ function AddTaskForm({
         <label
           className={
             priorityChoice === 'high'
-              ? 'ml-2 rounded-md border border-black bg-blue-400 px-1 py-0.5'
-              : 'ml-2 rounded-md border border-black px-1 py-0.5 '
+              ? 'ml-2 rounded-md border border-black bg-blue-400 px-1 py-0.5 font-medium'
+              : 'ml-2 rounded-md border border-black px-1 py-0.5 font-medium '
           }
         >
           High
@@ -152,11 +152,11 @@ function AddTaskForm({
           ></input>
         </label>
       </label>
-      <div className="mt-3 flex justify-between pr-1">
+      <div className="mt-3 flex justify-between pr-1 font-semibold sm:mt-5">
         <label>
           Project:
           <select
-            className="ml-1"
+            className="ml-1 w-[115px] truncate font-medium sm:w-fit sm:max-w-xs"
             id="taskProject"
             value={task.project}
             onChange={e =>
@@ -173,13 +173,9 @@ function AddTaskForm({
               if (project === '') {
                 return;
               }
-              let projectName = project;
-              if (projectName.length >= 12) {
-                projectName = projectName.slice(0, 9) + '...';
-              }
               return (
                 <option key={index} value={project}>
-                  {projectName}
+                  {project}
                 </option>
               );
             })}
@@ -187,7 +183,7 @@ function AddTaskForm({
         </label>
         <button
           type="button"
-          className="mb-3 h-6 self-end whitespace-nowrap rounded-md border border-black bg-blue-400 px-2 text-sm"
+          className="mb-3 h-6 self-end whitespace-nowrap rounded-md border border-black bg-blue-300 px-2 text-sm hover:bg-blue-400 active:bg-blue-500 sm:h-9 sm:w-28 sm:rounded-xl sm:text-xl"
           onClick={() => {
             formFunctions.handleSubmit(
               newTask,

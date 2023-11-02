@@ -36,16 +36,16 @@ function ProjectCard({
   const [isOpen, setIsOpen] = useState(false);
   const projectFilter = ['project', project];
   return (
-    <div>
+    <div className="mb-3 sm:mb-10">
       <div className="mr-3 grid grid-cols-[1fr_40px_40px]">
         <h3
-          className="ml-2 cursor-pointer text-xl"
+          className="ml-2 cursor-pointer text-xl sm:mt-2 sm:text-3xl"
           onClick={() => setIsOpen(!isOpen)}
         >
           {project}
         </h3>
         <button
-          className="justify-self-end"
+          className="self-start justify-self-end sm:self-end"
           onClick={() => {
             handleVisibility.open(setEditProjectVisible);
           }}
@@ -53,7 +53,7 @@ function ProjectCard({
           <EditSVG classes="ml-1" />
         </button>
         <button
-          className="justify-self-end"
+          className="self-start justify-self-end sm:self-end"
           onClick={() => {
             handleVisibility.open(setDeleteProjectVisible);
           }}

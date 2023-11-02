@@ -25,8 +25,8 @@ function ProjectList({
 }) {
   let projectKey = 0;
   return (
-    <div className="mb-24 ml-2">
-      <h2 className="text-2xl">Projects</h2>
+    <div className="mb-32 ml-2">
+      <h2 className="text-2xl sm:text-4xl">Projects</h2>
       {projectArr.map(project => {
         projectKey++;
         return (

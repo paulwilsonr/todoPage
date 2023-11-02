@@ -5,7 +5,7 @@ function FilterDropdown({
 }) {
   return (
     <select
-      className="ml-2 mt-2 cursor-pointer bg-transparent text-2xl"
+      className="ml-2 mt-2 cursor-pointer bg-transparent text-2xl sm:text-4xl"
       onChange={e => {
         setFilterRange([e.target.value, 'none']);
       }}

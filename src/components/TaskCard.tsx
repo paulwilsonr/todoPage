@@ -51,22 +51,17 @@ function TaskCard({
       break;
   }
 
-  let taskName = task.name;
-  if (taskName.length >= 16 && window.innerWidth < 640) {
-    taskName = taskName.slice(0, 12) + '...';
-  }
-
   return (
     <div
       className={
-        'mx-2 my-3 flex justify-between border-2 border-black px-1 sm:h-20 sm:items-center sm:justify-start' +
+        'mx-2 my-2 grid grid-cols-[1fr_210px] justify-between border-2 border-black bg-white px-1 sm:h-12 sm:grid-cols-[minmax(250px,_3fr)_minmax(300px,_1fr)] sm:items-center sm:justify-start' +
         priorityColor
       }
       key={task.id}
     >
-      <div className="flex px-1 sm:w-3/4">
+      <div className="grid grid-cols-[20px_1fr] gap-2 px-1 sm:w-full">
         <input
-          className="sm:w-10"
+          className="w-4 sm:w-6"
           type="checkbox"
           name="taskDone"
           id="taskDone"
@@ -80,16 +75,18 @@ function TaskCard({
           }
           checked={task.completed}
         />
-        <h2 className="ml-1 truncate  sm:ml-4 sm:text-4xl">{taskName}</h2>
+        <h2 className="ml-1 w-11/12 truncate sm:ml-4 sm:text-2xl">
+          {task.name}
+        </h2>
       </div>
-      <div className="flex sm:mr-5 sm:w-1/4 sm:justify-between">
+      <div className="flex sm:mr-5 sm:grid sm:w-1/4 sm:min-w-full sm:grid-cols-[minmax(80px,_2fr)_minmax(150px,_3fr)_minmax(40px,_1fr)_minmax(40px,_1fr)] sm:justify-between">
         <button
-          className="mx-1 sm:w-fit sm:text-4xl"
+          className="mx-1 sm:w-fit sm:text-2xl"
           onClick={() => handleVisibility.open(setDetailsVisible)}
         >
           Details
         </button>
-        <p className="ml-1 w-24 sm:w-fit sm:text-4xl">
+        <p className="ml-1 w-24 sm:w-fit sm:whitespace-nowrap sm:text-2xl">
           {formatDate(task.due, true)}
         </p>
         <button
