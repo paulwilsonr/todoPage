@@ -46,7 +46,7 @@ function AddItem({
         }
       }}
     >
-      <div className="grid w-80 grid-cols-[80px_1fr] grid-rows-[50px_1fr] bg-white sm:w-2/5 sm:grid-cols-[240px_1fr] sm:grid-rows-[70px_minmax(250px,_1fr)]">
+      <div className="grid w-80 grid-cols-[75px_1fr] grid-rows-[50px_1fr] bg-white sm:w-2/5 sm:grid-cols-[240px_1fr] sm:grid-rows-[70px_minmax(250px,_1fr)] mr-2">
         <h2 className="col-span-full row-start-1 h-full bg-blue-400 pl-2 pt-3 font-bold sm:pl-5 sm:text-3xl">
           Create New...
         </h2>
@@ -61,18 +61,18 @@ function AddItem({
           <li
             className={
               formChoice === 'task'
-                ? 'mt-1 h-6 w-3/4 cursor-pointer border-b-4 border-blue-400 sm:h-10'
-                : 'mt-1 h-6 cursor-pointer sm:h-10'
+                ? 'pl-1 mt-1 h-6 w-10/12 cursor-pointer border-b-4 border-blue-400 sm:h-10'
+                : 'pl-1 mt-1 h-6 cursor-pointer sm:h-10'
             }
             onClick={() => setFormChoice('task')}
           >
-            To Do
+            Task
           </li>
           <li
             className={
               formChoice === 'project'
-                ? 'mt-1 h-6 w-3/4 cursor-pointer border-b-4 border-blue-400 sm:h-10'
-                : 'mt-1 h-6 cursor-pointer sm:h-10'
+                ? 'pl-1 mt-1 h-6 w-11/12 cursor-pointer border-b-4 border-blue-400 sm:h-10'
+                : 'pl-1 mt-1 h-6 cursor-pointer sm:h-10'
             }
             onClick={() => setFormChoice('project')}
           >

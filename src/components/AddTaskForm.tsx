@@ -38,17 +38,17 @@ function AddTaskForm({
   useAutosizeTextArea(textAreaRef.current, task.details);
 
   if (newTask) {
-    formWidth = ' w-[250px]';
+    formWidth = ' w-[255px]';
   } else {
     formWidth = ' w-[300px]';
   }
 
   return (
-    <div className={'bg-white sm:w-11/12 sm:text-xl' + formWidth}>
+    <div className={'bg-white sm:w-11/12 sm:text-xl pr-1' + formWidth}>
       <label className="mt-2 flex font-semibold sm:my-4">
         Title:
         <input
-          className="ml-1 font-medium sm:w-4/5"
+          className="ml-1 font-medium w-4/5 "
           type="text"
           id="taskTitle"
           placeholder="Pay bills"
@@ -62,7 +62,7 @@ function AddTaskForm({
         Details:
         <textarea
           ref={textAreaRef}
-          className="ml-1 h-6 w-[185px] font-medium sm:w-4/5"
+          className="ml-1 h-6  font-medium w-4/5"
           id="taskDetails"
           placeholder="eg. internet, phone, rent"
           value={task.details}

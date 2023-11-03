@@ -58,7 +58,7 @@ function AddProjectForm({
   }
 
   if (newProject) {
-    formHeight = ' h-44 w-[250px]';
+    formHeight = ' h-44 w-[260px]';
   } else {
     formHeight = ' h-24 w-[300px]';
   }
@@ -73,7 +73,7 @@ function AddProjectForm({
       <label className="mt-2 flex font-semibold sm:mt-4">
         Title:
         <input
-          className="ml-1 font-medium sm:w-4/5"
+          className="ml-1 font-medium w-2/3 sm:w-4/5"
           type="text"
           id="projectTitle"
           placeholder="Gym"
