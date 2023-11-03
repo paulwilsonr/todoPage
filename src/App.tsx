@@ -7,7 +7,6 @@ import ProjectList from './components/ProjectList';
 import FilterDropdown from './components/FilterDropdown';
 import TitleBar from './components/TitleBar';
 
-console.log(uuidv4());
 
 type objType = {
   name: string;
