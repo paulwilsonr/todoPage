@@ -1,7 +1,8 @@
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs'
 import dayOfYear from 'dayjs/plugin/dayOfYear'
 import isLeapYear from 'dayjs/plugin/isLeapYear'
 import isBetween from 'dayjs/plugin/isBetween'
+dayjs().format()
 dayjs.extend(dayOfYear)
 dayjs.extend(isLeapYear)
 dayjs.extend(isBetween)
